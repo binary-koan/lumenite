@@ -33,15 +33,12 @@ function createWindow () {
     let installExtension = require('electron-devtools-installer')
 
     installExtension.default(installExtension.VUEJS_DEVTOOLS)
-      .then((name) => mainWindow.webContents.openDevTools())
       .catch((err) => console.log('An error occurred: ', err))
   }
 
   mainWindow.on('closed', () => {
     mainWindow = null
   })
-
-  console.log('mainWindow opened')
 }
 
 app.on('ready', createWindow)
