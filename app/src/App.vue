@@ -1,60 +1,4 @@
 <style>
-  /* CSS reset based on http://meyerweb.com/eric/tools/css/reset/ */
-
-  * {
-    box-sizing: border-box;
-  }
-
-  html, body, div, span, applet, object, iframe,
-  h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-  a, abbr, acronym, address, big, cite, code,
-  del, dfn, em, img, ins, kbd, q, s, samp,
-  small, strike, strong, sub, sup, tt, var,
-  b, u, i, center,
-  dl, dt, dd, ol, ul, li,
-  fieldset, form, label, legend,
-  table, caption, tbody, tfoot, thead, tr, th, td,
-  article, aside, canvas, details, embed,
-  figure, figcaption, footer, header, hgroup,
-  menu, nav, output, ruby, section, summary,
-  time, mark, audio, video {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    font-size: 100%;
-    font: inherit;
-    vertical-align: baseline;
-  }
-
-  body {
-    line-height: 1;
-  }
-
-  ol, ul {
-    list-style: none;
-  }
-
-  blockquote, q {
-    quotes: none;
-  }
-
-  blockquote:before, blockquote:after,
-  q:before, q:after {
-    content: '';
-    content: none;
-  }
-
-  table {
-    border-collapse: collapse;
-    border-spacing: 0;
-  }
-
-  a {
-    text-decoration: none;
-  }
-
-  /* end reset */
-
   html,
   body,
   main {
@@ -62,12 +6,14 @@
   }
 
   html {
-    font-family: "Helvetica Neue", Helvetica, sans-serif;
+    font-family: "Helvetica Neue", "Segoe UI", Helvetica, sans-serif;
     font-size: 14px;
+    font-weight: 300;
   }
 
   body {
     background: #222;
+    color: #eee;
   }
 
   main {
@@ -78,6 +24,7 @@
 <template>
   <main>
     <sidebar></sidebar>
+    <bench-build></bench-build>
     <landing-page></landing-page>
   </main>
 </template>
@@ -85,11 +32,13 @@
 <script>
   import LandingPage from './components/LandingPageView'
   import Sidebar from './components/sidebar/Sidebar'
+  import BenchBuild from './components/bench-build/BenchBuild'
   import store from './store/store'
 
   export default {
     components: {
       Sidebar,
+      BenchBuild,
       LandingPage
     },
     store

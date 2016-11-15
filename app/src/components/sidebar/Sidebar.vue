@@ -6,13 +6,12 @@
   .link {
     position: relative;
     display: block;
-    width: 3rem;
-    height: 3rem;
-    padding: 0.5rem;
+    width: 4rem;
+    height: 4rem;
 
     background-position: center;
     background-repeat: no-repeat;
-    background-size: 24px;
+    background-size: 32px;
     opacity: 0.75;
     transition: opacity 0.2s;
   }
@@ -46,8 +45,12 @@
     position: absolute;
     visibility: hidden;
     left: 100%;
+    top: 50%;
+    margin-top: -1rem;
     padding: 0.5rem;
-    background: #333;
+    line-height: 1;
+
+    background: #222;
     color: white;
     opacity: 0;
     transition: opacity 0.2s;
