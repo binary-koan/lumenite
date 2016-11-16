@@ -12,7 +12,7 @@
   }
 
   body {
-    background: #222;
+    background: #333;
     color: #eee;
   }
 
@@ -25,21 +25,21 @@
   <main>
     <sidebar></sidebar>
     <bench-build></bench-build>
-    <landing-page></landing-page>
+    <tabs></tabs>
   </main>
 </template>
 
 <script>
-  import LandingPage from './components/LandingPageView'
   import Sidebar from './components/sidebar/Sidebar'
   import BenchBuild from './components/bench-build/BenchBuild'
+  import Tabs from './components/tabs/Tabs'
   import store from './store/store'
 
   export default {
     components: {
       Sidebar,
       BenchBuild,
-      LandingPage
+      Tabs
     },
     store
   }

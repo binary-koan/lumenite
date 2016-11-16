@@ -50,7 +50,7 @@
     padding: 0.5rem;
     line-height: 1;
 
-    background: #222;
+    background: #333;
     color: white;
     opacity: 0;
     transition: opacity 0.2s;
