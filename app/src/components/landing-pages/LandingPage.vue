@@ -1,34 +1,4 @@
 <style scoped>
-  .overlay {
-    display: flex;
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-
-    background-color: #333;
-  }
-
-  .landing-page {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    padding: 1rem;
-  }
-
-  @media screen and (min-width: 700px) {
-    .overlay {
-      align-items: center;
-      justify-content: center;
-    }
-
-    .landing-page {
-      flex: 0 0 50vw;
-      height: 50vh;
-    }
-  }
-
   .recent {
     padding: 1rem;
     border-radius: 5px;
@@ -98,27 +68,25 @@
 </style>
 
 <template>
-  <div class="overlay">
-    <div class="landing-page">
-      <div class="recent">
-        <h2 class="recent-title">Recent Projects</h2>
-        <ul class="recent-list">
-          <li>
-            <a href="#">
-              <div class="project-icon"><span class="icon icon-folder"></span></div>
-              <div class="description">
-                <h3 class="title">Pacman</h3>
-                <p class="info">~/Projects/Pacman</p>
-              </div>
-            </a>
-          </li>
-        </ul>
-      </div>
+  <div>
+    <div class="recent">
+      <h2 class="recent-title">Recent Projects</h2>
+      <ul class="recent-list">
+        <li>
+          <a href="#">
+            <div class="project-icon"><span class="icon icon-folder"></span></div>
+            <div class="description">
+              <h3 class="title">Pacman</h3>
+              <p class="info">~/Projects/Pacman</p>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </div>
 
-      <div class="actions">
-        <button><span class="icon icon-plus"></span> Create Project</button>
-        <button><span class="icon icon-opened-folder"></span> Open Folder</button>
-      </div>
+    <div class="actions">
+      <button><span class="icon icon-plus"></span> Create Project</button>
+      <button><span class="icon icon-opened-folder"></span> Open Folder</button>
     </div>
   </div>
 </template>

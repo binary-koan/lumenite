@@ -26,12 +26,12 @@
     <sidebar></sidebar>
     <bench-build></bench-build>
     <tabs></tabs>
-    <landing-page></landing-page>
+    <landing-pages></landing-pages>
   </main>
 </template>
 
 <script>
-  import LandingPage from './components/landing-page/LandingPage'
+  import LandingPages from './components/landing-pages/LandingPages'
   import Sidebar from './components/sidebar/Sidebar'
   import BenchBuild from './components/bench-build/BenchBuild'
   import Tabs from './components/tabs/Tabs'
@@ -39,7 +39,7 @@
 
   export default {
     components: {
-      LandingPage,
+      LandingPages,
       Sidebar,
       BenchBuild,
       Tabs
