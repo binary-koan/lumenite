@@ -126,14 +126,21 @@
     </div>
 
     <div class="actions">
-      <button>Cancel</button>
+      <button @click="cancel">Cancel</button>
       <button class="submit">Create</button>
     </div>
   </div>
 </template>
 
 <script>
+  import { actionTypes, pages } from 'src/store/modules/landing-pages'
+
   export default {
-    name: 'create-project-page'
+    name: 'create-project-page',
+    methods: {
+      cancel() {
+        this.$store.commit(actionTypes.SWITCH_PAGE, pages.LANDING_PAGE)
+      }
+    }
   }
 </script>

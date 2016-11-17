@@ -69,14 +69,21 @@
     </ul>
 
     <div class="actions">
-      <button><span class="icon icon-plus"></span> Create Project</button>
+      <button @click="createProject"><span class="icon icon-plus"></span> Create Project</button>
       <button><span class="icon icon-opened-folder"></span> Open Folder</button>
     </div>
   </div>
 </template>
 
 <script>
+  import { actionTypes, pages } from 'src/store/modules/landing-pages'
+
   export default {
-    name: 'landing-page'
+    name: 'landing-page',
+    methods: {
+      createProject() {
+        this.$store.commit(actionTypes.SWITCH_PAGE, pages.CREATE_PROJECT)
+      }
+    }
   }
 </script>

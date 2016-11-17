@@ -1,9 +1,5 @@
-import * as types from './mutation-types'
+import createProject from './actions/create-project'
 
-export const decrementMain = ({ commit }) => {
-  commit(types.DECREMENT_MAIN_COUNTER)
-}
-
-export const incrementMain = ({ commit }) => {
-  commit(types.INCREMENT_MAIN_COUNTER)
+export default {
+  createProject
 }

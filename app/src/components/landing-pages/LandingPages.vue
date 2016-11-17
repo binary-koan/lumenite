@@ -23,11 +23,11 @@
 
 <template>
   <div class="landing-pages">
-    <div class="page">
+    <div class="page" :class="{ hidden: landingPageHidden }">
       <landing-page></landing-page>
     </div>
 
-    <div class="page hidden">
+    <div class="page" :class="{ hidden: createPageHidden }">
       <h1 class="title">Create Project</h1>
       <create-project-page></create-project-page>
     </div>
@@ -38,8 +38,18 @@
   import LandingPage from './LandingPage'
   import CreateProjectPage from './CreateProjectPage'
 
+  import { pages } from 'src/store/modules/landing-pages'
+
   export default {
     name: 'landing-pages',
+    computed: {
+      landingPageHidden() {
+        return this.$store.state.landingPages.page !== pages.LANDING_PAGE
+      },
+      createPageHidden() {
+        return this.$store.state.landingPages.page !== pages.CREATE_PROJECT
+      }
+    },
     components: {
       LandingPage,
       CreateProjectPage
