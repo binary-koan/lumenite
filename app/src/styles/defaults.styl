@@ -1,0 +1,50 @@
+@import 'mixins/all'
+
+html,
+body {
+  height: 100%
+}
+
+html {
+  font-default()
+}
+
+body {
+  background-default()
+  text-default()
+}
+
+a {
+  text-primary(stateful: true)
+  font-default()
+}
+
+label {
+  text-muted()
+}
+
+button {
+  padding-vertical(sm)
+  padding-horizontal(lg)
+  radius(sm)
+  text-default()
+  background-highlight(stateful: true)
+  cursor-pointer()
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="url"],
+input[type="tel"] {
+  padding-both(sm)
+  radius(sm)
+  text-default()
+  font-weight-medium()
+  background-lowlight()
+}
+
+.hidden {
+  display: none !important;
+}

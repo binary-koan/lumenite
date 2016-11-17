@@ -20,8 +20,8 @@ let config = {
     preLoaders: [],
     loaders: [
       {
-        test: /\.css$/,
-        loader: ExtractTextPlugin.extract('style-loader', 'css-loader')
+        test: /\.styl$/,
+        loader: ExtractTextPlugin.extract('style-loader', ['css-loader', 'stylus-loader'])
       },
       {
         test: /\.html$/,

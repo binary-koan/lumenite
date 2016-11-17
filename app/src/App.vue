@@ -1,19 +1,6 @@
 <style>
-  html,
-  body,
   main {
     height: 100%;
-  }
-
-  html {
-    font-family: "Helvetica Neue", "Segoe UI", Helvetica, sans-serif;
-    font-size: 14px;
-    font-weight: 300;
-  }
-
-  body {
-    background: #333;
-    color: #eee;
   }
 
   main {

@@ -1,41 +1,36 @@
-<style scoped>
-  .recent {
-    padding: 1rem;
-    border-radius: 5px;
-    background: #222;
+<style lang="stylus" scoped>
+  @import '../../styles/mixins/all';
+
+  .container {
+    spacing-vertical(md)
   }
 
-  .recent-title {
-    margin-bottom: 1rem;
-    font-size: 1.5rem;
-    font-weight: 600;
-  }
+  .recent-list {
+    padding-both(sm)
+    radius(sm)
+    background-lowlight()
+    spacing-vertical(lg)
 
-  .recent-list a {
-    display: flex;
-    align-items: center;
-    padding: 0.5rem;
-    border-radius: 3px;
-    color: white;
-    transition: background-color 0.2s;
-  }
+    a {
+      row()
+      items-center()
+      padding-both(sm)
+      spacing-horizontal(sm)
+      radius(sm)
+      text-default()
+      transition: all 0.2s
 
-  .recent-list a:hover {
-    background-color: #333;
-  }
+      &:hover {
+        background-highlight()
+      }
+    }
 
-  .recent-list .project-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 2.5rem;
-    height: 2.5rem;
-    margin-right: 0.5rem;
-
-    border-radius: 3px;
-    font-size: 1.5rem;
-    background: #eee;
-    color: #666;
+    .project-icon {
+      padding-both(sm)
+      font-size(lg)
+      radius(sm)
+      background-primary()
+    }
   }
 
   .recent-list .title {
@@ -48,41 +43,30 @@
   }
 
   .actions {
-    display: flex;
-    margin-top: 0.5rem;
+    row()
+    spacing-horizontal(md)
   }
 
   .actions button {
-    flex: 1;
-    padding: 1rem;
-    border-radius: 3px;
-    font-size: 1.1rem;
-    background: transparent;
-    color: white;
-    transition: background-color 0.2s;
-  }
-
-  .actions button:hover {
-    background-color: #444;
+    flex()
+    padding-both(lg)
+    font-size(md)
   }
 </style>
 
 <template>
-  <div>
-    <div class="recent">
-      <h2 class="recent-title">Recent Projects</h2>
-      <ul class="recent-list">
-        <li>
-          <a href="#">
-            <div class="project-icon"><span class="icon icon-folder"></span></div>
-            <div class="description">
-              <h3 class="title">Pacman</h3>
-              <p class="info">~/Projects/Pacman</p>
-            </div>
-          </a>
-        </li>
-      </ul>
-    </div>
+  <div class="container">
+    <ul class="recent-list">
+      <li>
+        <a href="#">
+          <div class="project-icon"><span class="icon icon-folder"></span></div>
+          <div class="description">
+            <h3 class="title">Pacman</h3>
+            <p class="info">~/Projects/Pacman</p>
+          </div>
+        </a>
+      </li>
+    </ul>
 
     <div class="actions">
       <button><span class="icon icon-plus"></span> Create Project</button>

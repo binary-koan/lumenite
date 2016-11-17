@@ -1,3 +1,7 @@
+import './styles/reset.styl'
+import './styles/icons.styl'
+import './styles/defaults.styl'
+
 import Vue from 'vue'
 import Electron from 'vue-electron'
 

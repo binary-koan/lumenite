@@ -1,0 +1,37 @@
+// Variables
+
+$border-radius-variants = {
+  sm: 0.2rem
+}
+
+// Mixins
+
+radius(variant) {
+  border-radius: $border-radius-variants[variant]
+}
+
+radius-left(variant) {
+  border-radius: $border-radius-variants[variant] 0 0 $border-radius-variants[variant]
+}
+
+radius-right(variant) {
+  border-radius: 0 $border-radius-variants[variant] $border-radius-variants[variant] 0
+}
+
+child-radius-horizontal(variant) {
+  > * {
+    border-radius: 0
+  }
+
+  > *:first-child {
+    radius-left(variant)
+  }
+
+  > *:last-child {
+    radius-right(variant)
+  }
+}
+
+cursor-pointer() {
+  cursor: pointer
+}
