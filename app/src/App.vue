@@ -13,7 +13,7 @@
     <sidebar></sidebar>
     <bench-build></bench-build>
     <tabs></tabs>
-    <landing-pages></landing-pages>
+    <landing-pages :class="{ hidden: landingPagesHidden }"></landing-pages>
   </main>
 </template>
 
@@ -25,6 +25,11 @@
   import store from './store/store'
 
   export default {
+    computed: {
+      landingPagesHidden() {
+        return Boolean(this.$store.state.activeProject.path)
+      }
+    },
     components: {
       LandingPages,
       Sidebar,

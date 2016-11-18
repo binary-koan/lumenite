@@ -84,6 +84,8 @@
 
 <template>
   <div class="container">
+    <div class="error" v-show="errorMessage">{{ errorMessage }}</div>
+
     <div class="input-group">
       <label for="projectName">Name</label>
       <input id="projectName" class="input" type="text" value="Pacman" />
@@ -127,7 +129,7 @@
 
     <div class="actions">
       <button @click="cancel">Cancel</button>
-      <button class="submit">Create</button>
+      <button @click="create" class="submit">Create</button>
     </div>
   </div>
 </template>
@@ -137,7 +139,16 @@
 
   export default {
     name: 'create-project-page',
+    computed: {
+      errorMessage() {
+        return this.$store.state.landingPages.error
+      }
+    },
     methods: {
+      create() {
+        this.$store.dispatch('createProject')
+      },
+
       cancel() {
         this.$store.commit(actionTypes.SWITCH_PAGE, pages.LANDING_PAGE)
       }
