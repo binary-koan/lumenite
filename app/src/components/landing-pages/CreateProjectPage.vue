@@ -5,6 +5,12 @@
     spacing-vertical(lg)
   }
 
+  .error {
+    padding-both(sm)
+    background-primary()
+    radius(sm)
+  }
+
   .input-group {
     column()
     spacing-vertical(xs)
@@ -84,18 +90,20 @@
 
 <template>
   <div class="container">
-    <div class="error" v-show="errorMessage">{{ errorMessage }}</div>
+    <div class="error" v-show="errorMessage">
+      <span class="icon icon-cancel-2"></span> {{ errorMessage }}
+    </div>
 
     <div class="input-group">
       <label for="projectName">Name</label>
-      <input id="projectName" class="input" type="text" value="Pacman" />
+      <input id="projectName" class="input" type="text" v-model="name" />
     </div>
 
     <div class="input-group">
       <label for="projectLocation">Location</label>
       <div class="input-row input">
-        <input id="projectLocation" type="text" value="/home/jono/Projects/Pacman" />
-        <button><span class="icon icon-opened-folder"></button>
+        <input id="projectLocation" type="text" v-model="path" />
+        <button><span class="icon icon-opened-folder"></span></button>
       </div>
     </div>
 
@@ -104,7 +112,10 @@
       <div class="templates">
         <ul>
           <li>
-            <input id="emptyTemplate" class="hidden" type="radio" checked="checked" name="template" value="empty" />
+            <input
+              id="emptyTemplate" class="hidden"
+              type="radio" name="template" value="empty"
+              v-model="template" />
             <label for="emptyTemplate" class="template active">
               <div class="image"><span class="icon icon-circle"></span></div>
               <div class="description">
@@ -114,7 +125,10 @@
             </label>
           </li>
           <li>
-            <input id="platformerTemplate" class="hidden" type="radio" name="template" value="platformer" />
+            <input
+              id="platformerTemplate" class="hidden"
+              type="radio" name="template" value="platformer"
+              v-model="template" />
             <label for="platformerTemplate" class="template">
               <div class="image"><span class="icon icon-babys-room"></span></div>
               <div class="description">
@@ -135,14 +149,19 @@
 </template>
 
 <script>
+  import { modelProperty } from 'src/helpers/vuex-helpers'
   import { actionTypes, pages } from 'src/store/modules/landing-pages'
 
   export default {
     name: 'create-project-page',
     computed: {
       errorMessage() {
+        console.log('getting error message')
         return this.$store.state.landingPages.error
-      }
+      },
+      name: modelProperty("landingPages.newProject.name", actionTypes.SET_NEW_PROJECT_NAME),
+      path: modelProperty("landingPages.newProject.path", actionTypes.SET_NEW_PROJECT_PATH),
+      template: modelProperty("landingPages.newProject.template", actionTypes.SET_NEW_PROJECT_TEMPLATE)
     },
     methods: {
       create() {

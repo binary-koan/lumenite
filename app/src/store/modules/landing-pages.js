@@ -6,8 +6,13 @@ export const pages = Object.freeze({
 })
 
 const state = {
+  error: null,
   page: pages.LANDING_PAGE,
-  newProject: {},
+  newProject: {
+    name: 'Pacman',
+    path: '/home/jono/Projects/Pacman',
+    template: 'empty'
+  },
   recentProjects: [],
   templates: []
 }
@@ -18,6 +23,7 @@ export const actionTypes = Object.freeze({
   SWITCH_PAGE: 'landingPages.SWITCH_PAGE',
   SET_NEW_PROJECT_NAME: 'landingPages.SET_NEW_PROJECT_NAME',
   SET_NEW_PROJECT_PATH: 'landingPages.SET_NEW_PROJECT_PATH',
+  SET_NEW_PROJECT_TEMPLATE: 'landingPages.SET_NEW_PROJECT_TEMPLATE',
   SET_ERROR: 'landingPages.SET_ERROR'
 })
 
@@ -26,13 +32,16 @@ export const actionTypes = Object.freeze({
 const mutations = {
   [actionTypes.SWITCH_PAGE](state, page) {
     state.page = page
-    delete state.error
+    state.error = null
   },
   [actionTypes.SET_NEW_PROJECT_NAME](state, name) {
     state.newProject.name = name
   },
   [actionTypes.SET_NEW_PROJECT_PATH](state, path) {
     state.newProject.path = path
+  },
+  [actionTypes.SET_NEW_PROJECT_TEMPLATE](state, template) {
+    state.newProject.template = template
   },
   [actionTypes.SET_ERROR](state, message) {
     state.error = message
