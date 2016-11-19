@@ -1,18 +1,25 @@
 import every from 'lodash/every'
 import fs from '../fs'
 
+import { Rejection } from 'src/helpers/error-helpers'
+
 export default async function checkLooksLikeProject(path) {
-  return await requiredFilesExist(path) && await requiredFilesLookValid(path)
-}
+  const baseMessage = `The directory ${path} doesn't appear to be a valid project.`
 
-async function requiredFilesExist(path) {
-  return await fs.existsAsync(`${path}/project.json`) &&
-    await fs.existsAsync(`${path}/settings/general.json`)
-}
+  let project, generalSettings;
 
-async function requiredFilesLookValid(path) {
-  const project = await fs.readJson(`${path}/project.json`)
-  const generalSettings = await fs.readJson(`${path}/settings/general.json`)
+  try {
+    project = await fs.readJsonAsync(`${path}/project.json`)
+    generalSettings = await fs.readJsonAsync(`${path}/settings/general.json`)
+  } catch (e) {
+    throw new Rejection(`${baseMessage} Required files not found.`)
+  }
 
-  return project.editorVersion > 0 && Boolean(generalSettings.name)
+  if (!/^\d+\.\d+\.\d+/.test(project.editorVersion)) {
+    throw new Rejection(`${baseMessage} Invalid editor version.`)
+  }
+
+  if (!Boolean(generalSettings.name)) {
+    throw new Rejection(`${baseMessage} No project name specified.`)
+  }
 }

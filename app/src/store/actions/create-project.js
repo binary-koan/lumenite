@@ -1,4 +1,5 @@
-import createOnDisk from '../../filesystem/projects/create'
+import { Rejection } from 'src/helpers/error-helpers'
+import createOnDisk from 'src/filesystem/projects/create'
 
 import { actionTypes as projectActions } from '../modules/active-project'
 import { actionTypes as landingActions } from '../modules/landing-pages'
@@ -9,6 +10,11 @@ export default async function createProject({ state, commit }) {
 
     commit(projectActions.LOAD, state.landingPages.newProject.path)
   } catch (err) {
-    commit(landingActions.SET_ERROR, err.toString())
+    if (err instanceof Rejection) {
+      commit(landingActions.SET_ERROR, err.toString())
+    } else {
+      commit(landingActions.SET_ERROR, err.toString())
+      console.error(err.stack)
+    }
   }
 }

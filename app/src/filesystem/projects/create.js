@@ -1,13 +1,15 @@
 import isEmpty from 'lodash/isEmpty'
 import fs from '../fs'
 
+import { Rejection } from 'src/helpers/error-helpers'
+
 import checkLooksLikeProject from './looks-like-project'
 
 const TEMPLATES_ROOT = `${process.resourcesPath}/templates`
 
 export default async function createProject(details) {
   if (isEmpty(details.template)) {
-    throw new Error('No template specified')
+    throw new Rejection('No template specified')
   }
 
   const templatePath = `${TEMPLATES_ROOT}/${details.template}`
@@ -30,14 +32,15 @@ export default async function createProject(details) {
 
 async function checkValidPath(path) {
   if (isEmpty(path) || !path.includes('/')) {
-    throw new Error(`Invalid path: ${path || '(empty path)'}`)
+    throw new Rejection(`Invalid path: ${path || '(empty path)'}`)
   }
 }
 
 async function checkValidTemplate(templatePath) {
-  const exists = await fs.existsAsync(templatePath)
-  if (!exists) {
-    throw new Error(`Template does not exist: ${template}. Expected it to be in ${templatePath}`)
+  try {
+    await fs.accessAsync(templatePath)
+  } catch (err) {
+    throw new Rejection(`Template cannot be accessed. Expected it to be a readable directory in ${templatePath}`)
   }
 
   await checkLooksLikeProject(templatePath)

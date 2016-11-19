@@ -156,7 +156,6 @@
     name: 'create-project-page',
     computed: {
       errorMessage() {
-        console.log('getting error message')
         return this.$store.state.landingPages.error
       },
       name: modelProperty("landingPages.newProject.name", actionTypes.SET_NEW_PROJECT_NAME),

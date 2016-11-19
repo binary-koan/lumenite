@@ -7,6 +7,7 @@ const webpack = require('webpack')
 
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const SymlinkPlugin = require('./tasks/webpack/symlink')
 
 let config = {
   devtool: '#eval-source-map',
@@ -108,6 +109,14 @@ if (process.env.NODE_ENV !== 'production') {
       }
     )
   }
+
+  const resourcesDir = process.platform === 'darwin' ?
+    './node_modules/electron-prebuilt/dist/Electron.app/Contents/Resources' :
+    './node_modules/electron-prebuilt/dist/resources'
+
+  config.plugins.push(new SymlinkPlugin({
+    from: './templates', to: `${resourcesDir}/templates`, type: 'dir'
+  }))
 }
 
 /**

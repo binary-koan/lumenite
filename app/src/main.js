@@ -2,7 +2,7 @@ import './styles/reset.styl'
 import './styles/icons.styl'
 import './styles/defaults.styl'
 
-window.Promise = require('bluebird')
+// window.Promise = require('bluebird')
 
 import Vue from 'vue'
 import Electron from 'vue-electron'
