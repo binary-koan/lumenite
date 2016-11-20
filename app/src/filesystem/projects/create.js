@@ -48,7 +48,7 @@ async function checkValidTemplate(templatePath) {
 
 function generateProjectJson() {
   return {
-    editorVersion: app.getVersion()
+    editorVersion: process.env.npm_package_version
   }
 }
 
