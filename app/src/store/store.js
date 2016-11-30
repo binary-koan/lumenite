@@ -1,12 +1,17 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import actions from './actions'
-import modules from './modules'
+
+import landingPages from './modules/landing-pages'
+import activeProject from './modules/active-project'
+import fileTree from './modules/file-tree'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  actions,
-  modules,
+  modules: {
+    landingPages,
+    activeProject,
+    fileTree
+  },
   strict: true
 })

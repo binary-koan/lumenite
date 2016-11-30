@@ -79,27 +79,27 @@
 
 <template>
   <div class="bench-build">
-    <div class="top-level-item">
-      <button class="title"><span class="icon icon-timeline"></span> Settings</button>
+    <div class="top-level-item" :class="{ expanded: settingsFolder.expanded }">
+      <button class="title" @click="toggleSettings"><span class="icon icon-timeline"></span> Settings</button>
       <button class="action"><span class="icon icon-more"></span></button>
     </div>
 
-    <div class="top-level-item">
-      <button class="title"><span class="icon icon-image-file"></span> Assets</button>
+    <div class="top-level-item" :class="{ expanded: assetsFolder.expanded }">
+      <button class="title" @click="toggleAssets"><span class="icon icon-image-file"></span> Assets</button>
       <button class="action"><span class="icon icon-import"></span></button>
       <button class="action"><span class="icon icon-folder"></span></button>
       <button class="action"><span class="icon icon-more"></span></button>
     </div>
 
-    <div class="top-level-item">
-      <button class="title"><span class="icon icon-fantasy"></span> Behaviours</button>
+    <div class="top-level-item" :class="{ expanded: behavioursFolder.expanded }">
+      <button class="title" @click="toggleBehaviours"><span class="icon icon-fantasy"></span> Behaviours</button>
       <button class="action"><span class="icon icon-plus"></span></button>
       <button class="action"><span class="icon icon-folder"></span></button>
       <button class="action"><span class="icon icon-more"></span></button>
     </div>
 
-    <div class="top-level-item expanded">
-      <button class="title"><span class="icon icon-film"></span> Scenes</button>
+    <div class="top-level-item" :class="{ expanded: scenesFolder.expanded }">
+      <button class="title" @click="toggleScenes"><span class="icon icon-film"></span> Scenes</button>
       <button class="action"><span class="icon icon-plus"></span></button>
       <button class="action"><span class="icon icon-folder"></span></button>
       <button class="action"><span class="icon icon-more"></span></button>
@@ -127,7 +127,43 @@
 </template>
 
 <script>
+  import find from 'lodash/find'
+
   export default {
-    name: 'bench-build'
+    name: 'bench-build',
+    computed: {
+      settingsFolder() {
+        return find(this.$store.state.fileTree.baseFolders, folder => folder.name === 'Settings')
+      },
+
+      assetsFolder() {
+        return find(this.$store.state.fileTree.baseFolders, folder => folder.name === 'Assets')
+      },
+
+      behavioursFolder() {
+        return find(this.$store.state.fileTree.baseFolders, folder => folder.name === 'Behaviours')
+      },
+
+      scenesFolder() {
+        return find(this.$store.state.fileTree.baseFolders, folder => folder.name === 'Scenes')
+      }
+    },
+    methods: {
+      toggleSettings() {
+        this.$store.dispatch('toggleFolder', ['Settings'])
+      },
+
+      toggleAssets() {
+        this.$store.dispatch('toggleFolder', ['Assets'])
+      },
+
+      toggleBehaviours() {
+        this.$store.dispatch('toggleFolder', ['Behaviours'])
+      },
+
+      toggleScenes() {
+        this.$store.dispatch('toggleFolder', ['Scenes'])
+      }
+    }
   }
 </script>

@@ -3,7 +3,7 @@ import fs from '../fs'
 
 import { Rejection } from 'src/helpers/error-helpers'
 
-import checkLooksLikeProject from './looks-like-project'
+import checkLooksLikeProject from '../queries/looks-like-project'
 
 const TEMPLATES_ROOT = `${process.resourcesPath}/templates`
 

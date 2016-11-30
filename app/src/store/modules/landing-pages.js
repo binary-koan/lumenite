@@ -4,6 +4,12 @@ import os from 'os'
 import last from 'lodash/last'
 import dropRight from 'lodash/dropRight'
 
+import { Rejection } from 'src/helpers/error-helpers'
+import createOnDisk from 'src/filesystem/operations/create-project'
+
+import { actionTypes as projectActions } from './active-project'
+import { actionTypes as landingActions } from './landing-pages'
+
 // State
 
 export const pages = Object.freeze({
@@ -60,7 +66,24 @@ const mutations = {
   }
 }
 
+// Actions
+
+async function createProject({ state, commit }) {
+  try {
+    await createOnDisk(state.newProject)
+
+    commit(projectActions.LOAD, state.newProject.path)
+  } catch (err) {
+    commit(landingActions.SET_ERROR, err.toString())
+
+    if (!err instanceof Rejection) {
+      console.error(err.stack)
+    }
+  }
+}
+
 export default {
   state,
-  mutations
+  mutations,
+  actions: { createProject }
 }
