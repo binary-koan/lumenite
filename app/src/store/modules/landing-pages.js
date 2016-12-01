@@ -1,5 +1,6 @@
 import path from 'path'
 import os from 'os'
+import fs from 'src/filesystem/fs'
 
 import last from 'lodash/last'
 import dropRight from 'lodash/dropRight'
@@ -43,6 +44,7 @@ export const types = Object.freeze({
   SET_ERROR: 'landingPages.SET_ERROR',
 
   FIND_TEMPLATES: 'landingPages.FIND_TEMPLATES',
+  PICK_DIRECTORY: 'landingPages.PICK_DIRECTORY',
   CREATE_PROJECT: 'landingPages.CREATE_PROJECT'
 })
 
@@ -87,7 +89,7 @@ function setError(error, commit) {
 }
 
 const actions = {
-  async [types.FIND_TEMPLATES]({ state, commit }) {
+  async [types.FIND_TEMPLATES]({ commit }) {
     try {
       const templates = await listTemplates()
 
@@ -95,6 +97,22 @@ const actions = {
       commit(types.SET_NEW_PROJECT_TEMPLATE, templates[0].id)
     } catch (err) {
       setError(err, commit)
+    }
+  },
+
+  async [types.PICK_DIRECTORY]({ state, commit }, dirname) {
+    if (!dirname) {
+      return
+    }
+
+    const contents = await fs.readdirAsync(dirname)
+
+    // Assume that if the chosen directory is empty then project files should be created in it
+    // directly, and if it contains anything then a new directory should be created inside it
+    if (contents.length === 0) {
+      commit(types.SET_NEW_PROJECT_PATH, dirname)
+    } else {
+      commit(types.SET_NEW_PROJECT_PATH, dirname + path.sep + state.newProject.name)
     }
   },
 

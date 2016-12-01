@@ -103,7 +103,7 @@
       <label for="projectLocation">Location</label>
       <div class="input-row input">
         <input id="projectLocation" type="text" v-model="path" />
-        <button><span class="icon icon-opened-folder"></span></button>
+        <button @click="pickDirectory"><span class="icon icon-opened-folder"></span></button>
       </div>
     </div>
 
@@ -135,6 +135,9 @@
 </template>
 
 <script>
+  import { remote } from 'electron'
+  const dialog = remote.dialog
+
   import { modelProperty } from 'src/helpers/vuex-helpers'
   import { types, pages } from 'src/store/modules/landing-pages'
 
@@ -152,6 +155,14 @@
       template: modelProperty("landingPages.newProject.template", types.SET_NEW_PROJECT_TEMPLATE)
     },
     methods: {
+      pickDirectory() {
+        const dirs = dialog.showOpenDialog({
+          defaultPath: this.$store.state.landingPages.newProject.path,
+          properties: ['openDirectory', 'createDirectory']
+        })
+        this.$store.dispatch(types.PICK_DIRECTORY, dirs[0])
+      },
+
       create() {
         this.$store.dispatch(types.CREATE_PROJECT)
       },
