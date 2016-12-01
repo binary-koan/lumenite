@@ -111,29 +111,15 @@
       <h2 class="template-label">Template</h2>
       <div class="templates">
         <ul>
-          <li>
+          <li v-for="t in templates">
             <input
-              id="emptyTemplate" class="hidden"
-              type="radio" name="template" value="empty"
-              v-model="template" />
-            <label for="emptyTemplate" class="template active">
+              :id="t.id + 'Template'" :value="t.id"
+              type="radio" name="template" class="hidden" v-model="template" />
+            <label :for="t.id + 'Template'" :class="{ active: template === t.id }" class="template">
               <div class="image"><span class="icon icon-circle"></span></div>
               <div class="description">
-                <h3 class="name">Empty</h3>
-                <p class="info">Start from scratch.</p>
-              </div>
-            </label>
-          </li>
-          <li>
-            <input
-              id="platformerTemplate" class="hidden"
-              type="radio" name="template" value="platformer"
-              v-model="template" />
-            <label for="platformerTemplate" class="template">
-              <div class="image"><span class="icon icon-babys-room"></span></div>
-              <div class="description">
-                <h3 class="name">Platformer</h3>
-                <p class="info">Allow the player to run and jump in a side-on world.</p>
+                <h3 class="name">{{ t.name }}</h3>
+                <p class="info">{{ t.description }}</p>
               </div>
             </label>
           </li>
@@ -150,7 +136,7 @@
 
 <script>
   import { modelProperty } from 'src/helpers/vuex-helpers'
-  import { actionTypes, pages } from 'src/store/modules/landing-pages'
+  import { types, pages } from 'src/store/modules/landing-pages'
 
   export default {
     name: 'create-project-page',
@@ -158,18 +144,24 @@
       errorMessage() {
         return this.$store.state.landingPages.error
       },
-      name: modelProperty("landingPages.newProject.name", actionTypes.SET_NEW_PROJECT_NAME),
-      path: modelProperty("landingPages.newProject.path", actionTypes.SET_NEW_PROJECT_PATH),
-      template: modelProperty("landingPages.newProject.template", actionTypes.SET_NEW_PROJECT_TEMPLATE)
+      templates() {
+        return this.$store.state.landingPages.templates
+      },
+      name: modelProperty("landingPages.newProject.name", types.SET_NEW_PROJECT_NAME),
+      path: modelProperty("landingPages.newProject.path", types.SET_NEW_PROJECT_PATH),
+      template: modelProperty("landingPages.newProject.template", types.SET_NEW_PROJECT_TEMPLATE)
     },
     methods: {
       create() {
-        this.$store.dispatch('createProject')
+        this.$store.dispatch(types.CREATE_PROJECT)
       },
 
       cancel() {
-        this.$store.commit(actionTypes.SWITCH_PAGE, pages.LANDING_PAGE)
+        this.$store.commit(types.SWITCH_PAGE, pages.LANDING_PAGE)
       }
+    },
+    created() {
+      this.$store.dispatch(types.FIND_TEMPLATES)
     }
   }
 </script>

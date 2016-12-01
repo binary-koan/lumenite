@@ -76,13 +76,13 @@
 </template>
 
 <script>
-  import { actionTypes, pages } from 'src/store/modules/landing-pages'
+  import { types, pages } from 'src/store/modules/landing-pages'
 
   export default {
     name: 'landing-page',
     methods: {
       createProject() {
-        this.$store.commit(actionTypes.SWITCH_PAGE, pages.CREATE_PROJECT)
+        this.$store.commit(types.SWITCH_PAGE, pages.CREATE_PROJECT)
       }
     }
   }

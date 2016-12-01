@@ -6,9 +6,10 @@ import dropRight from 'lodash/dropRight'
 
 import { Rejection } from 'src/helpers/error-helpers'
 import createOnDisk from 'src/filesystem/operations/create-project'
+import listTemplates from 'src/filesystem/queries/list-templates'
 
-import { actionTypes as projectActions } from './active-project'
-import { actionTypes as landingActions } from './landing-pages'
+import { types as projectActions } from './active-project'
+import { types as landingActions } from './landing-pages'
 
 // State
 
@@ -26,27 +27,36 @@ const state = {
     template: 'empty'
   },
   recentProjects: [],
-  templates: []
+  templates: [],
+  pendingAction: null,
+  pendingActionBlocks: false
 }
 
-// Action types
+// Types
 
-export const actionTypes = Object.freeze({
+export const types = Object.freeze({
   SWITCH_PAGE: 'landingPages.SWITCH_PAGE',
+  SET_TEMPLATES: 'landingPages.SET_TEMPLATES',
   SET_NEW_PROJECT_NAME: 'landingPages.SET_NEW_PROJECT_NAME',
   SET_NEW_PROJECT_PATH: 'landingPages.SET_NEW_PROJECT_PATH',
   SET_NEW_PROJECT_TEMPLATE: 'landingPages.SET_NEW_PROJECT_TEMPLATE',
-  SET_ERROR: 'landingPages.SET_ERROR'
+  SET_ERROR: 'landingPages.SET_ERROR',
+
+  FIND_TEMPLATES: 'landingPages.FIND_TEMPLATES',
+  CREATE_PROJECT: 'landingPages.CREATE_PROJECT'
 })
 
 // Mutations
 
 const mutations = {
-  [actionTypes.SWITCH_PAGE](state, page) {
+  [types.SWITCH_PAGE](state, page) {
     state.page = page
     state.error = null
   },
-  [actionTypes.SET_NEW_PROJECT_NAME](state, name) {
+  [types.SET_TEMPLATES](state, templates) {
+    state.templates = templates
+  },
+  [types.SET_NEW_PROJECT_NAME](state, name) {
     const pathSegments = state.newProject.path.split(path.sep)
 
     if (last(pathSegments) === state.newProject.name) {
@@ -55,29 +65,46 @@ const mutations = {
 
     state.newProject.name = name
   },
-  [actionTypes.SET_NEW_PROJECT_PATH](state, path) {
+  [types.SET_NEW_PROJECT_PATH](state, path) {
     state.newProject.path = path
   },
-  [actionTypes.SET_NEW_PROJECT_TEMPLATE](state, template) {
+  [types.SET_NEW_PROJECT_TEMPLATE](state, template) {
     state.newProject.template = template
   },
-  [actionTypes.SET_ERROR](state, message) {
+  [types.SET_ERROR](state, message) {
     state.error = message
   }
 }
 
 // Actions
 
-async function createProject({ state, commit }) {
-  try {
-    await createOnDisk(state.newProject)
+function setError(error, commit) {
+  commit(landingActions.SET_ERROR, error.toString())
 
-    commit(projectActions.LOAD, state.newProject.path)
-  } catch (err) {
-    commit(landingActions.SET_ERROR, err.toString())
+  if (!error instanceof Rejection) {
+    console.error(error.stack)
+  }
+}
 
-    if (!err instanceof Rejection) {
-      console.error(err.stack)
+const actions = {
+  async [types.FIND_TEMPLATES]({ state, commit }) {
+    try {
+      const templates = await listTemplates()
+
+      commit(types.SET_TEMPLATES, templates)
+      commit(types.SET_NEW_PROJECT_TEMPLATE, templates[0].id)
+    } catch (err) {
+      setError(err, commit)
+    }
+  },
+
+  async [types.CREATE_PROJECT]({ state, commit }) {
+    try {
+      await createOnDisk(state.newProject)
+
+      commit(projectActions.LOAD, state.newProject.path)
+    } catch (err) {
+      setError(err, commit)
     }
   }
 }
@@ -85,5 +112,5 @@ async function createProject({ state, commit }) {
 export default {
   state,
   mutations,
-  actions: { createProject }
+  actions
 }

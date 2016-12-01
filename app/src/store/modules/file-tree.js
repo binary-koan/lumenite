@@ -11,9 +11,9 @@ const state = {
   ]
 }
 
-// Action types
+// Types
 
-export const actionTypes = Object.freeze({
+export const types = Object.freeze({
   SET_CHILDREN: 'fileTree.SET_CHILDREN',
   COLLAPSE_FOLDER: 'fileTree.COLLAPSE_FOLDER'
 })
@@ -21,7 +21,7 @@ export const actionTypes = Object.freeze({
 // Mutations
 
 const mutations = {
-  [actionTypes.SET_CHILDREN](state, { path, children }) {
+  [types.SET_CHILDREN](state, { path, children }) {
     let affected = state.baseFolders
 
     path.forEach(fragment => {
@@ -41,7 +41,7 @@ const mutations = {
     affected.expanded = true
   },
 
-  [actionTypes.COLLAPSE_FOLDER](state, path) {
+  [types.COLLAPSE_FOLDER](state, path) {
     let affected = state.baseFolders
 
     path.forEach(fragment => {
@@ -55,7 +55,7 @@ const mutations = {
 // Actions
 
 async function toggleFolder({ state, commit }, path) {
-  commit(actionTypes.SET_CHILDREN, { path, children: [] })
+  commit(types.SET_CHILDREN, { path, children: [] })
 }
 
 export default {

@@ -1,18 +1,18 @@
 import isEmpty from 'lodash/isEmpty'
+import path from 'path'
 import fs from '../fs'
 
 import { Rejection } from 'src/helpers/error-helpers'
 
-import checkLooksLikeProject from '../queries/looks-like-project'
-
-const TEMPLATES_ROOT = `${process.resourcesPath}/templates`
+import { TEMPLATES_PATH } from '../paths'
+import projectInfo from '../queries/project-info'
 
 export default async function createProject(details) {
   if (isEmpty(details.template)) {
     throw new Rejection('No template specified')
   }
 
-  const templatePath = `${TEMPLATES_ROOT}/${details.template}`
+  const templatePath = `${TEMPLATES_PATH}/${details.template}`
   await Promise.all([checkValidPath(details.path), checkValidTemplate(templatePath)])
 
   await fs.mkdirsAsync(details.path)
@@ -30,9 +30,9 @@ export default async function createProject(details) {
   )
 }
 
-async function checkValidPath(path) {
-  if (isEmpty(path) || !path.includes('/')) {
-    throw new Rejection(`Invalid path: ${path || '(empty path)'}`)
+async function checkValidPath(pathName) {
+  if (isEmpty(pathName) || !pathName.includes(path.sep)) {
+    throw new Rejection(`Invalid path: ${pathName || '(empty path)'}`)
   }
 }
 
@@ -43,7 +43,7 @@ async function checkValidTemplate(templatePath) {
     throw new Rejection(`Template cannot be accessed. Expected it to be a readable directory in ${templatePath}`)
   }
 
-  await checkLooksLikeProject(templatePath)
+  await projectInfo(templatePath)
 }
 
 function generateProjectJson() {

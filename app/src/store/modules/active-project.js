@@ -4,16 +4,16 @@ const state = {
   path: null
 }
 
-// Action types
+// Types
 
-export const actionTypes = Object.freeze({
+export const types = Object.freeze({
   LOAD: 'activeProject.LOAD'
 })
 
 // Mutations
 
 const mutations = {
-  [actionTypes.LOAD](state, path) {
+  [types.LOAD](state, path) {
     state.path = path
   }
 }

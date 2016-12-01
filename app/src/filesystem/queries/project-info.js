@@ -3,7 +3,7 @@ import fs from '../fs'
 
 import { Rejection } from 'src/helpers/error-helpers'
 
-export default async function checkLooksLikeProject(path) {
+export default async function projectInfo(path) {
   const baseMessage = `The directory ${path} doesn't appear to be a valid project.`
 
   let project, generalSettings;
@@ -22,4 +22,6 @@ export default async function checkLooksLikeProject(path) {
   if (!Boolean(generalSettings.name)) {
     throw new Rejection(`${baseMessage} No project name specified.`)
   }
+
+  return { project, generalSettings }
 }
