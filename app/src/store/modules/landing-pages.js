@@ -8,6 +8,7 @@ import dropRight from 'lodash/dropRight'
 import { Rejection } from 'src/helpers/error-helpers'
 import createOnDisk from 'src/filesystem/operations/create-project'
 import listTemplates from 'src/filesystem/queries/list-templates'
+import projectInfo from 'src/filesystem/queries/project-info'
 
 import { types as projectActions } from './active-project'
 import { types as landingActions } from './landing-pages'
@@ -45,7 +46,8 @@ export const types = Object.freeze({
 
   FIND_TEMPLATES: 'landingPages.FIND_TEMPLATES',
   PICK_DIRECTORY: 'landingPages.PICK_DIRECTORY',
-  CREATE_PROJECT: 'landingPages.CREATE_PROJECT'
+  CREATE_PROJECT: 'landingPages.CREATE_PROJECT',
+  OPEN_PROJECT: 'landingPages.OPEN_PROJECT'
 })
 
 // Mutations
@@ -121,6 +123,16 @@ const actions = {
       await createOnDisk(state.newProject)
 
       commit(projectActions.LOAD, state.newProject.path)
+    } catch (err) {
+      setError(err, commit)
+    }
+  },
+
+  async [types.OPEN_PROJECT]({ commit }, dirname) {
+    try {
+      await projectInfo(dirname)
+
+      commit(projectActions.LOAD, dirname)
     } catch (err) {
       setError(err, commit)
     }

@@ -70,12 +70,15 @@
 
     <div class="actions">
       <button @click="createProject"><span class="icon icon-plus"></span> Create Project</button>
-      <button><span class="icon icon-opened-folder"></span> Open Folder</button>
+      <button @click="openProject"><span class="icon icon-opened-folder"></span> Open Folder</button>
     </div>
   </div>
 </template>
 
 <script>
+  import { remote } from 'electron'
+  const dialog = remote.dialog
+
   import { types, pages } from 'src/store/modules/landing-pages'
 
   export default {
@@ -83,6 +86,13 @@
     methods: {
       createProject() {
         this.$store.commit(types.SWITCH_PAGE, pages.CREATE_PROJECT)
+      },
+
+      openProject() {
+        const dirs = dialog.showOpenDialog({
+          properties: ['openDirectory']
+        })
+        this.$store.dispatch(types.OPEN_PROJECT, dirs[0])
       }
     }
   }

@@ -5,12 +5,6 @@
     spacing-vertical(lg)
   }
 
-  .error {
-    padding-both(sm)
-    background-primary()
-    radius(sm)
-  }
-
   .input-group {
     column()
     spacing-vertical(xs)
@@ -90,10 +84,6 @@
 
 <template>
   <div class="container">
-    <div class="error" v-show="errorMessage">
-      <span class="icon icon-cancel-2"></span> {{ errorMessage }}
-    </div>
-
     <div class="input-group">
       <label for="projectName">Name</label>
       <input id="projectName" class="input" type="text" v-model="name" />
@@ -144,9 +134,6 @@
   export default {
     name: 'create-project-page',
     computed: {
-      errorMessage() {
-        return this.$store.state.landingPages.error
-      },
       templates() {
         return this.$store.state.landingPages.templates
       },

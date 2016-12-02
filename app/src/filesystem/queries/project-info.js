@@ -4,7 +4,7 @@ import fs from '../fs'
 import { Rejection } from 'src/helpers/error-helpers'
 
 export default async function projectInfo(path) {
-  const baseMessage = `The directory ${path} doesn't appear to be a valid project.`
+  const baseMessage = `The directory ‘${path}’ doesn't appear to be a valid project.`
 
   let project, generalSettings;
 
