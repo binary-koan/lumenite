@@ -1,3 +1,7 @@
+# Generated files
+builds
+app/dist
+
 # Logs
 logs
 *.log
