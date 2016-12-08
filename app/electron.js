@@ -1,6 +1,7 @@
 'use strict'
 
 const electron = require('electron')
+const fs = require('fs')
 const path = require('path')
 const app = electron.app
 const BrowserWindow = electron.BrowserWindow
@@ -16,13 +17,13 @@ if (process.env.NODE_ENV === 'development') {
   config.url = `file://${__dirname}/dist/index.html`
 }
 
-function createWindow () {
+function createWindow() {
   /**
    * Initial window options
    */
   mainWindow = new BrowserWindow({
-    height: 600,
-    width: 800
+    height: 700,
+    width: 950
   })
 
   mainWindow.loadURL(config.url)

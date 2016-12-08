@@ -114,9 +114,14 @@ if (process.env.NODE_ENV !== 'production') {
     './node_modules/electron-prebuilt/dist/Electron.app/Contents/Resources' :
     './node_modules/electron-prebuilt/dist/resources'
 
-  config.plugins.push(new SymlinkPlugin({
-    from: './templates', to: `${resourcesDir}/templates`, type: 'dir'
-  }))
+  config.plugins.push(new SymlinkPlugin([
+    { from: './templates', to: `${resourcesDir}/templates`, type: 'dir' },
+    { from: './dependencies/git', to: `${resourcesDir}/git`, type: 'dir' },
+    {
+      from: './dependencies/haxe', to: `${resourcesDir}/haxe`, type: 'dir',
+      warnIfEmpty: 'Haxe directory is empty; make sure you run `npm run setup` before starting the app.'
+    }
+  ]))
 }
 
 /**
