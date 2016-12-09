@@ -27,17 +27,16 @@ function gitDownloadUrl() {
 
 function gitDownloadConfig() {
   if (!gitExists()) {
-    console.log(gitDownloadUrl())
     if (process.platform === 'win32') {
       return {
         id: 'git',
         name: 'Git',
         url: gitDownloadUrl(),
-        destination: paths.temp,
+        destination: paths.dependencies,
         extract: false,
         afterDownload(dl) {
           const filePath = path.resolve(dl.destination, path.basename(dl.url))
-          childProcess.execFileSync(filePath, ['-y', '-gm2', `-InstallPath="${paths.git}"`])
+          childProcess.execFileSync(filePath, ['-y', '-gm2'])
         }
       }
     } else {
@@ -75,6 +74,7 @@ function haxeDownloadConfig() {
       name: 'Haxe',
       url: haxeDownloadUrl(),
       destination: paths.temp,
+      extract: true,
       afterDownload(dl) {
         const copyFrom = glob.sync(path.resolve(dl.destination, 'haxe-*/*'))
         copyFrom.forEach(file => {
@@ -100,15 +100,17 @@ function nekoDownloadConfig() {
       name: 'Neko',
       url: `http://nekovm.org/media/neko-${expectedVersions.neko}-win.zip`,
       destination: paths.temp,
+      extract: true,
       afterDownload(dl) {
         const copyFrom = glob.sync(path.resolve(dl.destination, 'neko-*/neko.dll'))
-        fs.copySync(copyFrom, path.resolve(paths.haxe, 'neko.dll'), { clobber: true })
+        fs.copySync(copyFrom[0], path.resolve(paths.haxe, 'neko.dll'), { clobber: true })
       }
     }
   }
 }
 
 module.exports = {
+  currentVersions,
   gitDownloadConfig,
   haxeDownloadConfig,
   nekoDownloadConfig

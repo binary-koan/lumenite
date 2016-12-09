@@ -12,7 +12,7 @@ function downloads() {
   return [check.gitDownloadConfig(), check.haxeDownloadConfig(), check.nekoDownloadConfig()]
     .filter(Boolean)
     .map(dl => Object.assign(dl, {
-      download: download(dl.url, dl.destination, { extract: true })
+      download: download(dl.url, dl.destination, { extract: dl.extract })
     }))
 }
 
@@ -51,7 +51,7 @@ function fetchDependencies() {
 }
 
 function runAfterDownloadTasks(dls) {
-  console.log('Fixing directory structure ...')
+  console.log('\nFixing directory structure ...')
 
   return dls.map(dl => {
     if (dl.afterDownload) {
@@ -63,7 +63,7 @@ function runAfterDownloadTasks(dls) {
 }
 
 function writeVersions(dls) {
-  const versions = {}
+  const versions = check.currentVersions
   dls.forEach(dl => versions[dl.id] = expectedVersions[dl.id])
 
   fs.writeJsonSync(paths.versions, versions)
