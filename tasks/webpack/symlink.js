@@ -24,6 +24,10 @@ module.exports = class SymlinkPlugin {
       console.warn(warnIfEmpty)
     }
 
+    if (!fs.existsSync(from)) {
+      return
+    }
+
     const stats = fs.existsSync(to) ? fs.lstatSync(to) : {}
 
     if (fs.existsSync(to) && stats.isDirectory() && process.platform === 'win32') {
