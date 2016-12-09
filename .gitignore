@@ -1,7 +1,7 @@
 # Generated files
-dependencies
-builds
-app/dist
+/dependencies
+/builds
+/app/dist
 
 # Logs
 logs
