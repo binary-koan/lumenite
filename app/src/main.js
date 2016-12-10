@@ -1,5 +1,5 @@
 import './styles/reset.styl'
-import './styles/icons.styl'
+import './styles/icons/all.styl'
 import './styles/defaults.styl'
 
 // window.Promise = require('bluebird')

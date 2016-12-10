@@ -79,55 +79,19 @@
 
 <template>
   <div class="bench-build">
-    <div class="top-level-item" :class="{ expanded: settingsFolder.expanded }">
-      <button class="title" @click="toggleSettings"><span class="icon icon-timeline"></span> Settings</button>
-      <button class="action"><span class="icon icon-more"></span></button>
-    </div>
-
-    <div class="top-level-item" :class="{ expanded: assetsFolder.expanded }">
-      <button class="title" @click="toggleAssets"><span class="icon icon-image-file"></span> Assets</button>
-      <button class="action"><span class="icon icon-import"></span></button>
-      <button class="action"><span class="icon icon-folder"></span></button>
-      <button class="action"><span class="icon icon-more"></span></button>
-    </div>
-
-    <div class="top-level-item" :class="{ expanded: behavioursFolder.expanded }">
-      <button class="title" @click="toggleBehaviours"><span class="icon icon-fantasy"></span> Behaviours</button>
-      <button class="action"><span class="icon icon-plus"></span></button>
-      <button class="action"><span class="icon icon-folder"></span></button>
-      <button class="action"><span class="icon icon-more"></span></button>
-    </div>
-
-    <div class="top-level-item" :class="{ expanded: scenesFolder.expanded }">
-      <button class="title" @click="toggleScenes"><span class="icon icon-film"></span> Scenes</button>
-      <button class="action"><span class="icon icon-plus"></span></button>
-      <button class="action"><span class="icon icon-folder"></span></button>
-      <button class="action"><span class="icon icon-more"></span></button>
-    </div>
-
-    <ul class="folder-contents">
-      <li class="folder">
-        <div class="folder-title"><span class="icon icon-sort-right"></span> Enemies</div>
-      </li>
-      <li class="folder">
-        <div class="folder-title"><span class="icon icon-sort-down"></span> Levels</div>
-        <ul class="folder-contents">
-          <li class="folder">
-            <div class="folder-title"><span class="icon icon-sort-down"></span> Hard</div>
-            <ul class="folder-contents">
-              <li class="file"><span class="icon color-icon" style="background-color: #0ff"></span> Level 24</li>
-            </ul>
-          </li>
-          <li class="file"><span class="icon color-icon" style="background-color: #0ff"></span> Level 1</li>
-        </ul>
-      </li>
-      <li class="file"><span class="icon color-icon" style="background-color: #ff0"></span> Pacman</li>
-    </ul>
+    <top-level-item :base-folder="settingsFolder" :actions="settingsActions"></top-level-item>
+    <top-level-item :base-folder="assetsFolder" :actions="assetsActions"></top-level-item>
+    <top-level-item :base-folder="behavioursFolder" :actions="behavioursActions"></top-level-item>
+    <top-level-item :base-folder="scenesFolder" :actions="scenesActions"></top-level-item>
   </div>
 </template>
 
 <script>
   import find from 'lodash/find'
+
+  import TopLevelItem from './TopLevelItem'
+
+  import types from 'src/store/file-tree/types'
 
   export default {
     name: 'bench-build',
@@ -136,34 +100,36 @@
         return find(this.$store.state.fileTree.baseFolders, folder => folder.name === 'Settings')
       },
 
+      settingsActions() {
+        return [{ icon: 'more' }]
+      },
+
       assetsFolder() {
         return find(this.$store.state.fileTree.baseFolders, folder => folder.name === 'Assets')
+      },
+
+      assetsActions() {
+        return [{ icon: 'import' }, { icon: 'more' }]
       },
 
       behavioursFolder() {
         return find(this.$store.state.fileTree.baseFolders, folder => folder.name === 'Behaviours')
       },
 
+      behavioursActions() {
+        return [{ icon: 'add' }, { icon: 'add-folder'}, { icon: 'more' }]
+      },
+
       scenesFolder() {
         return find(this.$store.state.fileTree.baseFolders, folder => folder.name === 'Scenes')
+      },
+
+      scenesActions() {
+        return [{ icon: 'add' }, { icon: 'add-folder'}, { icon: 'more' }]
       }
     },
-    methods: {
-      toggleSettings() {
-        this.$store.dispatch('toggleFolder', ['Settings'])
-      },
-
-      toggleAssets() {
-        this.$store.dispatch('toggleFolder', ['Assets'])
-      },
-
-      toggleBehaviours() {
-        this.$store.dispatch('toggleFolder', ['Behaviours'])
-      },
-
-      toggleScenes() {
-        this.$store.dispatch('toggleFolder', ['Scenes'])
-      }
+    components: {
+      TopLevelItem
     }
   }
 </script>
