@@ -19,12 +19,12 @@ export default async function createProject(details) {
   await fs.copyAsync(templatePath, details.path)
 
   await fs.outputJsonAsync(
-    `${details.path}/project.json`,
+    `${details.path}/Project.json`,
     generateProjectJson(),
     { spaces: 2 }
   )
   await fs.outputJsonAsync(
-    `${details.path}/settings/general.json`,
+    `${details.path}/Settings/General.general-settings.json`,
     generateGeneralSettingsJson(details),
     { spaces: 2 }
   )

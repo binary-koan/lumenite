@@ -1,4 +1,5 @@
 {
+  "$type": "settings",
   "name": "Empty",
   "description": "Start from scratch."
 }
