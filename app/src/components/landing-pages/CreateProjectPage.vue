@@ -129,7 +129,7 @@
   const dialog = remote.dialog
 
   import { modelProperty } from 'src/helpers/vuex-helpers'
-  import { types, pages } from 'src/store/modules/landing-pages'
+  import { types, pages } from 'src/store/landing-pages'
 
   export default {
     name: 'create-project-page',

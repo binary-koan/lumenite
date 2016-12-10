@@ -10,8 +10,8 @@ import createOnDisk from 'src/filesystem/operations/create-project'
 import listTemplates from 'src/filesystem/queries/list-templates'
 import projectInfo from 'src/filesystem/queries/project-info'
 
-import { types as projectActions } from './active-project'
-import { types as landingActions } from './landing-pages'
+import { types as projectActions } from '../active-project'
+import { types as landingActions } from '../landing-pages'
 
 // State
 

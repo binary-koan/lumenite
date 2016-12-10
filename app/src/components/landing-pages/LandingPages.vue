@@ -53,7 +53,7 @@
   import LandingPage from './LandingPage'
   import CreateProjectPage from './CreateProjectPage'
 
-  import { pages } from 'src/store/modules/landing-pages'
+  import { pages } from 'src/store/landing-pages'
 
   export default {
     name: 'landing-pages',

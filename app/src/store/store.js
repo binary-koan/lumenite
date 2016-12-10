@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import landingPages from './modules/landing-pages'
-import activeProject from './modules/active-project'
-import fileTree from './modules/file-tree'
+import landingPages from './landing-pages/index'
+import activeProject from './active-project/index'
+import fileTree from './file-tree/index'
 
 Vue.use(Vuex)
 

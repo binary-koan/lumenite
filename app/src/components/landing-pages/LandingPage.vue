@@ -79,7 +79,7 @@
   import { remote } from 'electron'
   const dialog = remote.dialog
 
-  import { types, pages } from 'src/store/modules/landing-pages'
+  import { types, pages } from 'src/store/landing-pages'
 
   export default {
     name: 'landing-page',
