@@ -7,22 +7,20 @@ const webpack = require('webpack')
 
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const SymlinkPlugin = require('./tasks/webpack/symlink')
+const SymlinkPlugin = require('./tasks/webpack/symlink-plugin')
 
 let config = {
   devtool: '#eval-source-map',
-  eslint: {
-    formatter: require('eslint-friendly-formatter')
-  },
   entry: {
     build: path.join(__dirname, 'app/src/main.js')
   },
   module: {
-    preLoaders: [],
-    loaders: [
+    rules: [
       {
         test: /\.styl$/,
-        loader: ExtractTextPlugin.extract('style-loader', ['css-loader', 'stylus-loader'])
+        loader: ExtractTextPlugin.extract({
+          notExtractLoader: 'style-loader', loader: ['css-loader', 'stylus-loader']
+        })
       },
       {
         test: /\.html$/,
@@ -30,8 +28,7 @@ let config = {
       },
       {
         test: /\.js$/,
-        loader: 'babel-loader',
-        exclude: /node_modules/
+        loader: 'strict-loader'
       },
       {
         test: /\.json$/,
@@ -44,7 +41,7 @@ let config = {
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
         loader: 'url-loader',
-        query: {
+        options: {
           limit: 10000,
           name: 'imgs/[name].[hash:7].[ext]'
         }
@@ -52,7 +49,7 @@ let config = {
       {
         test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
         loader: 'url-loader',
-        query: {
+        options: {
           limit: 10000,
           name: 'fonts/[name].[hash:7].[ext]'
         }
@@ -73,25 +70,13 @@ let config = {
     path: path.join(__dirname, 'app/dist')
   },
   resolve: {
-    alias: {
-      'src': path.join(__dirname, 'app/src')
-    },
-    extensions: ['', '.js', '.vue', '.json', '.styl', '.css'],
-    fallback: [path.join(__dirname, 'app/node_modules')]
+    modules: [
+      path.join(__dirname, 'app'),
+      'node_modules'
+    ],
+    extensions: ['.js', '.vue', '.json', '.styl', '.css'],
   },
-  resolveLoader: {
-    root: path.join(__dirname, 'node_modules')
-  },
-  target: 'electron-renderer',
-  vue: {
-    loaders: {
-      sass: 'vue-style-loader!css-loader!sass-loader?indentedSyntax=1',
-      scss: 'vue-style-loader!css-loader!sass-loader'
-    }
-  },
-  stylus: {
-    preferPathResolver: 'webpack'
-  }
+  target: 'electron-renderer'
 }
 
 if (process.env.NODE_ENV !== 'production') {
@@ -99,22 +84,30 @@ if (process.env.NODE_ENV !== 'production') {
    * Apply ESLint
    */
   if (settings.eslint) {
-    config.module.preLoaders.push(
+    config.module.rules.push(
       {
         test: /\.js$/,
         loader: 'eslint-loader',
-        exclude: /node_modules/
+        enforce: 'pre',
+        exclude: /node_modules/,
+        options: {
+          formatter: require('eslint-friendly-formatter')
+        }
       },
       {
         test: /\.vue$/,
-        loader: 'eslint-loader'
+        loader: 'eslint-loader',
+        enforce: 'pre',
+        options: {
+          formatter: require('eslint-friendly-formatter')
+        }
       }
     )
   }
 
   const resourcesDir = process.platform === 'darwin' ?
-    './node_modules/electron-prebuilt/dist/Electron.app/Contents/Resources' :
-    './node_modules/electron-prebuilt/dist/resources'
+    './node_modules/electron/dist/Electron.app/Contents/Resources' :
+    './node_modules/electron/dist/resources'
 
   config.plugins.push(new SymlinkPlugin([
     { from: './templates', to: `${resourcesDir}/templates`, type: 'dir' },
@@ -136,7 +129,6 @@ if (process.env.NODE_ENV === 'production') {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': '"production"'
     }),
-    new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         warnings: false

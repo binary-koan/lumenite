@@ -7,6 +7,4 @@ Vue.config.debug = true
 import App from './app'
 
 /* eslint-disable no-new */
-new Vue({
-  ...App
-}).$mount('#app')
+new Vue(App).$mount('#app')

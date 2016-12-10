@@ -6,6 +6,9 @@ const path = require('path')
 const app = electron.app
 const BrowserWindow = electron.BrowserWindow
 
+//TODO remove when electron upgrades to Chrome >= 55
+app.commandLine.appendSwitch('js-flags', '--harmony_async_await')
+
 let mainWindow
 let config = {}
 

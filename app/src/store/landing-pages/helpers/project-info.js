@@ -12,6 +12,7 @@ export default async function projectInfo(path) {
     project = await fs.readJsonAsync(`${path}/Project.json`)
     generalSettings = await fs.readJsonAsync(`${path}/Settings/General.general-settings.json`)
   } catch (e) {
+    console.log(e)
     throw new Rejection(`${baseMessage} Required files not found.`)
   }
 

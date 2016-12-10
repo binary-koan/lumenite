@@ -9,7 +9,7 @@ let config = {
 
   // Use ESLint (extends `none`)
   // Further changes can be made in `.eslintrc.js`
-  eslint: true,
+  eslint: false, //TODO enable when things can be parsed properly
 
   // webpack-dev-server port
   port: 9080,

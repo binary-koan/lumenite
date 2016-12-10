@@ -1,7 +1,7 @@
 'use strict'
 
 const path = require('path')
-const merge = require('webpack-merge')
+const merge = require('lodash/merge')
 const webpack = require('webpack')
 
 const baseConfig = require('../../webpack.config')
@@ -9,9 +9,10 @@ const projectRoot = path.resolve(__dirname, '../../app')
 
 let webpackConfig = merge(baseConfig, {
   devtool: '#inline-source-map',
+  //TODO this won't work with Webpack 2
   vue: {
     loaders: {
-      js: 'isparta'
+      js: 'isparta-loader'
     }
   },
   plugins: [
