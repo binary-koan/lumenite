@@ -155,7 +155,7 @@
       },
 
       cancel() {
-        this.$store.commit(types.SWITCH_PAGE, pages.LANDING_PAGE)
+        this.$store.commit(types.SWITCH_PAGE, pages.RECENT_PROJECTS)
       }
     },
     created() {

@@ -13,7 +13,7 @@
 </template>
 
 <script>
-  import TabBar from './TabBar'
+  import TabBar from './tab-bar'
 
   export default {
     name: 'tabs',

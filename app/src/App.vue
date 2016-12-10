@@ -18,10 +18,10 @@
 </template>
 
 <script>
-  import LandingPages from './components/landing-pages/LandingPages'
-  import Sidebar from './components/sidebar/Sidebar'
-  import BenchBuild from './components/bench-build/BenchBuild'
-  import Tabs from './components/tabs/Tabs'
+  import LandingPages from './components/landing-pages'
+  import Sidebar from './components/sidebar'
+  import BenchBuild from './components/bench-build'
+  import Tabs from './components/tabs'
   import store from './store/store'
 
   export default {

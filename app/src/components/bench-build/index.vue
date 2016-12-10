@@ -89,7 +89,7 @@
 <script>
   import find from 'lodash/find'
 
-  import TopLevelItem from './TopLevelItem'
+  import TopLevelItem from './top-level-item'
 
   import types from 'src/store/file-tree/types'
 

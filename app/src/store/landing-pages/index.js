@@ -16,13 +16,13 @@ import { types as landingActions } from '../landing-pages'
 // State
 
 export const pages = Object.freeze({
-  LANDING_PAGE: 'LANDING_PAGE',
+  RECENT_PROJECTS: 'RECENT_PROJECTS',
   CREATE_PROJECT: 'CREATE_PROJECT'
 })
 
 const state = {
   error: null,
-  page: pages.LANDING_PAGE,
+  page: pages.RECENT_PROJECTS,
   newProject: {
     name: '',
     path: path.join(os.homedir(), 'Projects') + path.sep,

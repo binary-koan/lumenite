@@ -82,7 +82,7 @@
   import { types, pages } from 'src/store/landing-pages'
 
   export default {
-    name: 'landing-page',
+    name: 'recent-projects-page',
     methods: {
       createProject() {
         this.$store.commit(types.SWITCH_PAGE, pages.CREATE_PROJECT)

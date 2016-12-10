@@ -37,8 +37,8 @@
         <span>{{ errorMessage }}</span>
       </div>
 
-      <div :class="{ hidden: landingPageHidden }">
-        <landing-page></landing-page>
+      <div :class="{ hidden: recentPageHidden }">
+        <recent-projects-page></recent-projects-page>
       </div>
 
       <div :class="{ hidden: createPageHidden }">
@@ -50,8 +50,8 @@
 </template>
 
 <script>
-  import LandingPage from './LandingPage'
-  import CreateProjectPage from './CreateProjectPage'
+  import RecentProjectsPage from './recent-projects-page'
+  import CreateProjectPage from './create-project-page'
 
   import { pages } from 'src/store/landing-pages'
 
@@ -61,15 +61,15 @@
       errorMessage() {
         return this.$store.state.landingPages.error
       },
-      landingPageHidden() {
-        return this.$store.state.landingPages.page !== pages.LANDING_PAGE
+      recentPageHidden() {
+        return this.$store.state.landingPages.page !== pages.RECENT_PROJECTS
       },
       createPageHidden() {
         return this.$store.state.landingPages.page !== pages.CREATE_PROJECT
       }
     },
     components: {
-      LandingPage,
+      RecentProjectsPage,
       CreateProjectPage
     }
   }

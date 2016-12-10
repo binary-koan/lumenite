@@ -10,7 +10,7 @@ import Electron from 'vue-electron'
 Vue.use(Electron)
 Vue.config.debug = true
 
-import App from './App'
+import App from './app'
 
 /* eslint-disable no-new */
 new Vue({
