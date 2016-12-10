@@ -45,6 +45,14 @@
   .top-level-item + .folder-contents {
     padding-left: 2.25rem;
   }
+
+  .empty {
+    padding-left: 2.25rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    font-style: italic;
+    opacity: 0.6;
+  }
 </style>
 
 <template>
@@ -59,6 +67,9 @@
     </div>
 
     <folder-contents :entries="baseFolder.children"></folder-contents>
+    <div v-show="baseFolder.expanded && !baseFolder.children.length" class="empty">
+      (Empty)
+    </div>
   </div>
 </template>
 

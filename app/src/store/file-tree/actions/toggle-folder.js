@@ -30,8 +30,13 @@ export default async function toggleFolder({ state, rootState, commit }, path) {
     commit(types.COLLAPSE_FOLDER, folder)
   } else {
     const baseLocation = rootState.activeProject.path + '/' + path.join('/')
-    const entries = await fs.readdirAsync(baseLocation)
 
+    if (!(await fs.existsSync(baseLocation))) {
+      commit(types.SET_CHILDREN, { folder, children: [] })
+      return
+    }
+
+    const entries = await fs.readdirAsync(baseLocation)
     const children = (await Promise.all(
       entries.map(name => baseLocation + '/' + name).map(location => buildEntry(path, location))
     )).filter(Boolean)
