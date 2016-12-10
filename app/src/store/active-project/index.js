@@ -1,14 +1,10 @@
+import types from './types'
+
 // State
 
 const state = {
   path: null
 }
-
-// Types
-
-export const types = Object.freeze({
-  LOAD: 'activeProject.LOAD'
-})
 
 // Mutations
 

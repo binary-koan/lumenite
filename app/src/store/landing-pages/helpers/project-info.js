@@ -1,6 +1,6 @@
 import every from 'lodash/every'
-import fs from '../fs'
 
+import fs from 'src/filesystem/fs'
 import { Rejection } from 'src/helpers/error-helpers'
 
 export default async function projectInfo(path) {

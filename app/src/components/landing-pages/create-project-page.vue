@@ -129,7 +129,8 @@
   const dialog = remote.dialog
 
   import { modelProperty } from 'src/helpers/vuex-helpers'
-  import { types, pages } from 'src/store/landing-pages'
+  import { pages } from 'src/store/landing-pages'
+  import types from 'src/store/landing-pages/types'
 
   export default {
     name: 'create-project-page',
@@ -147,7 +148,7 @@
           defaultPath: this.$store.state.landingPages.newProject.path,
           properties: ['openDirectory', 'createDirectory']
         })
-        this.$store.dispatch(types.PICK_DIRECTORY, dirs[0])
+        this.$store.dispatch(types.PICK_NEW_PROJECT_LOCATION, dirs[0])
       },
 
       create() {
