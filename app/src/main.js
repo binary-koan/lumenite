@@ -1,9 +1,3 @@
-import './styles/reset.styl'
-import './styles/icons/all.styl'
-import './styles/defaults.styl'
-
-// window.Promise = require('bluebird')
-
 import Vue from 'vue'
 import Electron from 'vue-electron'
 

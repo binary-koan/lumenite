@@ -1,28 +1,17 @@
-fixed-fill() {
+fixed() {
   position: fixed
-  top: 0
-  left: 0
-  bottom: 0
-  right: 0
+
+  for direction in arguments {
+    {direction}: 0
+  }
 }
 
-row() {
-  display: flex;
+flex-layout(direction) {
+  display: flex
+  flex-direction: direction
 }
 
-column() {
-  display: flex;
-  flex-direction: column;
-}
-
-items-center() {
-  align-items: center;
-}
-
-content-center() {
-  justify-content: center;
-}
-
-flex() {
-  flex: 1;
+width-upto(size) {
+  width: size
+  max-width: 100%
 }

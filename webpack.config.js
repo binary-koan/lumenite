@@ -74,10 +74,9 @@ let config = {
   },
   resolve: {
     alias: {
-      'components': path.join(__dirname, 'app/src/components'),
       'src': path.join(__dirname, 'app/src')
     },
-    extensions: ['', '.js', '.vue', '.json', '.css'],
+    extensions: ['', '.js', '.vue', '.json', '.styl', '.css'],
     fallback: [path.join(__dirname, 'app/node_modules')]
   },
   resolveLoader: {
@@ -89,6 +88,9 @@ let config = {
       sass: 'vue-style-loader!css-loader!sass-loader?indentedSyntax=1',
       scss: 'vue-style-loader!css-loader!sass-loader'
     }
+  },
+  stylus: {
+    preferPathResolver: 'webpack'
   }
 }
 

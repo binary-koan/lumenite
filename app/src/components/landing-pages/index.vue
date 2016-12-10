@@ -1,31 +1,33 @@
 <style lang="stylus" scoped>
-  @import '../../styles/mixins/all';
+  @import '~src/styles/default'
 
   .landing-pages {
-    fixed-fill()
-    row()
-    content-center()
-    items-center()
-    background-default()
+    fixed: top left bottom right
+    flex-layout: row
+    align-items: center
+    justify-content: center
+
+    background-color: $background-default
   }
 
   .page {
-    width-upto(sm)
-    padding-both(lg)
-    spacing-vertical(lg)
+    width-upto: $width-sm
+    padding: $gap-lg
+    spacing-vertical: $gap-lg
   }
 
   .error {
-    row()
-    padding-both(sm)
-    spacing-horizontal(xs)
-    background-primary()
-    radius(sm)
+    flex-layout: row
+    padding: $gap-sm
+    spacing-horizontal: $gap-xs
+    background: $background-primary
+    border-radius: $radius-sm
   }
 
   .title {
-    font-size(lg)
-    font-weight-strong()
+    font-size: $font-size-lg
+    font-weight: $font-weight-strong
+    margin-bottom: $gap-lg
   }
 </style>
 

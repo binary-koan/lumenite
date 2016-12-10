@@ -1,10 +1,9 @@
-<style>
-  main {
-    height: 100%;
-  }
+<style lang="stylus">
+  @import '~src/styles/default'
 
   main {
-    display: flex;
+    height: 100%
+    flex-layout: row
   }
 </style>
 

@@ -1,0 +1,25 @@
+stateful-color(color) {
+  color: color
+  transition: all $transition-default
+
+  &:hover {
+    color: lighten(color, 35%)
+  }
+
+  &:active {
+    color: darken(color, 25%)
+  }
+}
+
+stateful-background(color) {
+  background-color: color
+  transition: all $transition-default
+
+  &:hover {
+    background-color: lighten(color, 15%)
+  }
+
+  &:active {
+    background-color: darken(color, 10%)
+  }
+}

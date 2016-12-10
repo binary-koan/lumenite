@@ -1,83 +1,83 @@
 <style lang="stylus" scoped>
-  @import '../../styles/mixins/all';
+  @import '~src/styles/default';
 
   .container {
-    spacing-vertical(lg)
+    spacing-vertical: $gap-lg
   }
 
   .input-group {
-    column()
-    spacing-vertical(xs)
+    flex-layout: column
+    spacing-vertical: $gap-sm
   }
 
   .input-group .input {
-    border-muted()
-    radius(sm)
+    border: 1px solid $color-muted
+    border-radius: $radius-sm
   }
 
   .input-row {
-    row()
-    child-radius-horizontal(sm)
+    flex-layout: row
+    child-radius-horizontal: $radius-sm
   }
 
   .input-row input {
-    flex()
+    flex: 1
   }
 
   .input-row button {
-    background-lowlight()
-    text-muted(stateful: true)
+    stateful-background: $background-darken
+    stateful-color: $color-muted
   }
 
   .template-label {
-    text-muted()
+    color: $color-muted
   }
 
   .templates {
-    padding-both(sm)
-    radius(sm)
-    background-lowlight()
+    padding: $gap-sm
+    border-radius: $radius-sm
+    background-color: $background-darken
   }
 
   .template {
-    row()
-    items-center()
-    padding-both(sm)
-    spacing-horizontal(sm)
-    radius(sm)
-    text-default()
+    flex-layout: row
+    align-items: center
+    padding: $gap-sm
+    spacing-horizontal: $gap-sm
+    border-radius: $radius-sm
+    color: $color-default
 
     input:checked + & {
-      background-highlight()
+      background: $background-lighten
     }
 
     .image {
-      padding-both(sm)
-      font-size(lg)
-      radius(sm)
-      background-inverse()
-      text-inverse()
+      padding: $gap-sm
+      font-size: $font-size-lg
+      border-radius: $radius-sm
+      background-color: $background-inverse
+      color: $color-inverse
     }
 
     .description {
-      spacing-vertical(xs)
+      spacing-vertical: $gap-xs
     }
 
     .name {
-      font-size(md)
+      font-size: $font-size-md
     }
 
     .info {
-      text-muted()
+      color: $color-muted
     }
   }
 
   .actions {
     text-align: right
-    spacing-horizontal(sm)
+    spacing-horizontal: $gap-sm
 
     .submit {
-      background-primary(stateful: true)
+      stateful-background: $background-primary
     }
   }
 </style>

@@ -1,79 +1,10 @@
-<style scoped>
+<style lang="stylus" scoped>
+  @import '~src/styles/default'
+
   .bench-build {
-    width: 20rem;
-    padding-top: 0.25rem;
-    background: #222;
-  }
-
-  .top-level-item {
-    display: flex;
-    margin: 0.75rem;
-    border-radius: 3px;
-    background: #333;
-  }
-
-  .top-level-item.expanded {
-    margin-bottom: 0.25rem;
-    font-weight: 500;
-  }
-
-  .top-level-item > *:first-child {
-    border-top-left-radius: 3px;
-    border-bottom-left-radius: 3px;
-  }
-
-  .top-level-item > *:last-child {
-    border-top-right-radius: 3px;
-    border-bottom-right-radius: 3px;
-  }
-
-  .top-level-item > button {
-    padding: 0.5rem;
-    background-color: #333;
-    color: white;
-    transition: background-color 0.2s;
-  }
-
-  .top-level-item > button:hover {
-    background-color: #444;
-  }
-
-  .top-level-item > button:active {
-    background-color: #111;
-  }
-
-  .top-level-item > .title {
-    flex: 1;
-    padding: 0.5rem;
-    text-align: left;
-  }
-
-  .top-level-item + .folder-contents {
-    padding-left: 2.25rem;
-  }
-
-  .folder-contents {
-    padding-left: 1.25rem;
-  }
-
-  .file,
-  .folder-title {
-    display: flex;
-    align-items: center;
-    padding: 0.5rem 0;
-  }
-
-  .file > .icon,
-  .folder-title > .icon {
-    margin-right: 0.25rem;
-  }
-
-  .file {
-    margin-left: 0.25rem;
-  }
-
-  .folder-title {
-    margin-left: -1rem;
+    width: $bench-width-default
+    padding-top: $gap-xs
+    background: $background-darken
   }
 </style>
 

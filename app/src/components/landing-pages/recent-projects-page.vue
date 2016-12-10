@@ -1,56 +1,53 @@
 <style lang="stylus" scoped>
-  @import '../../styles/mixins/all';
+  @import '~src/styles/default';
 
   .container {
-    spacing-vertical(md)
+    spacing-vertical: $gap-md
   }
 
   .recent-list {
-    padding-both(sm)
-    radius(sm)
-    background-lowlight()
-    spacing-vertical(lg)
+    padding: $gap-sm
+    border-radius: $radius-sm
+    background-color: $background-darken
+    spacing-vertical: $gap-lg
 
     a {
-      row()
-      items-center()
-      padding-both(sm)
-      spacing-horizontal(sm)
-      radius(sm)
-      text-default()
-      transition: all 0.2s
-
-      &:hover {
-        background-highlight()
-      }
+      flex-layout: row
+      align-items: center
+      padding: $gap-sm
+      spacing-horizontal: $gap-sm
+      border-radius: $radius-sm
+      color: $color-default
+      transition: all $transition-default
+      stateful-background: $background-darken
     }
 
     .project-icon {
-      padding-both(sm)
-      font-size(lg)
-      radius(sm)
-      background-primary()
+      padding: $gap-sm
+      font-size: $font-size-lg
+      border-radius: $radius-sm
+      background-color: $background-primary
     }
   }
 
   .recent-list .title {
-    margin-bottom: 0.25rem;
-    font-size: 1.1rem;
+    margin-bottom: $gap-xs
+    font-size: $font-size-md
   }
 
   .recent-list .info {
-    color: #aaa;
+    color: $color-muted
   }
 
   .actions {
-    row()
-    spacing-horizontal(md)
+    flex-layout: row
+    spacing-horizontal: $gap-md
   }
 
   .actions button {
-    flex()
-    padding-both(lg)
-    font-size(md)
+    flex: 1
+    padding: $gap-lg
+    font-size: $font-size-md
   }
 </style>
 
@@ -79,7 +76,8 @@
   import { remote } from 'electron'
   const dialog = remote.dialog
 
-  import { types, pages } from 'src/store/landing-pages'
+  import { pages } from 'src/store/landing-pages'
+  import types from 'src/store/landing-pages/types'
 
   export default {
     name: 'recent-projects-page',
@@ -89,10 +87,10 @@
       },
 
       openProject() {
-        const dirs = dialog.showOpenDialog({
-          properties: ['openDirectory']
-        })
-        this.$store.dispatch(types.OPEN_PROJECT, dirs[0])
+        const dirs = dialog.showOpenDialog({ properties: ['openDirectory'] })
+        if (dirs && dirs.length) {
+          this.$store.dispatch(types.OPEN_PROJECT, dirs[0])
+        }
       }
     }
   }

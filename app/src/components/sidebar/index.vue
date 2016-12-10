@@ -1,64 +1,67 @@
-<style scoped>
+<style lang="stylus" scoped>
+  @import '~src/styles/default'
+
   .sidebar {
-    width: 4rem;
+    width: $sidebar-width
   }
 
   .link {
-    position: relative;
-    display: block;
-    width: 4rem;
-    height: 4rem;
+    position: relative
+    display: block
+    width: $sidebar-width
+    height: @width
 
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: 32px;
-    opacity: 0.75;
-    transition: opacity 0.2s;
+    background-position: center
+    background-repeat: no-repeat
+    background-size: 32px
+    opacity: 0.75
+    transition: opacity $default-transition
   }
 
   .link:hover,
   .link.active {
-    opacity: 1;
+    opacity: 1
   }
 
   .link.menu {
-    background-image: url(./assets/menu.svg);
+    background-image: url(./assets/menu.svg)
   }
 
   .link.build {
-    background-image: url(./assets/build.svg);
+    background-image: url(./assets/build.svg)
   }
 
   .link.run {
-    background-image: url(./assets/run.svg);
+    background-image: url(./assets/run.svg)
   }
 
   .link.test {
-    background-image: url(./assets/test.svg);
+    background-image: url(./assets/test.svg)
   }
 
   .link.publish {
-    background-image: url(./assets/publish.svg);
+    background-image: url(./assets/publish.svg)
   }
 
   .link > .tooltip {
-    position: absolute;
-    visibility: hidden;
-    left: 100%;
-    top: 50%;
-    margin-top: -1rem;
-    padding: 0.5rem;
-    line-height: 1;
+    position: absolute
+    visibility: hidden
+    left: 100%
+    top: 50%
+    margin-top: -($sidebar-width / 4)
+    padding: ($sidebar-width / 8)
+    line-height: ($sidebar-width / 4)
 
-    background: #333;
-    color: white;
-    opacity: 0;
-    transition: opacity 0.2s;
+    border-radius: $radius-sm
+    background: $background-default
+    color: $color-default
+    opacity: 0
+    transition: opacity $transition-default
   }
 
   .link:hover > .tooltip {
-    visibility: visible;
-    opacity: 1;
+    visibility: visible
+    opacity: 1
   }
 </style>
 

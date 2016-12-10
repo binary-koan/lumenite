@@ -1,55 +1,53 @@
-<style scoped>
+<style lang="stylus" scoped>
+  @import '~src/styles/default'
+
   .tab-bar {
-    display: flex;
-    background: #222;
+    flex-layout: row
+    background-color: $background-darken
   }
 
   .tab {
-    display: flex;
-    align-items: center;
-    min-width: 10rem;
-    padding: 0.75rem;
+    flex-layout: row
+    align-items: center
+    width: $tab-width
+    padding: $gap-sm $gap-sm $gap-sm $gap-lg
   }
 
   .tab.active {
-    background: #333;
+    background: $background-default
   }
 
-  .tab > .icon {
-    margin-right: 0.5rem;
+  .tab-icon {
+    margin-right: $gap-sm
   }
 
-  .tab > .title {
-    flex: 1;
+  .title {
+    flex: 1
+    overflow: ellipsis
   }
 
-  .tab > .close {
-    background: transparent;
-    color: white;
-    opacity: 0.5;
-    transition: opacity 0.2s;
+  .close {
+    padding: $gap-sm
+    background: transparent
+    stateful-color: $color-muted
   }
 
-  .tab > .close:before {
-    content: "×";
-  }
-
-  .tab > .close:hover {
-    opacity: 1;
+  .close .icon:before {
+    content: '×'
+    font-size: $font-size-lg
   }
 </style>
 
 <template>
   <div class="tab-bar">
     <div class="tab active">
-      <span class="icon color-icon" style="background-color: #ff0"></span>
+      <span class="icon tab-icon color-icon" style="background-color: #ff0"></span>
       <span class="title">Pacman</span>
-      <button class="close"></button>
+      <button class="close"><span class="icon"></span></button>
     </div>
     <div class="tab">
-      <span class="icon color-icon" style="background-color: #0ff"></span>
+      <span class="icon tab-icon color-icon" style="background-color: #0ff"></span>
       <span class="title">Inky</span>
-      <button class="close"></button>
     </div>
   </div>
 </template>

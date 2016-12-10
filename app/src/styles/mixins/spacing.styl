@@ -1,31 +1,6 @@
-// Variables
-
-$padding-variants = {
-  xs: 0.25rem,
-  sm: 0.5rem,
-  md: 0.75rem,
-  lg: 1rem
-}
-
-// Mixins
-
-padding-both(variant) {
-  padding: $padding-variants[variant]
-}
-
-padding-horizontal(variant) {
-  padding-left: $padding-variants[variant]
-  padding-right: $padding-variants[variant]
-}
-
-padding-vertical(variant) {
-  padding-top: $padding-variants[variant]
-  padding-bottom: $padding-variants[variant]
-}
-
-spacing-vertical(variant) {
+spacing-vertical(size) {
   > * {
-    margin-bottom: $padding-variants[variant]
+    margin-bottom: size
   }
 
   > *:last-child {
@@ -33,9 +8,9 @@ spacing-vertical(variant) {
   }
 }
 
-spacing-horizontal(variant) {
+spacing-horizontal(size) {
   > * {
-    margin-right: $padding-variants[variant]
+    margin-right: size
   }
 
   > *:last-child {

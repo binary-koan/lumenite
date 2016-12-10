@@ -1,57 +1,39 @@
-<style scoped>
+<style lang="stylus" scoped>
+  @import '~src/styles/default'
+
   .top-level-item {
-    display: flex;
-    margin: 0.75rem;
-    border-radius: 3px;
-    background: #333;
+    flex-layout: row
+    margin: $gap-md
+    child-radius-horizontal: $radius-sm
   }
 
   .top-level-item.expanded {
-    margin-bottom: 0.25rem;
-    font-weight: 500;
-  }
-
-  .top-level-item > *:first-child {
-    border-top-left-radius: 3px;
-    border-bottom-left-radius: 3px;
-  }
-
-  .top-level-item > *:last-child {
-    border-top-right-radius: 3px;
-    border-bottom-right-radius: 3px;
+    margin-bottom: $gap-xs
+    font-weight: $font-weight-medium
   }
 
   .top-level-item > button {
-    padding: 0.5rem;
-    background-color: #333;
-    color: white;
-    transition: background-color 0.2s;
-  }
-
-  .top-level-item > button:hover {
-    background-color: #444;
-  }
-
-  .top-level-item > button:active {
-    background-color: #111;
+    padding: $gap-sm
+    stateful-background: $background-default
+    color: $color-default
   }
 
   .top-level-item > .title {
-    flex: 1;
-    padding: 0.5rem;
-    text-align: left;
+    flex: 1
+    padding: $gap-sm
+    text-align: left
   }
 
   .top-level-item + .folder-contents {
-    padding-left: 2.25rem;
+    padding-left: ($folder-contents-gap + $gap-md)
   }
 
   .empty {
-    padding-left: 2.25rem;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-    font-style: italic;
-    opacity: 0.6;
+    padding-left: ($folder-contents-gap + $gap-lg)
+    padding-top: $gap-sm
+    padding-bottom: $gap-sm
+    font-style: italic
+    color: $color-muted
   }
 </style>
 

@@ -1,8 +1,9 @@
-<style scoped>
+<style lang="stylus" scoped>
+  @import '~src/styles/default'
+
   .tabs {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
+    flex: 1
+    flex-layout: column
   }
 </style>
 

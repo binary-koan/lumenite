@@ -11,7 +11,6 @@ import openProject from './actions/open-project'
 import pickNewProjectLocation from './actions/pick-new-project-location'
 
 import types from './types'
-import projectTypes from '../active-project/types'
 
 // State
 

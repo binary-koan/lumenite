@@ -1,9 +1,11 @@
+import { Rejection } from 'src/helpers/error-helpers'
+
 import landingTypes from '../types'
 
 export default function setError(error, commit) {
-  commit(landingActions.SET_ERROR, error.toString())
+  commit(landingTypes.SET_ERROR, error.toString())
 
-  if (!error instanceof Rejection) {
-    console.error(error.stack)
+  if (!(error instanceof Rejection)) {
+    console.error(error)
   }
 }

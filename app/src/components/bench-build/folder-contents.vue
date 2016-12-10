@@ -1,30 +1,39 @@
-<style scoped>
-  .folder-contents {
-    padding-left: 1.25rem;
-  }
+<style lang="stylus" scoped>
+  @import '~src/styles/default'
 
-  .title {
-    display: flex;
-    align-items: center;
-    padding: 0.5rem 0;
-  }
-
-  .title > .icon {
-    margin-right: 0.25rem;
+  .file,
+  .folder {
+    flex-layout: column
   }
 
   .file {
-    margin-left: 0.25rem;
+    margin-left: $gap-xs
   }
 
   .folder {
-    margin-left: -1rem;
+    margin-left: -($gap-lg)
+  }
+
+  .title {
+    flex-layout: row
+    align-items: center
+    padding: $gap-sm 0
+    background: transparent
+    stateful-color: $color-muted
+  }
+
+  .title > .icon {
+    margin-right: $gap-xs
+  }
+
+  .folder-contents {
+    padding-left: $folder-contents-gap
   }
 </style>
 
 <template>
   <ul class="folder-contents" v-show="entries && entries.length">
-    <li v-for="entry in entries" class="fileOrFolder(entry)">
+    <li v-for="entry in entries" :class="fileOrFolder(entry)">
       <button class="title" @click="handleClick(entry)">
         <span :class="iconFor(entry)"></span> {{ entry.name }}
       </button>
