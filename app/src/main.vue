@@ -1,5 +1,5 @@
 <style lang="stylus">
-  @import '~src/styles/default'
+  @import '~src/styles/definitions'
 
   main {
     height: 100%

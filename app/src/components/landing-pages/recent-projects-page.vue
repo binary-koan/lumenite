@@ -1,5 +1,5 @@
 <style lang="stylus" scoped>
-  @import '~src/styles/default';
+  @import '~src/styles/definitions'
 
   .container {
     spacing-vertical: $gap-md

@@ -1,5 +1,5 @@
 <style lang="stylus" scoped>
-  @import '~src/styles/default'
+  @import '~src/styles/definitions'
 
   .top-level-item {
     flex-layout: row

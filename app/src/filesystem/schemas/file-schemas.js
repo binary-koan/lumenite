@@ -1,4 +1,4 @@
 export default {
   'Project.json': require('./global/project'),
-  'Settings/General.json': require('./settings/general')
+  'Settings/General.general-settings.json': require('./settings/general-settings')
 }

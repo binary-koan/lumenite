@@ -1,5 +1,5 @@
 <style lang="stylus" scoped>
-  @import '~src/styles/default'
+  @import '~src/styles/definitions'
 
   .tab-bar {
     flex-layout: row

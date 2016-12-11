@@ -1,5 +1,5 @@
 <style lang="stylus" scoped>
-  @import '~src/styles/default'
+  @import '~src/styles/definitions'
 
   .bench-build {
     width: $bench-width-default

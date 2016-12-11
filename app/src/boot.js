@@ -1,10 +1,12 @@
+import './styles/main.styl'
+
 import Vue from 'vue'
 import Electron from 'vue-electron'
 
 Vue.use(Electron)
 Vue.config.debug = true
 
-import App from './app'
+import Main from './main'
 
 /* eslint-disable no-new */
-new Vue(App).$mount('#app')
+new Vue(Main).$mount('#main')
