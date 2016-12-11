@@ -44,8 +44,6 @@
 </template>
 
 <script>
-  import find from 'lodash/find'
-
   import types from 'src/store/file-tree/types'
 
   export default {

@@ -56,8 +56,6 @@
 </template>
 
 <script>
-  import find from 'lodash/find'
-
   import FolderContents from './folder-contents'
 
   import types from 'src/store/file-tree/types'

@@ -1,12 +1,10 @@
-import every from 'lodash/every'
-
 import fs from 'src/filesystem/fs'
 import { Rejection } from 'src/helpers/error-helpers'
 
 export default async function projectInfo(path) {
   const baseMessage = `The directory ‘${path}’ doesn't appear to be a valid project.`
 
-  let project, generalSettings;
+  let project, generalSettings
 
   try {
     project = await fs.readJsonAsync(`${path}/Project.json`)
@@ -20,7 +18,7 @@ export default async function projectInfo(path) {
     throw new Rejection(`${baseMessage} Invalid editor version.`)
   }
 
-  if (!Boolean(generalSettings.name)) {
+  if (!generalSettings.name) {
     throw new Rejection(`${baseMessage} No project name specified.`)
   }
 

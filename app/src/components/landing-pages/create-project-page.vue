@@ -138,9 +138,9 @@
       templates() {
         return this.$store.state.landingPages.templates
       },
-      name: modelFromStore("landingPages.newProject.name", types.SET_NEW_PROJECT_NAME),
-      path: modelFromStore("landingPages.newProject.path", types.SET_NEW_PROJECT_PATH),
-      template: modelFromStore("landingPages.newProject.template", types.SET_NEW_PROJECT_TEMPLATE)
+      name: modelFromStore('landingPages.newProject.name', types.SET_NEW_PROJECT_NAME),
+      path: modelFromStore('landingPages.newProject.path', types.SET_NEW_PROJECT_PATH),
+      template: modelFromStore('landingPages.newProject.template', types.SET_NEW_PROJECT_TEMPLATE)
     },
     methods: {
       pickDirectory() {

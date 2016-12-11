@@ -22,8 +22,6 @@
 
   import TopLevelItem from './top-level-item'
 
-  import types from 'src/store/file-tree/types'
-
   export default {
     name: 'bench-build',
     computed: {
@@ -48,7 +46,7 @@
       },
 
       behavioursActions() {
-        return [{ icon: 'add' }, { icon: 'add-folder'}, { icon: 'more' }]
+        return [{ icon: 'add' }, { icon: 'add-folder' }, { icon: 'more' }]
       },
 
       scenesFolder() {
@@ -56,7 +54,7 @@
       },
 
       scenesActions() {
-        return [{ icon: 'add' }, { icon: 'add-folder'}, { icon: 'more' }]
+        return [{ icon: 'add' }, { icon: 'add-folder' }, { icon: 'more' }]
       }
     },
     components: {

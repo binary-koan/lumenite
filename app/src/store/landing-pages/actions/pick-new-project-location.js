@@ -1,3 +1,7 @@
+import fs from 'src/filesystem/fs'
+
+import types from '../types'
+
 export default async function pickNewProjectLocation({ state, commit }, location) {
   if (!location) {
     return
@@ -10,6 +14,6 @@ export default async function pickNewProjectLocation({ state, commit }, location
   if (contents.length === 0) {
     commit(types.SET_NEW_PROJECT_PATH, location)
   } else {
-    commit(types.SET_NEW_PROJECT_PATH, location + path.sep + state.newProject.name)
+    commit(types.SET_NEW_PROJECT_PATH, location + '/' + state.newProject.name)
   }
 }

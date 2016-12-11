@@ -1,6 +1,5 @@
 import path from 'path'
 import os from 'os'
-import fs from 'src/filesystem/fs'
 
 import last from 'lodash/last'
 import dropRight from 'lodash/dropRight'
