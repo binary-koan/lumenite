@@ -2,6 +2,7 @@
 /dependencies
 /builds
 /app/dist
+/test/boilerplate/unit/dist
 
 # Logs
 logs
