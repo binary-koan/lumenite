@@ -5,11 +5,13 @@ import toggleFolder from './actions/toggle-folder'
 
 const state = {
   baseFolders: [
-    { name: 'Settings', icon: 'settings', path: ['Settings'], expanded: false, children: [] },
-    { name: 'Assets', icon: 'assets', path: ['Assets'], expanded: false, children: [] },
-    { name: 'Behaviours', icon: 'behaviours', path: ['Behaviours'], expanded: false, children: [] },
-    { name: 'Scenes', icon: 'scenes', path: ['Scenes'], expanded: false, children: [] }
-  ]
+    { name: 'Settings', icon: 'settings', displayName: 'Settings', expanded: false, children: [] },
+    { name: 'Assets', icon: 'assets', displayName: 'Assets', expanded: false, children: [] },
+    { name: 'Behaviours', icon: 'behaviours', displayName: 'Behaviours', expanded: false, children: [] },
+    { name: 'Scenes', icon: 'scenes', displayName: 'Scenes', expanded: false, children: [] }
+  ],
+  renamingPath: null,
+  newName: ''
 }
 
 // Mutations

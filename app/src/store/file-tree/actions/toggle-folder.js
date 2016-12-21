@@ -11,15 +11,14 @@ function enterNextLevel(level, fragment) {
 }
 
 async function buildEntry(basePath, location) {
-  const fileName = basename(location)
-  const path = basePath.concat([fileName])
-  const [name, type] = basename(fileName, '.json').split('.')
+  const name = basename(location)
+  const [displayName, type] = basename(name, '.json').split('.')
   const stats = await fs.statAsync(location)
 
   if (stats.isDirectory()) {
-    return { name, type, path, expanded: false, children: [] }
-  } else if (type && fileName.endsWith('.json')) {
-    return { name, type, path }
+    return { name, displayName, type, expanded: false, children: [] }
+  } else if (type && name.endsWith('.json')) {
+    return { name, displayName, type }
   }
 }
 

@@ -35,10 +35,10 @@
   <ul class="folder-contents" v-show="entries && entries.length">
     <li v-for="entry in entries" :class="fileOrFolder(entry)">
       <button class="title" @click="handleClick(entry)">
-        <span :class="iconFor(entry)"></span> {{ entry.name }}
+        <span :class="iconFor(entry)"></span> {{ entry.displayName }}
       </button>
 
-      <folder-contents :entries="entry.children"></folder-contents>
+      <folder-contents :entries="entry.children" :parent-path="entryPath(entry)"></folder-contents>
     </li>
   </ul>
 </template>
@@ -48,7 +48,7 @@
 
   export default {
     name: 'folder-contents',
-    props: ['entries'],
+    props: ['entries', 'parentPath'],
     methods: {
       fileOrFolder(entry) {
         return Array.isArray(entry.children) ? 'folder' : 'file'
@@ -62,8 +62,12 @@
         }
       },
 
+      entryPath(entry) {
+        return this.parentPath.concat(entry.name)
+      },
+
       toggleFolder(folder) {
-        this.$store.dispatch(types.TOGGLE_FOLDER, folder.path)
+        this.$store.dispatch(types.TOGGLE_FOLDER, this.entryPath(entry))
       }
     }
   }

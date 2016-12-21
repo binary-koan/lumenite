@@ -41,14 +41,14 @@
   <div>
     <div class="top-level-item" :class="{ expanded: baseFolder.expanded }">
       <button class="title" @click="toggleFolder(baseFolder)">
-        <span :class="'icon top-level-icon-' + baseFolder.icon"></span> {{ baseFolder.name }}
+        <span :class="'icon top-level-icon-' + baseFolder.icon"></span> {{ baseFolder.displayName }}
       </button>
       <button v-show="baseFolder.expanded" v-for="action in actions" @click="runAction(action)" class="action">
         <span :class="'icon action-icon-' + action.icon"></span>
       </button>
     </div>
 
-    <folder-contents :entries="baseFolder.children"></folder-contents>
+    <folder-contents :entries="baseFolder.children" :parent-path="[baseFolder.name]"></folder-contents>
     <div v-show="baseFolder.expanded && !baseFolder.children.length" class="empty">
       (Empty)
     </div>
@@ -65,7 +65,7 @@
     props: ['baseFolder', 'actions'],
     methods: {
       toggleFolder(folder) {
-        this.$store.dispatch(types.TOGGLE_FOLDER, folder.path)
+        this.$store.dispatch(types.TOGGLE_FOLDER, [folder.name])
       },
 
       runAction(action) {
