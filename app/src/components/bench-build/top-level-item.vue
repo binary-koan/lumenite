@@ -43,7 +43,7 @@
       <button class="title" @click="toggleFolder(baseFolder)">
         <span :class="'icon top-level-icon-' + baseFolder.icon"></span> {{ baseFolder.name }}
       </button>
-      <button v-show="baseFolder.expanded" v-for="action in actions" class="action">
+      <button v-show="baseFolder.expanded" v-for="action in actions" @click="runAction(action)" class="action">
         <span :class="'icon action-icon-' + action.icon"></span>
       </button>
     </div>
@@ -66,6 +66,10 @@
     methods: {
       toggleFolder(folder) {
         this.$store.dispatch(types.TOGGLE_FOLDER, folder.path)
+      },
+
+      runAction(action) {
+        action.run(this)
       }
     },
     components: {

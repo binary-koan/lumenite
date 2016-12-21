@@ -19,8 +19,10 @@
 
 <script>
   import find from 'lodash/find'
+  import constant from 'lodash/constant'
 
   import TopLevelItem from './top-level-item'
+  import { settingsActions, assetsActions, behavioursActions, scenesActions } from './actions'
 
   export default {
     name: 'bench-build',
@@ -29,33 +31,22 @@
         return find(this.$store.state.fileTree.baseFolders, folder => folder.name === 'Settings')
       },
 
-      settingsActions() {
-        return [{ icon: 'more' }]
-      },
-
       assetsFolder() {
         return find(this.$store.state.fileTree.baseFolders, folder => folder.name === 'Assets')
-      },
-
-      assetsActions() {
-        return [{ icon: 'import' }, { icon: 'more' }]
       },
 
       behavioursFolder() {
         return find(this.$store.state.fileTree.baseFolders, folder => folder.name === 'Behaviours')
       },
 
-      behavioursActions() {
-        return [{ icon: 'add' }, { icon: 'add-folder' }, { icon: 'more' }]
-      },
-
       scenesFolder() {
         return find(this.$store.state.fileTree.baseFolders, folder => folder.name === 'Scenes')
       },
 
-      scenesActions() {
-        return [{ icon: 'add' }, { icon: 'add-folder' }, { icon: 'more' }]
-      }
+      settingsActions: constant(settingsActions),
+      assetsActions: constant(assetsActions),
+      behavioursActions: constant(behavioursActions),
+      scenesActions: constant(scenesActions)
     },
     components: {
       TopLevelItem

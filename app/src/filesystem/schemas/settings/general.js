@@ -11,3 +11,15 @@ export default {
     type: String
   }
 }
+
+export const layout = {
+  groups: [
+    {
+      title: 'Info',
+      fields: [
+        ['name', 'version'],
+        ['description']
+      ]
+    }
+  ]
+}
