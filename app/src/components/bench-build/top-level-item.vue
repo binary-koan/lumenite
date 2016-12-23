@@ -39,6 +39,7 @@
 
   .top-level-item + .folder-contents {
     padding-left: ($folder-contents-gap + $gap-md)
+    padding-right: $gap-md
   }
 </style>
 

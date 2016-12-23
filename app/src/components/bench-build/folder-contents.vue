@@ -36,6 +36,29 @@
     font-style: italic
     color: $color-muted
   }
+
+  .editor {
+    display: flex
+    border: 1px solid $color-muted
+    border-radius: $radius-sm
+    margin: $gap-sm 0
+
+    > input {
+      flex: 1
+      min-width: 0
+    }
+
+    > button {
+      padding-left: $gap-sm
+      padding-right: $gap-sm
+      background: transparent
+      opacity: 0.5
+
+      &:hover {
+        opacity: 1
+      }
+    }
+  }
 </style>
 
 <template>
@@ -44,8 +67,12 @@
       (Empty)
     </li>
 
-    <li v-show="isCreatingEntryHere()">
-      CREATING A THING
+    <li v-if="isCreatingEntryHere()">
+      <div class="editor">
+        <input type="text" v-focus-on-create />
+        <button><span class="icon icon-checkmark"></span></button>
+        <button><span class="icon icon-cancel-2"></span></button>
+      </div>
     </li>
 
     <li v-for="entry in entries" :class="isFolder(entry) ? 'folder' : 'file'">
