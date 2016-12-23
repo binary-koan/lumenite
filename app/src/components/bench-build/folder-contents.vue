@@ -29,35 +29,75 @@
   .folder-contents {
     padding-left: $folder-contents-gap
   }
+
+  .empty {
+    padding-top: $gap-sm
+    padding-bottom: $gap-sm
+    font-style: italic
+    color: $color-muted
+  }
 </style>
 
 <template>
-  <ul class="folder-contents" v-show="entries && entries.length">
-    <li v-for="entry in entries" :class="fileOrFolder(entry)">
-      <button class="title" @click="handleClick(entry)">
-        <span :class="iconFor(entry)"></span> {{ entry.displayName }}
-      </button>
+  <ul class="folder-contents">
+    <li v-show="isEmpty()" class="empty">
+      (Empty)
+    </li>
 
-      <folder-contents :entries="entry.children" :parent-path="entryPath(entry)"></folder-contents>
+    <li v-show="isCreatingEntryHere()">
+      CREATING A THING
+    </li>
+
+    <li v-for="entry in entries" :class="isFolder(entry) ? 'folder' : 'file'">
+      <template v-if="isFolder(entry)">
+        <!-- TODO -->
+        <span>
+          <button class="title" @click="handleClick(entry)">
+            <span :class="iconFor(entry)"></span> {{ entry.displayName }}
+          </button>
+          <button class="action" @click="handleClick(entry)">
+            <span class="icon-add"></span>
+          </button>
+        </span>
+
+        <folder-contents v-show="entry.expanded" :entries="entry.children" :parent-path="entryPath(entry)"></folder-contents>
+      </template>
+      <template v-else>
+        <button class="title" @click="handleClick(entry)">
+          <span :class="iconFor(entry)"></span> {{ entry.displayName }}
+        </button>
+      </template>
     </li>
   </ul>
 </template>
 
 <script>
+  import isEqual from 'lodash/isEqual'
+
   import types from 'src/store/file-tree/types'
 
   export default {
     name: 'folder-contents',
     props: ['entries', 'parentPath'],
     methods: {
-      fileOrFolder(entry) {
-        return Array.isArray(entry.children) ? 'folder' : 'file'
+      isEmpty() {
+        return !this.isCreatingEntryHere() && !this.entries.length
+      },
+
+      isCreatingEntryHere() {
+        return this.$store.state.fileTree.rename.inProgress &&
+          !this.$store.state.fileTree.rename.originalName &&
+          isEqual(this.parentPath, this.$store.state.fileTree.rename.parentPath)
+      },
+
+      isFolder(entry) {
+        return Array.isArray(entry.children)
       },
 
       iconFor(entry) {
         if (entry.type) {
           return `icon file-icon-${entry.type}`
-        } else if (Array.isArray(entry.children)) {
+        } else if (this.isFolder(entry)) {
           return entry.expanded ? 'icon icon-sort-down' : 'icon icon-sort-right'
         }
       },

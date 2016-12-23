@@ -40,14 +40,6 @@
   .top-level-item + .folder-contents {
     padding-left: ($folder-contents-gap + $gap-md)
   }
-
-  .empty {
-    padding-left: ($folder-contents-gap + $gap-lg)
-    padding-top: $gap-sm
-    padding-bottom: $gap-sm
-    font-style: italic
-    color: $color-muted
-  }
 </style>
 
 <template>
@@ -61,10 +53,7 @@
       </button>
     </div>
 
-    <folder-contents :entries="baseFolder.children" :parent-path="[baseFolder.name]"></folder-contents>
-    <div v-show="baseFolder.expanded && !baseFolder.children.length" class="empty">
-      (Empty)
-    </div>
+    <folder-contents v-show="baseFolder.expanded" :entries="baseFolder.children" :parent-path="[baseFolder.name]"></folder-contents>
   </div>
 </template>
 

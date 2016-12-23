@@ -2,7 +2,6 @@ import electron from 'electron'
 
 import types from 'src/store/file-tree/types'
 import { CORE_FOLDERS } from 'src/filesystem/paths'
-import { BEHAVIOURS_SCHEMAS, SCENES_SCHEMAS } from 'src/filesystem/schemas'
 
 const { dialog } = electron.remote
 
@@ -16,13 +15,13 @@ function importFiles(component) {
 
 function addFolderAction(root) {
   return (component) => {
-    component.$store.commit(types.START_ADD_FOLDER, { root })
+    component.$store.commit(types.START_ADD_FOLDER, [root])
   }
 }
 
-function addFileAction(root, fileType) {
+function addFileAction(root) {
   return (component) => {
-    component.$store.commit(types.START_ADD_FILE, { root, fileType })
+    component.$store.commit(types.START_ADD_FILE, [root])
   }
 }
 
@@ -34,11 +33,11 @@ export const assetsActions = [
 ]
 
 export const behavioursActions = [
-  { icon: 'add', run: addFileAction(CORE_FOLDERS.behaviours, BEHAVIOURS_SCHEMAS.default) },
+  { icon: 'add', run: addFileAction(CORE_FOLDERS.behaviours) },
   { icon: 'add-folder', run: addFolderAction(CORE_FOLDERS.assets) }
 ]
 
 export const scenesActions = [
-  { icon: 'add', run: addFileAction(CORE_FOLDERS.behaviours, SCENES_SCHEMAS.default) },
+  { icon: 'add', run: addFileAction(CORE_FOLDERS.behaviours) },
   { icon: 'add-folder', run: addFolderAction(CORE_FOLDERS.assets) }
 ]

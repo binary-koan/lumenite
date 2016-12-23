@@ -10,8 +10,13 @@ const state = {
     { name: 'Behaviours', icon: 'behaviours', displayName: 'Behaviours', expanded: false, children: [] },
     { name: 'Scenes', icon: 'scenes', displayName: 'Scenes', expanded: false, children: [] }
   ],
-  renamingPath: null,
-  newName: ''
+  rename: {
+    inProgress: false,
+    parentPath: null,
+    originalName: null,
+    newName: null,
+    create: null
+  }
 }
 
 // Mutations
@@ -28,6 +33,46 @@ const mutations = {
   [types.COLLAPSE_FOLDER](_, folder) {
     folder.children = []
     folder.expanded = false
+  },
+
+  [types.START_RENAME](state, path) {
+    const name = path.pop()
+
+    state.rename = {
+      inProgress: true,
+      parentPath: path,
+      originalName: name,
+      newName: name,
+      create: null
+    }
+  },
+
+  [types.START_ADD_FOLDER](state, parentPath) {
+    state.rename = {
+      inProgress: true,
+      parentPath: parentPath,
+      originalName: null,
+      newName: '',
+      create: 'folder'
+    }
+  },
+
+  [types.START_ADD_FILE](state, parentPath) {
+    state.rename = {
+      inProgress: true,
+      parentPath: parentPath,
+      originalName: null,
+      newName: '',
+      create: 'file'
+    }
+  },
+
+  [types.CONTINUE_RENAME](state, name) {
+    state.rename.newName = name
+  },
+
+  [types.CANCEL_RENAME](state) {
+    state.rename.inProgress = false
   }
 }
 
