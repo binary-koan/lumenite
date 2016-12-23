@@ -4,6 +4,7 @@
   .top-level-item {
     flex-layout: row
     margin: $gap-md
+    stateful-background: $background-default
     child-radius-horizontal: $radius-sm
   }
 
@@ -22,6 +23,18 @@
     flex: 1
     padding: $gap-sm
     text-align: left
+  }
+
+  .top-level-item > .action {
+    display: block
+    visibility: hidden
+    opacity: 0
+    transition: all 0.2s
+  }
+
+  .top-level-item:hover > .action {
+    visibility: visible
+    opacity: 1
   }
 
   .top-level-item + .folder-contents {
@@ -43,7 +56,7 @@
       <button class="title" @click="toggleFolder(baseFolder)">
         <span :class="'icon top-level-icon-' + baseFolder.icon"></span> {{ baseFolder.displayName }}
       </button>
-      <button v-show="baseFolder.expanded" v-for="action in actions" @click="runAction(action)" class="action">
+      <button v-for="action in actions" @click="runAction(action)" class="action">
         <span :class="'icon action-icon-' + action.icon"></span>
       </button>
     </div>

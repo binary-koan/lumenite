@@ -1,4 +1,3 @@
-import noop from 'lodash/noop'
 import electron from 'electron'
 
 import types from 'src/store/file-tree/types'
@@ -27,24 +26,19 @@ function addFileAction(root, fileType) {
   }
 }
 
-export const settingsActions = [
-  { icon: 'more', run: noop }
-]
+export const settingsActions = []
 
 export const assetsActions = [
   { icon: 'import', run: importFiles },
-  { icon: 'add-folder', run: addFolderAction(CORE_FOLDERS.assets) },
-  { icon: 'more', run: noop }
+  { icon: 'add-folder', run: addFolderAction(CORE_FOLDERS.assets) }
 ]
 
 export const behavioursActions = [
   { icon: 'add', run: addFileAction(CORE_FOLDERS.behaviours, BEHAVIOURS_SCHEMAS.default) },
-  { icon: 'add-folder', run: addFolderAction(CORE_FOLDERS.assets) },
-  { icon: 'more', run: noop }
+  { icon: 'add-folder', run: addFolderAction(CORE_FOLDERS.assets) }
 ]
 
 export const scenesActions = [
   { icon: 'add', run: addFileAction(CORE_FOLDERS.behaviours, SCENES_SCHEMAS.default) },
-  { icon: 'add-folder', run: addFolderAction(CORE_FOLDERS.assets) },
-  { icon: 'more', run: noop }
+  { icon: 'add-folder', run: addFolderAction(CORE_FOLDERS.assets) }
 ]
