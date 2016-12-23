@@ -9,8 +9,16 @@ const expectedVersions = require('./versions')
 const currentVersions = fs.existsSync(paths.versions) ? fs.readJsonSync(paths.versions) : {}
 
 function gitExists() {
-  const result = childProcess.spawnSync('git --version')
-  return result.status === 0 || currentVersions.git === expectedVersions.git
+  try {
+    childProcess.execSync('git --version');
+    return true;
+  } catch (e) {
+    if (e.includes("command not found")) {
+      return false;
+    } else {
+      throw e;
+    }
+  }
 }
 
 function gitDownloadUrl() {
