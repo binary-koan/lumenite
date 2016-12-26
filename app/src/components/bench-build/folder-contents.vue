@@ -6,21 +6,15 @@
     flex-layout: column
   }
 
-  .file,
-  .folder {
-    margin-left: $gap-xs
-  }
-
   .title {
     flex-layout: row
     align-items: center
-    padding: $gap-sm 0
-    background: transparent
-    stateful-color: $color-muted
   }
 
-  .title > .icon {
-    margin-right: $gap-xs
+  .title > button {
+    padding: $gap-sm $gap-xs
+    background: transparent
+    stateful-color: $color-muted
   }
 
   .folder-contents {
@@ -30,6 +24,7 @@
   .empty {
     padding-top: $gap-sm
     padding-bottom: $gap-sm
+    padding-left: $folder-contents-gap
     font-style: italic
     color: $color-muted
   }
@@ -74,9 +69,8 @@
 
     <li v-for="entry in entries" :class="isFolder(entry) ? 'folder' : 'file'">
       <template v-if="isFolder(entry)">
-        <!-- TODO -->
-        <span>
-          <button class="title" @click="handleClick(entry)">
+        <span class="title">
+          <button @click="handleClick(entry)">
             <span :class="iconFor(entry)"></span> {{ entry.displayName }}
           </button>
           <button class="action" @click="handleClick(entry)">
@@ -87,9 +81,11 @@
         <folder-contents v-show="entry.expanded" :entries="entry.children" :parent-path="entryPath(entry)"></folder-contents>
       </template>
       <template v-else>
-        <button class="title" @click="handleClick(entry)">
-          <span :class="iconFor(entry)"></span> {{ entry.displayName }}
-        </button>
+        <span class="title">
+          <button @click="handleClick(entry)">
+            <span :class="iconFor(entry)"></span> {{ entry.displayName }}
+          </button>
+        </span>
       </template>
     </li>
   </ul>
