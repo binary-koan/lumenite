@@ -6,12 +6,9 @@
     flex-layout: column
   }
 
-  .file {
-    margin-left: $gap-xs
-  }
-
+  .file,
   .folder {
-    margin-left: -($gap-lg)
+    margin-left: $gap-xs
   }
 
   .title {
