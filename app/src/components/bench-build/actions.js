@@ -5,30 +5,50 @@ import { CORE_FOLDERS } from 'src/filesystem/paths'
 
 const { dialog, Menu, MenuItem } = electron.remote
 
-function importFiles(component) {
-  const files = dialog.showOpenDialog({ properties: ['openFile', 'multiSelections'] })
+function importFilesAction(path) {
+  return (component) => {
+    const files = dialog.showOpenDialog({ properties: ['openFile', 'multiSelections'] })
 
-  if (files && files.length) {
-    component.$store.dispatch(types.IMPORT_FILES, { files, root: CORE_FOLDERS.assets })
+    if (files && files.length) {
+      component.$store.dispatch(types.IMPORT_FILES, { files, root: path })
+    }
   }
 }
 
-function addFolderAction(root) {
+function addFolderAction(path) {
   return (component) => {
-    component.$store.commit(types.START_ADD_FOLDER, [root])
+    component.$store.commit(types.START_ADD_FOLDER, path)
   }
 }
 
-function addFileAction(root) {
+function addFileAction(path) {
   return (component) => {
-    component.$store.commit(types.START_ADD_FILE, [root])
+    component.$store.commit(types.START_ADD_FILE, path)
   }
+}
+
+export function basicActionsForFolder(folder, path) {
+  const actions = []
+
+  if (folder.properties.importFiles) {
+    actions.push({ icon: 'import', run: importFilesAction(path) })
+  }
+
+  if (folder.properties.createFiles) {
+    actions.push({ icon: 'add', run: addFileAction(path) })
+  }
+
+  if (folder.properties.createFolders) {
+    actions.push({ icon: 'add-folder', run: addFolderAction(path) })
+  }
+
+  return actions
 }
 
 export const settingsActions = []
 
 export const assetsActions = [
-  { icon: 'import', run: importFiles },
+  // { icon: 'import', run: importFiles },
   { icon: 'add-folder', run: addFolderAction(CORE_FOLDERS.assets) }
 ]
 

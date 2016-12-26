@@ -45,7 +45,7 @@
 <template>
   <div>
     <div class="top-level-item" :class="{ expanded: baseFolder.expanded }">
-      <button class="title" @click="toggleFolder(baseFolder)">
+      <button class="title" @click="toggleFolder">
         <span :class="'icon top-level-icon-' + baseFolder.icon"></span> {{ baseFolder.displayName }}
       </button>
       <button v-for="action in actions" @click="runAction(action)" class="action">
@@ -61,13 +61,19 @@
   import FolderContents from './folder-contents'
 
   import types from 'src/store/file-tree/types'
+  import { basicActionsForFolder } from './actions'
 
   export default {
     name: 'top-level-item',
-    props: ['baseFolder', 'actions'],
+    props: ['baseFolder'],
+    computed: {
+      actions() {
+        return basicActionsForFolder(this.baseFolder, [this.baseFolder.name])
+      }
+    },
     methods: {
-      toggleFolder(folder) {
-        this.$store.dispatch(types.TOGGLE_FOLDER, { path: [folder.name] })
+      toggleFolder() {
+        this.$store.dispatch(types.TOGGLE_FOLDER, { path: [baseFolder.name] })
       },
 
       runAction(action) {

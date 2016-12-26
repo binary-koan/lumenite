@@ -11,9 +11,9 @@
 <template>
   <div class="bench-build">
     <top-level-item :base-folder="settingsFolder"></top-level-item>
-    <top-level-item :base-folder="assetsFolder" :actions="assetsActions"></top-level-item>
-    <top-level-item :base-folder="behavioursFolder" :actions="behavioursActions"></top-level-item>
-    <top-level-item :base-folder="scenesFolder" :actions="scenesActions"></top-level-item>
+    <top-level-item :base-folder="assetsFolder"></top-level-item>
+    <top-level-item :base-folder="behavioursFolder"></top-level-item>
+    <top-level-item :base-folder="scenesFolder"></top-level-item>
   </div>
 </template>
 
@@ -41,11 +41,7 @@
 
       scenesFolder() {
         return find(this.$store.state.fileTree.baseFolders, folder => folder.name === 'Scenes')
-      },
-
-      assetsActions: constant(assetsActions),
-      behavioursActions: constant(behavioursActions),
-      scenesActions: constant(scenesActions)
+      }
     },
     components: {
       TopLevelItem
