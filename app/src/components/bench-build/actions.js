@@ -34,10 +34,10 @@ export const assetsActions = [
 
 export const behavioursActions = [
   { icon: 'add', run: addFileAction(CORE_FOLDERS.behaviours) },
-  { icon: 'add-folder', run: addFolderAction(CORE_FOLDERS.assets) }
+  { icon: 'add-folder', run: addFolderAction(CORE_FOLDERS.behaviours) }
 ]
 
 export const scenesActions = [
-  { icon: 'add', run: addFileAction(CORE_FOLDERS.behaviours) },
-  { icon: 'add-folder', run: addFolderAction(CORE_FOLDERS.assets) }
+  { icon: 'add', run: addFileAction(CORE_FOLDERS.scenes) },
+  { icon: 'add-folder', run: addFolderAction(CORE_FOLDERS.scenes) }
 ]

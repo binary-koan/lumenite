@@ -2,13 +2,8 @@ import find from 'lodash/find'
 import { basename } from 'path'
 import fs from 'src/filesystem/fs'
 
-window.fs = fs
-
 import types from '../types'
-
-function enterNextLevel(level, fragment) {
-  return find(level, entry => Array.isArray(entry.children) && entry.name === fragment)
-}
+import findFolder from '../helpers/find-folder'
 
 async function buildEntry(basePath, location) {
   const name = basename(location)
@@ -22,12 +17,14 @@ async function buildEntry(basePath, location) {
   }
 }
 
-export default async function toggleFolder({ state, rootState, commit }, path) {
-  const folder = path.reduce(enterNextLevel, state.baseFolders)
+export default async function toggleFolder({ state, rootState, commit }, { path, expand }) {
+  const folder = findFolder(state, path)
 
-  if (folder.expanded) {
-    commit(types.COLLAPSE_FOLDER, folder)
-  } else {
+  if (expand === undefined) {
+    expand = !folder.expanded
+  }
+
+  if (expand) {
     const baseLocation = rootState.activeProject.path + '/' + path.join('/')
 
     if (!(await fs.existsSync(baseLocation))) {
@@ -41,5 +38,7 @@ export default async function toggleFolder({ state, rootState, commit }, path) {
     )).filter(Boolean)
 
     commit(types.SET_CHILDREN, { folder, children: children })
+  } else {
+    commit(types.COLLAPSE_FOLDER, folder)
   }
 }

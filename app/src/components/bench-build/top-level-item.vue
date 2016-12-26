@@ -68,7 +68,7 @@
     props: ['baseFolder', 'actions'],
     methods: {
       toggleFolder(folder) {
-        this.$store.dispatch(types.TOGGLE_FOLDER, [folder.name])
+        this.$store.dispatch(types.TOGGLE_FOLDER, { path: [folder.name] })
       },
 
       runAction(action) {

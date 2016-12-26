@@ -1,5 +1,7 @@
 import types from './types'
 import toggleFolder from './actions/toggle-folder'
+import refreshFolder from './actions/refresh-folder'
+import commitRename from './actions/commit-rename'
 
 // State
 
@@ -71,7 +73,7 @@ const mutations = {
     state.rename.newName = name
   },
 
-  [types.CANCEL_RENAME](state) {
+  [types.STOP_RENAME](state) {
     state.rename.inProgress = false
   }
 }
@@ -82,6 +84,8 @@ export default {
   state,
   mutations,
   actions: {
-    [types.TOGGLE_FOLDER]: toggleFolder
+    [types.TOGGLE_FOLDER]: toggleFolder,
+    [types.REFRESH_FOLDER]: refreshFolder,
+    [types.COMMIT_RENAME]: commitRename
   }
 }

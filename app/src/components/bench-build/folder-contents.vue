@@ -69,9 +69,9 @@
 
     <li v-if="isCreatingEntryHere()">
       <div class="editor">
-        <input type="text" v-focus-on-create />
-        <button><span class="icon icon-checkmark"></span></button>
-        <button><span class="icon icon-cancel-2"></span></button>
+        <input type="text" v-focus-on-create v-model="newEntryName" />
+        <button @click="commitRename"><span class="icon icon-checkmark"></span></button>
+        <button @click="cancelRename"><span class="icon icon-cancel-2"></span></button>
       </div>
     </li>
 
@@ -101,11 +101,15 @@
 <script>
   import isEqual from 'lodash/isEqual'
 
+  import { modelFromStore } from 'src/helpers/vuex-helpers'
   import types from 'src/store/file-tree/types'
 
   export default {
     name: 'folder-contents',
     props: ['entries', 'parentPath'],
+    computed: {
+      newEntryName: modelFromStore('fileTree.rename.newName', types.CONTINUE_RENAME),
+    },
     methods: {
       isEmpty() {
         return !this.isCreatingEntryHere() && !this.entries.length
@@ -134,7 +138,15 @@
       },
 
       toggleFolder(folder) {
-        this.$store.dispatch(types.TOGGLE_FOLDER, this.entryPath(entry))
+        this.$store.dispatch(types.TOGGLE_FOLDER, { path: this.entryPath(entry) })
+      },
+
+      commitRename() {
+        this.$store.dispatch(types.COMMIT_RENAME)
+      },
+
+      cancelRename() {
+        this.$store.commit(types.STOP_RENAME)
       }
     }
   }
