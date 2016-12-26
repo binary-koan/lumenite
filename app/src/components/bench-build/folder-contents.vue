@@ -82,7 +82,7 @@
       </template>
       <template v-else>
         <span class="title">
-          <button @click="handleClick(entry)">
+          <button @click="handleClick(entry)" @contextmenu="showFileContextMenu">
             <span :class="iconFor(entry)"></span> {{ entry.displayName }}
           </button>
         </span>
@@ -92,10 +92,12 @@
 </template>
 
 <script>
+  import electron from 'electron'
   import isEqual from 'lodash/isEqual'
 
   import { modelFromStore } from 'src/helpers/vuex-helpers'
   import types from 'src/store/file-tree/types'
+  import { fileContextMenu } from './actions'
 
   export default {
     name: 'folder-contents',
@@ -140,6 +142,10 @@
 
       cancelRename() {
         this.$store.commit(types.STOP_RENAME)
+      },
+
+      showFileContextMenu() {
+        fileContextMenu([]).popup(electron.remote.getCurrentWindow())
       }
     }
   }
