@@ -11,6 +11,7 @@
     background: transparent
     stateful-color: $color-muted
     text-align: left
+    user-select: none
   }
 
   .folder-contents {
@@ -23,6 +24,8 @@
     padding-left: $folder-contents-gap
     font-style: italic
     color: $color-muted
+    opacity: 0.7
+    user-select: none
   }
 
   .editor {

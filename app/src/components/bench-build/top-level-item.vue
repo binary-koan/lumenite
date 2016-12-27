@@ -4,7 +4,8 @@
   .top-level-item {
     flex-layout: row
     margin: $gap-md
-    stateful-background: $background-default
+    background: $background-default
+    border-radius: $radius-sm
     child-radius-horizontal: $radius-sm
   }
 

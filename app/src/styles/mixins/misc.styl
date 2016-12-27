@@ -1,9 +1,11 @@
 border-left-radius(size) {
-  border-radius: size 0 0 size
+  border-top-left-radius: size
+  border-bottom-left-radius: size
 }
 
 border-right-radius(size) {
-  border-radius: 0 size size 0
+  border-top-right-radius: size
+  border-bottom-right-radius: size
 }
 
 child-radius-horizontal(size) {
@@ -18,4 +20,9 @@ child-radius-horizontal(size) {
   > *:last-child {
     border-right-radius: size
   }
+}
+
+user-select(value) {
+  -webkit-user-select: value
+  user-select: value
 }
