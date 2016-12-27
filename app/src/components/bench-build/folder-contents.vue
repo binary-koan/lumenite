@@ -55,7 +55,7 @@
 
 <template>
   <ul class="folder-contents">
-    <li v-show="isEmpty()" class="empty">
+    <li v-show="isEmpty()" class="empty" @contextmenu="showFileContextMenu(folder)">
       (Empty)
     </li>
 
@@ -67,23 +67,23 @@
       </div>
     </li>
 
-    <li v-for="entry in entries" :class="isFolder(entry) ? 'folder' : 'file'">
-      <template v-if="isFolder(entry)">
+    <li v-for="child in folder.children" :class="isFolder(child) ? 'folder' : 'file'">
+      <template v-if="isFolder(child)">
         <span class="title">
-          <button @click="handleClick(entry)">
-            <span :class="iconFor(entry)"></span> {{ entry.displayName }}
+          <button @click="handleClick(child)" @contextmenu="showFileContextMenu(child)">
+            <span :class="iconFor(child)"></span> {{ child.displayName }}
           </button>
-          <button class="action" @click="handleClick(entry)">
+          <button class="action" @click="handleClick(child)">
             <span class="icon-add"></span>
           </button>
         </span>
 
-        <folder-contents v-show="entry.expanded" :entries="entry.children" :parent-path="entryPath(entry)"></folder-contents>
+        <folder-contents v-show="child.expanded" :folder="child" :folder-path="entryPath(child)"></folder-contents>
       </template>
       <template v-else>
         <span class="title">
-          <button @click="handleClick(entry)" @contextmenu="showFileContextMenu">
-            <span :class="iconFor(entry)"></span> {{ entry.displayName }}
+          <button @click="handleClick(child)" @contextmenu="showFileContextMenu(child)">
+            <span :class="iconFor(child)"></span> {{ child.displayName }}
           </button>
         </span>
       </template>
@@ -101,19 +101,19 @@
 
   export default {
     name: 'folder-contents',
-    props: ['entries', 'parentPath'],
+    props: ['folder', 'folderPath'],
     computed: {
       newEntryName: modelFromStore('fileTree.rename.newName', types.CONTINUE_RENAME),
     },
     methods: {
       isEmpty() {
-        return !this.isCreatingEntryHere() && !this.entries.length
+        return !this.isCreatingEntryHere() && !this.folder.children.length
       },
 
       isCreatingEntryHere() {
         return this.$store.state.fileTree.rename.inProgress &&
           !this.$store.state.fileTree.rename.originalName &&
-          isEqual(this.parentPath, this.$store.state.fileTree.rename.parentPath)
+          isEqual(this.folderPath, this.$store.state.fileTree.rename.folderPath)
       },
 
       isFolder(entry) {
@@ -129,7 +129,7 @@
       },
 
       entryPath(entry) {
-        return this.parentPath.concat(entry.name)
+        return this.folderPath.concat(entry.name)
       },
 
       toggleFolder(folder) {
@@ -144,8 +144,8 @@
         this.$store.commit(types.STOP_RENAME)
       },
 
-      showFileContextMenu() {
-        fileContextMenu([]).popup(electron.remote.getCurrentWindow())
+      showFileContextMenu(entry) {
+        fileContextMenu(this.folder, []).popup(electron.remote.getCurrentWindow())
       }
     }
   }

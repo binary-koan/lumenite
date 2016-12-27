@@ -72,7 +72,10 @@ const mutations = {
   // These are a bit hacky since they rely on `folder` being part of the state tree, so they should
   // only be called by actions in this module
   [types.SET_CHILDREN](_, { folder, children }) {
-    children.forEach(child => folder.children.push(child))
+    children.forEach(child => {
+      child.properties = folder.properties
+      folder.children.push(child)
+    })
 
     folder.expanded = true
   },

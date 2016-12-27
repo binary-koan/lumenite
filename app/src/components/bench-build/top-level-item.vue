@@ -53,7 +53,7 @@
       </button>
     </div>
 
-    <folder-contents v-show="baseFolder.expanded" :entries="baseFolder.children" :parent-path="[baseFolder.name]"></folder-contents>
+    <folder-contents v-show="baseFolder.expanded" :folder="baseFolder" :folder-path="[baseFolder.name]"></folder-contents>
   </div>
 </template>
 
@@ -73,7 +73,7 @@
     },
     methods: {
       toggleFolder() {
-        this.$store.dispatch(types.TOGGLE_FOLDER, { path: [baseFolder.name] })
+        this.$store.dispatch(types.TOGGLE_FOLDER, { path: [this.baseFolder.name] })
       },
 
       runAction(action) {

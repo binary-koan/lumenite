@@ -27,6 +27,16 @@ function addFileAction(path) {
   }
 }
 
+function fileManagerName() {
+  if (process.platform === 'win32') {
+    return 'Explorer'
+  } else if (process.platform === 'darwin') {
+    return 'Finder'
+  } else {
+    return 'File Browser'
+  }
+}
+
 export function basicActionsForFolder(folder, path) {
   const actions = []
 
@@ -45,30 +55,32 @@ export function basicActionsForFolder(folder, path) {
   return actions
 }
 
-export const settingsActions = []
-
-export const assetsActions = [
-  // { icon: 'import', run: importFiles },
-  { icon: 'add-folder', run: addFolderAction(CORE_FOLDERS.assets) }
-]
-
-export const behavioursActions = [
-  { icon: 'add', run: addFileAction(CORE_FOLDERS.behaviours) },
-  { icon: 'add-folder', run: addFolderAction(CORE_FOLDERS.behaviours) }
-]
-
-export const scenesActions = [
-  { icon: 'add', run: addFileAction(CORE_FOLDERS.scenes) },
-  { icon: 'add-folder', run: addFolderAction(CORE_FOLDERS.scenes) }
-]
-
-export function fileContextMenu(path) {
+export function fileContextMenu(enclosingFolder, path) {
   const menu = new Menu()
-  menu.append(new MenuItem({ label: 'New File' }))
-  menu.append(new MenuItem({ label: 'New Folder' }))
-  menu.append(new MenuItem({ type: 'separator' }))
-  menu.append(new MenuItem({ label: 'Rename' }))
-  menu.append(new MenuItem({ label: 'Duplicate' }))
-  menu.append(new MenuItem({ label: 'Delete' }))
+
+  if (enclosingFolder.properties.importFiles) {
+    menu.append(new MenuItem({ label: 'Import Files' }))
+  }
+
+  if (enclosingFolder.properties.createFiles) {
+    menu.append(new MenuItem({ label: 'New File' }))
+  }
+
+  if (enclosingFolder.properties.createFolders) {
+    menu.append(new MenuItem({ label: 'New Folder' }))
+  }
+
+  if (enclosingFolder.properties.fileOperations) {
+    menu.append(new MenuItem({ type: 'separator' }))
+    menu.append(new MenuItem({ label: 'Rename' }))
+    menu.append(new MenuItem({ label: 'Duplicate' }))
+    menu.append(new MenuItem({ label: 'Delete' }))
+  }
+
+  if (menu.items.length) {
+    menu.append(new MenuItem({ type: 'separator' }))
+  }
+
+  menu.append(new MenuItem({ label: `Show in ${fileManagerName()}` }))
   return menu
 }
