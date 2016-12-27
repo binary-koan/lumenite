@@ -113,7 +113,7 @@
       isCreatingEntryHere() {
         return this.$store.state.fileTree.rename.inProgress &&
           !this.$store.state.fileTree.rename.originalName &&
-          isEqual(this.folderPath, this.$store.state.fileTree.rename.folderPath)
+          isEqual(this.folderPath, this.$store.state.fileTree.rename.parentPath)
       },
 
       isFolder(entry) {
