@@ -7,14 +7,10 @@
   }
 
   .title {
-    flex-layout: row
-    align-items: center
-  }
-
-  .title > button {
     padding: $gap-sm $gap-xs
     background: transparent
     stateful-color: $color-muted
+    text-align: left
   }
 
   .folder-contents {
@@ -69,23 +65,16 @@
 
     <li v-for="child in folder.children" :class="isFolder(child) ? 'folder' : 'file'">
       <template v-if="isFolder(child)">
-        <span class="title">
-          <button @click="handleClick(child)" @contextmenu="showFileContextMenu(child)">
-            <span :class="iconFor(child)"></span> {{ child.displayName }}
-          </button>
-          <button class="action" @click="handleClick(child)">
-            <span class="icon-add"></span>
-          </button>
-        </span>
+        <button class="title" @click="toggleFolder(child)" @contextmenu="showFileContextMenu(child)">
+          <span :class="iconFor(child)"></span> {{ child.displayName }}
+        </button>
 
         <folder-contents v-show="child.expanded" :folder="child" :folder-path="entryPath(child)"></folder-contents>
       </template>
       <template v-else>
-        <span class="title">
-          <button @click="handleClick(child)" @contextmenu="showFileContextMenu(child)">
-            <span :class="iconFor(child)"></span> {{ child.displayName }}
-          </button>
-        </span>
+        <button class="title" @click="handleClick(child)" @contextmenu="showFileContextMenu(child)">
+          <span :class="iconFor(child)"></span> {{ child.displayName }}
+        </button>
       </template>
     </li>
   </ul>
@@ -133,7 +122,7 @@
       },
 
       toggleFolder(folder) {
-        this.$store.dispatch(types.TOGGLE_FOLDER, { path: this.entryPath(entry) })
+        this.$store.dispatch(types.TOGGLE_FOLDER, { path: this.entryPath(folder) })
       },
 
       commitRename() {

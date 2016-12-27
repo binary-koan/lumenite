@@ -1,7 +1,8 @@
 import find from 'lodash/find'
 
 function enterNextLevel(level, fragment) {
-  return find(level, entry => Array.isArray(entry.children) && entry.name === fragment)
+  const children = Array.isArray(level) ? level : level.children
+  return find(children, entry => Array.isArray(entry.children) && entry.name === fragment)
 }
 
 export default function findFolder(state, path) {
