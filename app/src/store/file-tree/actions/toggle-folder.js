@@ -20,11 +20,13 @@ function directoriesFirst(entry1, entry2) {
 
 async function buildEntry(basePath, location) {
   const name = basename(location)
-  const [displayName, type] = basename(name, '.json').split('.')
+  const fragments = basename(name, '.json').split('.')
+  const displayName = fragments[0]
+  const type = fragments[fragments.length - 1]
   const stats = await fs.statAsync(location)
 
   if (stats.isDirectory()) {
-    return { name, displayName, type, expanded: false, children: [] }
+    return { name, displayName, expanded: false, children: [] }
   } else if (type && name.endsWith('.json')) {
     return { name, displayName, type }
   }
