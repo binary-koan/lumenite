@@ -7,7 +7,7 @@
   }
 
   .title {
-    padding: $gap-sm $gap-xs
+    padding: $gap-xs
     background: transparent
     stateful-color: $color-muted
     text-align: left
@@ -134,7 +134,8 @@
       },
 
       showFileContextMenu(entry) {
-        fileContextMenu(this.folder, []).popup(electron.remote.getCurrentWindow())
+        fileContextMenu(this.folder, this.folderPath.concat([entry.name]))
+          .popup(electron.remote.getCurrentWindow())
       }
     }
   }
