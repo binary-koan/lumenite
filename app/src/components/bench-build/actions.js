@@ -10,7 +10,7 @@ function importFilesAction(path) {
     const files = dialog.showOpenDialog({ properties: ['openFile', 'multiSelections'] })
 
     if (files && files.length) {
-      component.$store.dispatch(types.IMPORT_FILES, { files, root: path })
+      component.$store.dispatch(types.IMPORT_FILES, { files, path })
     }
   }
 }

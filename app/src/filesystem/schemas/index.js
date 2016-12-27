@@ -25,4 +25,4 @@ export const ASSET_FILE_TYPES = [
 
 export const BEHAVIOUR_FILE_TYPES = ['.ts', '.script.json']
 
-export const SCENES_FILE_TYPES = ['.scene.json']
+export const SCENE_FILE_TYPES = ['.scene.json']

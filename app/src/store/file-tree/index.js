@@ -2,8 +2,9 @@ import types from './types'
 import toggleFolder from './actions/toggle-folder'
 import refreshFolder from './actions/refresh-folder'
 import commitRename from './actions/commit-rename'
+import importFiles from './actions/import-files'
 
-import { ASSET_FILE_TYPES, BEHAVIOUR_FILE_TYPES, SCENES_FILE_TYPES } from 'src/filesystem/schemas'
+import { ASSET_FILE_TYPES, BEHAVIOUR_FILE_TYPES, SCENE_FILE_TYPES } from 'src/filesystem/schemas'
 
 const SETTINGS_FOLDER_PROPERTIES = {
   importFiles: false,
@@ -33,7 +34,7 @@ const SCENES_FOLDER_PROPERTIES = {
   createFiles: true,
   createFolders: true,
   fileOperations: true,
-  types: SCENES_FILE_TYPES
+  types: SCENE_FILE_TYPES
 }
 
 // State
@@ -134,6 +135,7 @@ export default {
   actions: {
     [types.TOGGLE_FOLDER]: toggleFolder,
     [types.REFRESH_FOLDER]: refreshFolder,
-    [types.COMMIT_RENAME]: commitRename
+    [types.COMMIT_RENAME]: commitRename,
+    [types.IMPORT_FILES]: importFiles
   }
 }
