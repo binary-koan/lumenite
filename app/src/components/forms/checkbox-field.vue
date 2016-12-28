@@ -4,8 +4,8 @@
 
 <template>
   <div class="input-group input-row">
-    <input type="checkbox" class="input" :id="inputId" v-model="value" />
     <label :for="inputId">{{ label }}</label>
+    <input type="checkbox" :id="inputId" v-model="value" />
   </div>
 </template>
 
@@ -15,7 +15,7 @@
   import get from 'lodash/get'
 
   export default {
-    name: 'text-field',
+    name: 'checkbox-field',
     props: ['label', 'valuePath', 'changedMutator'],
     computed: {
       inputId() {

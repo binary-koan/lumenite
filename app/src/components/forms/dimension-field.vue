@@ -5,10 +5,11 @@
 <template>
   <div class="input-group">
     <label :for="widthId">{{ label }}</label>
-    <div class="input">
-      <input type="text" :id="widthId" v-model="width" />
-      <span>×</span>
-      <input type="text" :id="heightId" v-model="height" />
+    <div class="input-row">
+      <span>Width</span>
+      <input type="text" class="input" :id="widthId" v-model="width" />
+      <span>Height</span>
+      <input type="text" class="input" :id="heightId" v-model="height" />
       <span>{{ unit }}</span>
       <button @click="toggleLocked"><span class="icon icon-checked"></span></button>
     </div>
@@ -43,7 +44,7 @@
       }
     },
     methods: {
-      toggleLocked: {
+      toggleLocked() {
         throw 'TODO'
       }
     }

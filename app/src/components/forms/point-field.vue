@@ -5,11 +5,11 @@
 <template>
   <div class="input-group">
     <label :for="xId">{{ label }}</label>
-    <div class="input">
+    <div class="input-row">
       <span>X</span>
-      <input type="text" :id="xId" v-model="xCoord" />
+      <input type="text" class="input" :id="xId" v-model="xCoord" />
       <span>Y</span>
-      <input type="text" :id="yId" v-model="yCoord" />
+      <input type="text" class="input" :id="yId" v-model="yCoord" />
       <span>{{ unit }}</span>
     </div>
   </div>

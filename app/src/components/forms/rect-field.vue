@@ -5,17 +5,8 @@
 <template>
   <div class="input-group">
     <label :for="xId">{{ label }}</label>
-    <div class="input">
-      <span>X</span>
-      <input type="text" :id="xId" v-model="xCoord" />
-      <span>Y</span>
-      <input type="text" :id="yId" v-model="yCoord" />
-      <span>Width</span>
-      <input type="text" />
-      <span>Height</span>
-      <input type="text" />
-      <span>{{ unit }}</span>
-    </div>
+    <point-field></point-field>
+    <dimension-field></dimension-field>
   </div>
 </template>
 
@@ -27,8 +18,11 @@
   import { remote } from 'electron'
   const dialog = remote.dialog
 
+  import PointField from './point-field'
+  import DimensionField from './dimension-field'
+
   export default {
-    name: 'point-field',
+    name: 'rect-field',
     props: ['label', 'unit', 'valuePath', 'changedMutator'],
     computed: {
       xId() {
@@ -45,6 +39,10 @@
         get() { return get(get(this.$store.state, this.valuePath), [1]) },
         set(value) { this.$store.commit(this.changedMutator, [this.xCoord, value]) }
       }
+    },
+    components: {
+      PointField,
+      DimensionField
     }
   }
 </script>

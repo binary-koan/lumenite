@@ -3,23 +3,48 @@
 .input-group {
   flex-layout: column
   spacing-vertical: $gap-sm
+  margin-bottom: $gap-lg
+}
+
+.input-group label:empty {
+  display: none
 }
 
 .input-group .input {
   border: 1px solid $color-muted
   border-radius: $radius-sm
+  child-radius-horizontal: $radius-sm
+}
+
+.input-group .input button {
+  stateful-background: $background-darken
+  stateful-color: $color-muted
 }
 
 .input-row {
   flex-layout: row
-  child-radius-horizontal: $radius-sm
+  align-items: center
 }
 
-.input-row input {
+.input-row > input {
   flex: 1
+  min-width: 0
 }
 
-.input-row button {
-  stateful-background: $background-darken
+.input-row > button {
+  background: transparent
   stateful-color: $color-muted
+}
+
+.input-row > span {
+  display: inline-block
+  margin: 0 $gap-sm
+
+  &:first-child {
+    margin-left: 0
+  }
+
+  &:last-child {
+    margin-right: 0
+  }
 }

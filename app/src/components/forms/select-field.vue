@@ -18,8 +18,8 @@
   import get from 'lodash/get'
 
   export default {
-    name: 'text-field',
-    props: ['label', 'valuePath', 'changedMutator'],
+    name: 'select-field',
+    props: ['label', 'options', 'valuePath', 'changedMutator'],
     computed: {
       inputId() {
         return uniqueId(kebabCase(this.label))

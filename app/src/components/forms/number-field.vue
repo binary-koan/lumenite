@@ -16,7 +16,7 @@
   import get from 'lodash/get'
 
   export default {
-    name: 'text-field',
+    name: 'number-field',
     props: ['label', 'valuePath', 'changedMutator', 'min', 'max', 'step'],
     computed: {
       inputId() {
