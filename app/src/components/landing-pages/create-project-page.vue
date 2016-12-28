@@ -1,32 +1,8 @@
 <style lang="stylus" scoped>
-  @import '~src/styles/definitions'
+  @import '~src/components/forms/common'
 
   .container {
     spacing-vertical: $gap-lg
-  }
-
-  .input-group {
-    flex-layout: column
-    spacing-vertical: $gap-sm
-  }
-
-  .input-group .input {
-    border: 1px solid $color-muted
-    border-radius: $radius-sm
-  }
-
-  .input-row {
-    flex-layout: row
-    child-radius-horizontal: $radius-sm
-  }
-
-  .input-row input {
-    flex: 1
-  }
-
-  .input-row button {
-    stateful-background: $background-darken
-    stateful-color: $color-muted
   }
 
   .template-label {
@@ -84,18 +60,18 @@
 
 <template>
   <div class="container">
-    <div class="input-group">
-      <label for="projectName">Name</label>
-      <input id="projectName" class="input" type="text" v-model="name" />
-    </div>
+    <text-field
+      label="Name"
+      valuePath="landingPages.newProject.name"
+      :changedMutator="types.SET_NEW_PROJECT_NAME"></text-field>
 
-    <div class="input-group">
-      <label for="projectLocation">Location</label>
-      <div class="input-row input">
-        <input id="projectLocation" type="text" v-model="path" />
-        <button @click="pickDirectory"><span class="icon icon-opened-folder"></span></button>
-      </div>
-    </div>
+    <file-field
+      label="Location"
+      valuePath="landingPages.newProject.path"
+      :changedMutator="types.SET_NEW_PROJECT_PATH"
+      :pickedAction="types.PICK_NEW_PROJECT_LOCATION"
+      :properties="['openDirectory', 'createDirectory']"
+      ></file-field>
 
     <div class="input-group">
       <h2 class="template-label">Template</h2>
@@ -128,6 +104,9 @@
   import { remote } from 'electron'
   const dialog = remote.dialog
 
+  import TextField from 'src/components/forms/text-field'
+  import FileField from 'src/components/forms/file-field'
+
   import { modelFromStore } from 'src/helpers/vuex-helpers'
   import { pages } from 'src/store/landing-pages'
   import types from 'src/store/landing-pages/types'
@@ -138,9 +117,10 @@
       templates() {
         return this.$store.state.landingPages.templates
       },
-      name: modelFromStore('landingPages.newProject.name', types.SET_NEW_PROJECT_NAME),
-      path: modelFromStore('landingPages.newProject.path', types.SET_NEW_PROJECT_PATH),
-      template: modelFromStore('landingPages.newProject.template', types.SET_NEW_PROJECT_TEMPLATE)
+      types() {
+        return types
+      },
+      template: modelFromStore('landingPages.newProject.template', types.SET_NEW_PROJECT_TEMPLATE),
     },
     methods: {
       pickDirectory() {
@@ -158,6 +138,10 @@
       cancel() {
         this.$store.commit(types.SWITCH_PAGE, pages.RECENT_PROJECTS)
       }
+    },
+    components: {
+      TextField,
+      FileField
     },
     created() {
       this.$store.dispatch(types.FIND_TEMPLATES)
