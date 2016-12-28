@@ -1,15 +1,12 @@
 <style lang="stylus" scoped>
+  @import '~src/styles/definitions'
 </style>
 
 <template>
-  <div class="fields">
-    
-  </div>
 </template>
 
 <script>
   export default {
-    name: 'fields',
-    props: ['schema', 'layout']
+    name: 'sprite-asset-editor'
   }
 </script>
