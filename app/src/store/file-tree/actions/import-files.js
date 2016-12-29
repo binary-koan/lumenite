@@ -51,7 +51,7 @@ function createDefaultWrapper(filename, matcher, projectPath) {
   }
 
   return {
-    filename: filename + importType.extension,
+    filename: `${filename}.${importType.id}.json`,
     content: importType.import.buildWrapper({ filename, projectPath })
   }
 }

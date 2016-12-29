@@ -5,7 +5,6 @@ import ScriptEditor from 'src/components/editors/behaviours/script'
 export const SCRIPT_FILE = {
   id: 'script',
   root: CORE_FOLDERS.behaviours,
-  extension: '.script.json',
   editor: ScriptEditor,
 
   import: {

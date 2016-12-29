@@ -10,7 +10,6 @@ const IMAGE_MATCHERS = ['*.png', '*.jpg', '*.jpeg', '*.gif']
 export const SPRITE_FILE = {
   id: 'sprite',
   root: CORE_FOLDERS.assets,
-  extension: '.sprite.json',
   editor: SpriteAssetEditor,
 
   import: {
@@ -26,7 +25,6 @@ export const SPRITE_FILE = {
 export const FONT_FILE = {
   id: 'font',
   root: CORE_FOLDERS.assets,
-  extension: '.font.json',
   editor: FontAssetEditor,
 
   import: {
@@ -42,7 +40,6 @@ export const FONT_FILE = {
 export const TILESET_FILE = {
   id: 'tileset',
   root: CORE_FOLDERS.assets,
-  extension: '.tileset.json',
   editor: TilesetAssetEditor,
 
   import: {
@@ -58,7 +55,6 @@ export const TILESET_FILE = {
 export const VIDEO_FILE = {
   id: 'video',
   root: CORE_FOLDERS.assets,
-  extension: '.video.json',
   editor: VideoAssetEditor,
 
   import: {
