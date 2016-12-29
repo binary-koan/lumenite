@@ -9,7 +9,7 @@ const paths = require('./paths')
 const expectedVersions = require('./versions')
 
 function downloads() {
-  return [check.gitDownloadConfig(), check.haxeDownloadConfig(), check.nekoDownloadConfig()]
+  return [check.gitDownloadConfig()]
     .filter(Boolean)
     .map(dl => Object.assign(dl, {
       download: download(dl.url, dl.destination, { extract: dl.extract })
@@ -63,6 +63,10 @@ function runAfterDownloadTasks(dls) {
 }
 
 function writeVersions(dls) {
+  if (!dls.length) {
+    return
+  }
+
   const versions = check.currentVersions
   dls.forEach(dl => versions[dl.id] = expectedVersions[dl.id])
 

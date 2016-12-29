@@ -46,6 +46,11 @@
         get() { return get(get(this.$store.state, this.valuePath), [1]) },
         set(value) { this.$store.commit(this.changedMutator, [this.xCoord, value]) }
       }
+    },
+    methods: {
+      showMenu() {
+        throw 'TODO'
+      }
     }
   }
 </script>
