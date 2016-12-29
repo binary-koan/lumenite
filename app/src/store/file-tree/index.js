@@ -1,8 +1,11 @@
 import types from './types'
+
 import toggleFolder from './actions/toggle-folder'
 import refreshFolder from './actions/refresh-folder'
 import commitRename from './actions/commit-rename'
 import importFiles from './actions/import-files'
+
+import findFolder from './helpers/find-folder'
 
 import { ASSET_FILE_TYPES, BEHAVIOUR_FILE_TYPES, SCENE_FILE_TYPES } from 'src/filesystem/schemas'
 
@@ -70,9 +73,8 @@ const state = {
 // Mutations
 
 const mutations = {
-  // These are a bit hacky since they rely on `folder` being part of the state tree, so they should
-  // only be called by actions in this module
-  [types.SET_CHILDREN](_, { folder, children }) {
+  [types.SET_CHILDREN](state, { path, children }) {
+    const folder = findFolder(state, path)
     folder.children = []
 
     children.forEach(child => {
@@ -83,7 +85,8 @@ const mutations = {
     folder.expanded = true
   },
 
-  [types.COLLAPSE_FOLDER](_, folder) {
+  [types.COLLAPSE_FOLDER](state, path) {
+    const folder = findFolder(state, path)
     folder.children = []
     folder.expanded = false
   },

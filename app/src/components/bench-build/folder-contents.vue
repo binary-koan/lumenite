@@ -54,7 +54,7 @@
 
 <template>
   <ul class="folder-contents">
-    <li v-show="isEmpty()" class="empty" @contextmenu="showFileContextMenu(folder)">
+    <li v-show="isEmpty()" class="empty" @contextmenu="showFolderContextMenu">
       (Empty)
     </li>
 
@@ -138,6 +138,11 @@
 
       showFileContextMenu(entry) {
         fileContextMenu(this.folder, this.folderPath.concat([entry.name]))
+          .popup(electron.remote.getCurrentWindow())
+      },
+
+      showFolderContextMenu() {
+        fileContextMenu(this.folder, this.folderPath)
           .popup(electron.remote.getCurrentWindow())
       }
     }

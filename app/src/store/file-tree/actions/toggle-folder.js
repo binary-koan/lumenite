@@ -43,7 +43,7 @@ export default async function toggleFolder({ state, rootState, commit }, { path,
     const baseLocation = rootState.activeProject.path + '/' + path.join('/')
 
     if (!(await fs.existsSync(baseLocation))) {
-      commit(types.SET_CHILDREN, { folder, children: [] })
+      commit(types.SET_CHILDREN, { path, children: [] })
       return
     }
 
@@ -52,8 +52,8 @@ export default async function toggleFolder({ state, rootState, commit }, { path,
       entries.map(name => baseLocation + '/' + name).map(location => buildEntry(path, location))
     )).filter(Boolean).sort(directoriesFirst)
 
-    commit(types.SET_CHILDREN, { folder, children: children })
+    commit(types.SET_CHILDREN, { path, children: children })
   } else {
-    commit(types.COLLAPSE_FOLDER, folder)
+    commit(types.COLLAPSE_FOLDER, path)
   }
 }
