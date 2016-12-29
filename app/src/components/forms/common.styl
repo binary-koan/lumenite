@@ -14,37 +14,40 @@
   border: 1px solid $color-muted
   border-radius: $radius-sm
   child-radius-horizontal: $radius-sm
+
+  button {
+    stateful-background: $background-darken
+    stateful-color: $color-muted
+  }
+
+  label {
+    width: 4rem
+    text-align: center
+  }
 }
 
-.input-group .input button {
-  stateful-background: $background-darken
-  stateful-color: $color-muted
+.input-group div.input {
+  display: flex
+  align-items: center
 }
 
 .input-row {
   flex-layout: row
   align-items: center
+  spacing-horizontal: $gap-sm
 }
 
-.input-row > input {
+.input-row input,
+.input-row .input {
   flex: 1
   min-width: 0
 }
 
-.input-row > button {
+.input-row button {
   background: transparent
   stateful-color: $color-muted
 }
 
-.input-row > span {
+.input-row span {
   display: inline-block
-  margin: 0 $gap-sm
-
-  &:first-child {
-    margin-left: 0
-  }
-
-  &:last-child {
-    margin-right: 0
-  }
 }

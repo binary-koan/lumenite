@@ -6,11 +6,16 @@
   <div class="input-group">
     <label :for="xId">{{ label }}</label>
     <div class="input-row">
-      <span>X</span>
-      <input type="text" class="input" :id="xId" v-model="xCoord" />
-      <span>Y</span>
-      <input type="text" class="input" :id="yId" v-model="yCoord" />
-      <span>{{ unit }}</span>
+      <div class="input">
+        <label>X</label>
+        <input type="text" :id="xId" v-model="xCoord" />
+      </div>
+      <div class="input">
+        <label>Y</label>
+        <input type="text" :id="yId" v-model="yCoord" />
+      </div>
+      <span v-if="unit">{{ unit }}</span>
+      <button @click="showMenu"><span class="icon icon-more"></span></button>
     </div>
   </div>
 </template>
