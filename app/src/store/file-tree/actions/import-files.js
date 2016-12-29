@@ -1,5 +1,8 @@
 import find from 'lodash/find'
+import values from 'lodash/values'
 import pathUtils from 'path'
+import minimatch from 'minimatch'
+import pluralize from 'pluralize'
 import fs from 'src/filesystem/fs'
 
 import { CORE_FOLDERS } from 'src/filesystem/paths'
@@ -7,17 +10,17 @@ import * as fileTypes from 'src/filesystem/file-types'
 
 import types from '../types'
 
-function allowedFileTypes(path) {
+function validTypeIn(root, type) {
+  return type.root === root && type.import
+}
+
+function allFileMatchers(path) {
   const root = path[0]
 
-  switch (root) {
-  case CORE_FOLDERS.assets:
-    return ASSET_FILE_TYPES
-  case CORE_FOLDERS.behaviours:
-    return BEHAVIOUR_FILE_TYPES
-  case CORE_FOLDERS.scenes:
-    return SCENE_FILE_TYPES
-  }
+  return values(fileTypes)
+    .filter(type => validTypeIn(root, type))
+    .map(type => type.import.matchers)
+    .reduce((all, current) => all.concat(current), [])
 }
 
 function findWrapper(location, allFiles) {
@@ -30,24 +33,57 @@ function findWrapper(location, allFiles) {
   )
 }
 
-function createDefaultWrapper(filename, projectLocation) {
-  const content = { test: 1 }
-  return fs.outputJsonAsync(pathUtils.resolve(projectLocation, filename + '.test.json'), content)
+function createDefaultWrapper(filename, matcher, projectPath) {
+  const root = projectPath[0]
+
+  // First, check if we're in a subdirectory that looks like a type ID - e.g. if we're in
+  // /Assets/Tilesets we should create a tileset. TODO this should be done better / more transparently
+  const pathAsIds = projectPath.map(fragment => pluralize.singular(fragment).toLowerCase())
+  let importType = find(values(fileTypes), type =>
+    validTypeIn(root, type) && type.import.matchers.includes(matcher) && pathAsIds.includes(type.id)
+  )
+
+  // Otherwise, just find the first file type that looks about right
+  if (!importType) {
+    importType = find(values(fileTypes), type =>
+      validTypeIn(root, type) && type.import.matchers.includes(matcher)
+    )
+  }
+
+  return {
+    filename: filename + importType.extension,
+    content: importType.import.buildWrapper({ filename, projectPath })
+  }
+}
+
+async function ensureWrapper(existingWrapperLoc, newWrapper, projectLocation) {
+  if (existingWrapperLoc) {
+    const filename = pathUtils.basename(existingWrapperLoc)
+    await fs.copyAsync(existingWrapperLoc, pathUtils.resolve(projectLocation, filename))
+  } else {
+    await fs.outputJsonAsync(pathUtils.resolve(projectLocation, newWrapper.filename), newWrapper.content)
+  }
 }
 
 export default async function importFiles({ state, rootState, dispatch }, { files, path }) {
-  const allowedTypes = allowedFileTypes(path)
+  const matchers = allFileMatchers(path)
   const projectLocation = pathUtils.resolve(rootState.activeProject.path, ...path)
 
   const operations = []
 
   files.forEach(location => {
     const name = pathUtils.basename(location)
-    operations.push(fs.copyAsync(location, pathUtils.resolve(projectLocation, name)))
+    const matcher = find(matchers, m => minimatch(name.toLowerCase(), m.toLowerCase()))
 
-    if (!findWrapper(name, files)) {
-      operations.push(createDefaultWrapper(name, projectLocation))
+    if (!matcher) {
+      console.warn(`No import matcher found for: ${location}`)
+      return
     }
+
+    operations.push(fs.copyAsync(location, pathUtils.resolve(projectLocation, name)))
+    operations.push(
+      ensureWrapper(findWrapper(name, files), createDefaultWrapper(name, matcher, path), projectLocation)
+    )
   })
 
   await Promise.all(operations)
