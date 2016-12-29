@@ -7,7 +7,7 @@
   }
 
   .title {
-    padding: $gap-xs
+    padding: $gap-sm $gap-xs
     background: transparent
     stateful-color: $color-muted
     text-align: left
