@@ -10,19 +10,19 @@
 <template>
   <div class="tabs">
     <tab-bar></tab-bar>
-    <image-asset-editor></image-asset-editor>
+    <sprite-asset-editor></sprite-asset-editor>
   </div>
 </template>
 
 <script>
   import TabBar from './tab-bar'
-  import ImageAssetEditor from '../editors/assets/image'
+  import SpriteAssetEditor from '../editors/assets/sprite'
 
   export default {
     name: 'tabs',
     components: {
       TabBar,
-      ImageAssetEditor
+      SpriteAssetEditor
     }
   }
 </script>

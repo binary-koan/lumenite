@@ -3,7 +3,8 @@ import pathUtils from 'path'
 import fs from 'src/filesystem/fs'
 
 import { CORE_FOLDERS } from 'src/filesystem/paths'
-import { ASSET_FILE_TYPES, BEHAVIOUR_FILE_TYPES, SCENE_FILE_TYPES } from 'src/filesystem/schemas'
+import * as fileTypes from 'src/filesystem/file-types'
+
 import types from '../types'
 
 function allowedFileTypes(path) {
