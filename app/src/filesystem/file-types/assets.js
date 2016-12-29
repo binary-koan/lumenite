@@ -2,7 +2,7 @@ import { CORE_FOLDERS } from '../paths'
 
 import SpriteAssetEditor from 'src/components/editors/assets/sprite'
 import FontAssetEditor from 'src/components/editors/assets/font'
-import TilemapAssetEditor from 'src/components/editors/assets/tilemap'
+import TilesetAssetEditor from 'src/components/editors/assets/tileset'
 import VideoAssetEditor from 'src/components/editors/assets/video'
 
 const IMAGE_MATCHERS = ['*.png', '*.jpg', '*.jpeg', '*.gif']
@@ -39,11 +39,11 @@ export const FONT_FILE = {
   }
 }
 
-export const TILEMAP_FILE = {
-  id: 'tilemap',
+export const TILESET_FILE = {
+  id: 'tileset',
   root: CORE_FOLDERS.assets,
-  extension: '.tilemap.json',
-  editor: TilemapAssetEditor,
+  extension: '.tileset.json',
+  editor: TilesetAssetEditor,
 
   import: {
     matchers: IMAGE_MATCHERS,

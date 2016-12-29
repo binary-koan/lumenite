@@ -7,6 +7,6 @@
 
 <script>
   export default {
-    name: 'tilemap-asset-editor'
+    name: 'tileset-asset-editor'
   }
 </script>
