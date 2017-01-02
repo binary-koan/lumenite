@@ -40,20 +40,27 @@
 
 <template>
   <div class="tab-bar">
-    <div class="tab active">
+    <div v-for="(tab, index) in tabs" class="tab" :class="activeClass(index)">
       <span class="icon tab-icon color-icon" style="background-color: #ff0"></span>
-      <span class="title">Pacman</span>
+      <span class="title">{{ tab.title }}</span>
       <button class="close"><span class="icon"></span></button>
-    </div>
-    <div class="tab">
-      <span class="icon tab-icon color-icon" style="background-color: #0ff"></span>
-      <span class="title">Inky</span>
     </div>
   </div>
 </template>
 
 <script>
   export default {
-    name: 'tab-bar'
+    name: 'tab-bar',
+    props: ['tabs'],
+    computed: {
+      tabs() {
+        return this.$store.state.tabs.tabs
+      }
+    },
+    methods: {
+      activeClass(index) {
+        return { active: this.$store.state.tabs.selectedIndex === index }
+      }
+    }
   }
 </script>

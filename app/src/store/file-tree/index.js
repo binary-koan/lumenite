@@ -7,7 +7,9 @@ import importFiles from './actions/import-files'
 
 import findFolder from './helpers/find-folder'
 
-import { ASSET_FILE_TYPES, BEHAVIOUR_FILE_TYPES, SCENE_FILE_TYPES } from 'src/filesystem/schemas'
+import ASSET_FILE_TYPES from 'src/filesystem/file-types/assets'
+import BEHAVIOUR_FILE_TYPES from 'src/filesystem/file-types/behaviours'
+import SCENE_FILE_TYPES from 'src/filesystem/file-types/scenes'
 
 const SETTINGS_FOLDER_PROPERTIES = {
   importFiles: false,

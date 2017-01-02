@@ -75,7 +75,7 @@
         <folder-contents v-show="child.expanded" :folder="child" :folder-path="entryPath(child)"></folder-contents>
       </template>
       <template v-else>
-        <button class="title" @click="handleClick(child)" @contextmenu="showFileContextMenu(child)">
+        <button class="title" @click="openFile(child)" @contextmenu="showFileContextMenu(child)">
           <span :class="iconFor(child)"></span> {{ child.displayName }}
         </button>
       </template>
@@ -89,6 +89,8 @@
 
   import { modelFromStore } from 'src/helpers/vuex-helpers'
   import types from 'src/store/file-tree/types'
+  import tabTypes from 'src/store/tabs/types'
+
   import { fileContextMenu } from './actions'
 
   export default {
@@ -126,6 +128,10 @@
 
       toggleFolder(folder) {
         this.$store.dispatch(types.TOGGLE_FOLDER, { path: this.entryPath(folder) })
+      },
+
+      openFile(file) {
+        this.$store.dispatch(tabTypes.OPEN_FILE, { path: this.entryPath(file), file })
       },
 
       commitRename() {
