@@ -1,12 +1,11 @@
 import find from 'lodash/find'
-import values from 'lodash/values'
 import pathUtils from 'path'
 import minimatch from 'minimatch'
 import pluralize from 'pluralize'
 import fs from 'src/filesystem/fs'
 
 import { CORE_FOLDERS } from 'src/filesystem/paths'
-import * as fileTypes from 'src/filesystem/file-types'
+import fileTypes from 'src/filesystem/file-types'
 
 import types from '../types'
 
@@ -17,7 +16,7 @@ function validTypeIn(root, type) {
 function allFileMatchers(path) {
   const root = path[0]
 
-  return values(fileTypes)
+  return fileTypes
     .filter(type => validTypeIn(root, type))
     .map(type => type.import.matchers)
     .reduce((all, current) => all.concat(current), [])
@@ -39,13 +38,13 @@ function createDefaultWrapper(filename, matcher, projectPath) {
   // First, check if we're in a subdirectory that looks like a type ID - e.g. if we're in
   // /Assets/Tilesets we should create a tileset. TODO this should be done better / more transparently
   const pathAsIds = projectPath.map(fragment => pluralize.singular(fragment).toLowerCase())
-  let importType = find(values(fileTypes), type =>
+  let importType = find(fileTypes, type =>
     validTypeIn(root, type) && type.import.matchers.includes(matcher) && pathAsIds.includes(type.id)
   )
 
   // Otherwise, just find the first file type that looks about right
   if (!importType) {
-    importType = find(values(fileTypes), type =>
+    importType = find(fileTypes, type =>
       validTypeIn(root, type) && type.import.matchers.includes(matcher)
     )
   }

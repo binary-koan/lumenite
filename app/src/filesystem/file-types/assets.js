@@ -7,7 +7,7 @@ import VideoAssetEditor from 'src/components/editors/assets/video'
 
 const IMAGE_MATCHERS = ['*.png', '*.jpg', '*.jpeg', '*.gif']
 
-export const SPRITE_FILE = {
+const SPRITE_FILE = {
   id: 'sprite',
   root: CORE_FOLDERS.assets,
   editor: SpriteAssetEditor,
@@ -22,7 +22,7 @@ export const SPRITE_FILE = {
   }
 }
 
-export const FONT_FILE = {
+const FONT_FILE = {
   id: 'font',
   root: CORE_FOLDERS.assets,
   editor: FontAssetEditor,
@@ -37,7 +37,7 @@ export const FONT_FILE = {
   }
 }
 
-export const TILESET_FILE = {
+const TILESET_FILE = {
   id: 'tileset',
   root: CORE_FOLDERS.assets,
   editor: TilesetAssetEditor,
@@ -52,7 +52,7 @@ export const TILESET_FILE = {
   }
 }
 
-export const VIDEO_FILE = {
+const VIDEO_FILE = {
   id: 'video',
   root: CORE_FOLDERS.assets,
   editor: VideoAssetEditor,
@@ -66,3 +66,5 @@ export const VIDEO_FILE = {
     }
   }
 }
+
+export default [SPRITE_FILE, FONT_FILE, TILESET_FILE, VIDEO_FILE]

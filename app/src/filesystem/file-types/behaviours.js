@@ -2,7 +2,7 @@ import { CORE_FOLDERS } from '../paths'
 
 import ScriptEditor from 'src/components/editors/behaviours/script'
 
-export const SCRIPT_FILE = {
+const SCRIPT_FILE = {
   id: 'script',
   root: CORE_FOLDERS.behaviours,
   editor: ScriptEditor,
@@ -29,3 +29,5 @@ export const SCRIPT_FILE = {
     }
   }
 }
+
+export default [SCRIPT_FILE]
