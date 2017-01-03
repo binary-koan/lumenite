@@ -60,7 +60,7 @@
 
     <li v-if="isCreatingEntryHere()">
       <div class="editor">
-        <input type="text" v-focus-on-create v-model="newEntryName" />
+        <input type="text" v-focus-on-create v-model="newEntryName" @keyup="commitOrCancelRename" />
         <button @click="commitRename"><span class="icon icon-checkmark"></span></button>
         <button @click="cancelRename"><span class="icon icon-cancel-2"></span></button>
       </div>
@@ -87,6 +87,7 @@
   import electron from 'electron'
   import isEqual from 'lodash/isEqual'
 
+  import { keyCodes } from 'src/helpers/event-helpers'
   import { modelFromStore } from 'src/helpers/vuex-helpers'
   import types from 'src/store/file-tree/types'
   import tabTypes from 'src/store/tabs/types'
@@ -132,6 +133,14 @@
 
       openFile(file) {
         this.$store.dispatch(tabTypes.OPEN_FILE, { path: this.entryPath(file), file })
+      },
+
+      commitOrCancelRename(e) {
+        if (e.keyCode === keyCodes.ENTER) {
+          this.commitRename()
+        } else if (e.keyCode === keyCodes.ESC) {
+          this.cancelRename()
+        }
       },
 
       commitRename() {
