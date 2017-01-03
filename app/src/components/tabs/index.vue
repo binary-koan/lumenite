@@ -4,11 +4,16 @@
   .tabs {
     flex: 1
     flex-layout: column
+    background: $background-darken
   }
 
   .tab-bar {
     flex-layout: row
-    background-color: $background-darken
+  }
+
+  .tab-pane {
+    flex: 1
+    background: $background-default
   }
 </style>
 
@@ -17,7 +22,7 @@
     <div class="tab-bar">
       <tab v-for="(tab, index) in tabs" :is-active="isActive(index)" :tab="tab" :index="index"></tab>
     </div>
-    <tab-pane v-for="(tab, index) in tabs" v-show="isActive(index)" :tab="tab"></tab-pane>
+    <tab-pane v-for="(tab, index) in tabs" class="tab-pane" v-show="isActive(index)" :tab="tab"></tab-pane>
   </div>
 </template>
 

@@ -13,6 +13,10 @@ const state = {
 const mutations = {
   [types.ADD_TAB](state, tab) {
     state.tabs.splice(state.selectedIndex + 1, 0, tab)
+
+    if (state.selectedIndex < 0) {
+      state.selectedIndex = 0
+    }
   },
 
   [types.SELECT_TAB](state, index) {
@@ -21,6 +25,10 @@ const mutations = {
 
   [types.CLOSE_TAB](state, index) {
     state.tabs.splice(index, 1)
+
+    if (state.selectedIndex >= state.tabs.length) {
+      state.selectedIndex = state.tabs.length - 1
+    }
   }
 }
 

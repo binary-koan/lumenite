@@ -41,7 +41,7 @@
   <button class="tab" :class="{ active: isActive }" @click="activate">
     <span class="icon tab-icon color-icon" style="background-color: #ff0"></span>
     <span class="title">{{ tab.title }}</span>
-    <button class="close"><span class="icon"></span></button>
+    <button class="close" @click="close"><span class="icon"></span></button>
   </button>
 </template>
 
@@ -52,8 +52,15 @@
     name: 'tab',
     props: ['isActive', 'tab', 'index'],
     methods: {
-      activate() {
-        this.$store.commit(types.SELECT_TAB, this.index)
+      activate(e) {
+        // Don't run the action if the close button is clicked ... eww
+        if (!e.target.closest('button.close')) {
+          this.$store.commit(types.SELECT_TAB, this.index)
+        }
+      },
+
+      close() {
+        this.$store.commit(types.CLOSE_TAB, this.index)
       }
     }
   }
