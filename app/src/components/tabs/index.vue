@@ -5,18 +5,25 @@
     flex: 1
     flex-layout: column
   }
+
+  .tab-bar {
+    flex-layout: row
+    background-color: $background-darken
+  }
 </style>
 
 <template>
   <div class="tabs">
-    <tab-bar></tab-bar>
-    <tab v-for="(tab, index) in tabs" v-show="isActive(index)" :tab="tab"></tab>
+    <div class="tab-bar">
+      <tab v-for="(tab, index) in tabs" :is-active="isActive(index)" :tab="tab" :index="index"></tab>
+    </div>
+    <tab-pane v-for="(tab, index) in tabs" v-show="isActive(index)" :tab="tab"></tab-pane>
   </div>
 </template>
 
 <script>
-  import TabBar from './tab-bar'
   import Tab from './tab'
+  import TabPane from './tab-pane'
 
   export default {
     name: 'tabs',
@@ -31,8 +38,8 @@
       }
     },
     components: {
-      TabBar,
-      Tab
+      Tab,
+      TabPane
     }
   }
 </script>

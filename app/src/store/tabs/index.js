@@ -15,6 +15,10 @@ const mutations = {
     state.tabs.splice(state.selectedIndex + 1, 0, tab)
   },
 
+  [types.SELECT_TAB](state, index) {
+    state.selectedIndex = index
+  },
+
   [types.CLOSE_TAB](state, index) {
     state.tabs.splice(index, 1)
   }

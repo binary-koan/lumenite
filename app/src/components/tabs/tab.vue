@@ -1,31 +1,59 @@
-<script>
-  import GeneralSettingsEditor from './editors/settings/general'
-  import SpriteAssetEditor from './editors/assets/sprite'
-  import FontAssetEditor from './editors/assets/font'
-  import TilesetAssetEditor from './editors/assets/tileset'
-  import VideoAssetEditor from './editors/assets/video'
-  import ScriptEditor from './editors/behaviours/script'
-  import SceneEditor from './editors/scenes/scene'
+<style lang="stylus" scoped>
+  @import '~src/styles/definitions'
 
-  const FILE_EDITORS = {
-    'general-settings': GeneralSettingsEditor,
-    'sprite': SpriteAssetEditor,
-    'font': FontAssetEditor,
-    'tileset': TilesetAssetEditor,
-    'video': VideoAssetEditor,
-    'script': ScriptEditor,
-    'scene': SceneEditor
+  .tab {
+    flex-layout: row
+    align-items: center
+    width: $tab-width
+    padding: $gap-sm $gap-sm $gap-sm $gap-lg
+    border-radius: 0
+    stateful-background: $background-darken
+    text-align: left
+    cursor: default
   }
+
+  .tab.active {
+    background: $background-default
+  }
+
+  .tab-icon {
+    margin-right: $gap-sm
+  }
+
+  .title {
+    flex: 1
+    overflow: ellipsis
+  }
+
+  .close {
+    padding: $gap-sm
+    background: transparent
+    stateful-color: $color-muted
+  }
+
+  .close .icon:before {
+    content: '×'
+    font-size: $font-size-lg
+  }
+</style>
+
+<template>
+  <button class="tab" :class="{ active: isActive }" @click="activate">
+    <span class="icon tab-icon color-icon" style="background-color: #ff0"></span>
+    <span class="title">{{ tab.title }}</span>
+    <button class="close"><span class="icon"></span></button>
+  </button>
+</template>
+
+<script>
+  import types from 'src/store/tabs/types'
 
   export default {
     name: 'tab',
-    props: ['tab'],
-
-    render(createElement) {
-      if (this.tab.tabType === 'file') {
-        return createElement(FILE_EDITORS[this.tab.fileType], {
-          props: { tab: this.tab }
-        })
+    props: ['isActive', 'tab', 'index'],
+    methods: {
+      activate() {
+        this.$store.commit(types.SELECT_TAB, this.index)
       }
     }
   }
