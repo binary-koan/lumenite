@@ -22,7 +22,10 @@
 
   .title {
     flex: 1
-    overflow: ellipsis
+    min-width: 0
+    white-space: nowrap
+    overflow: hidden
+    text-overflow: ellipsis
   }
 
   .close {

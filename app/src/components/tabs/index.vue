@@ -13,7 +13,9 @@
 
   .tab-pane {
     flex: 1
+    padding: $gap-sm $gap-md
     background: $background-default
+    overflow: auto
   }
 </style>
 
