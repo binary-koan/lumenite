@@ -3,10 +3,11 @@
 </style>
 
 <template>
+  <div>GENERAL SETTINGS</div>
 </template>
 
 <script>
   export default {
-    name: 'scene-editor'
+    name: 'general-settings-editor'
   }
 </script>

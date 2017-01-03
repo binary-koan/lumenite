@@ -3,10 +3,11 @@
 </style>
 
 <template>
+  <div>SCRIPT</div>
 </template>
 
 <script>
   export default {
-    name: 'video-asset-editor'
+    name: 'script-editor'
   }
 </script>

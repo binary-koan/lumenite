@@ -123,14 +123,6 @@
       template: modelFromStore('landingPages.newProject.template', types.SET_NEW_PROJECT_TEMPLATE),
     },
     methods: {
-      pickDirectory() {
-        const dirs = dialog.showOpenDialog({
-          defaultPath: this.$store.state.landingPages.newProject.path,
-          properties: ['openDirectory', 'createDirectory']
-        })
-        this.$store.dispatch(types.PICK_NEW_PROJECT_LOCATION, dirs[0])
-      },
-
       create() {
         this.$store.dispatch(types.CREATE_PROJECT)
       },

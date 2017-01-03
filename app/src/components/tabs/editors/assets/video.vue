@@ -3,10 +3,11 @@
 </style>
 
 <template>
+  <div>VIDEO</div>
 </template>
 
 <script>
   export default {
-    name: 'font-asset-editor'
+    name: 'video-asset-editor'
   }
 </script>

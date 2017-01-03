@@ -3,10 +3,11 @@
 </style>
 
 <template>
+  <div>TILESET</div>
 </template>
 
 <script>
   export default {
-    name: 'script-editor'
+    name: 'tileset-asset-editor'
   }
 </script>

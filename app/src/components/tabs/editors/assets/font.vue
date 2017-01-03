@@ -1,15 +1,13 @@
 <style lang="stylus" scoped>
+  @import '~src/styles/definitions'
 </style>
 
 <template>
-  <div class="fields">
-    
-  </div>
+  <div>FONT</div>
 </template>
 
 <script>
   export default {
-    name: 'fields',
-    props: ['schema', 'layout']
+    name: 'font-asset-editor'
   }
 </script>

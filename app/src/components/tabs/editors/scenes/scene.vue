@@ -3,10 +3,11 @@
 </style>
 
 <template>
+  <div>SCENE</div>
 </template>
 
 <script>
   export default {
-    name: 'tileset-asset-editor'
+    name: 'scene-editor'
   }
 </script>

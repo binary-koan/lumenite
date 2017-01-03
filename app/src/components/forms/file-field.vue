@@ -21,7 +21,7 @@
   const dialog = remote.dialog
 
   export default {
-    name: 'file-field',
+    name: 'file-field2',
     props: ['label', 'valuePath', 'changedMutator', 'pickedAction', 'properties', 'multiple'],
     computed: {
       inputId() {

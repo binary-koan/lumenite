@@ -1,11 +1,8 @@
 import { CORE_FOLDERS } from '../paths'
 
-import ScriptEditor from 'src/components/editors/behaviours/script'
-
 const SCRIPT_FILE = {
   id: 'script',
   root: CORE_FOLDERS.behaviours,
-  editor: ScriptEditor,
 
   import: {
     matchers: ['*.ts', '*.js'],
