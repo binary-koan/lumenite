@@ -26,7 +26,9 @@ function createWindow() {
    */
   mainWindow = new BrowserWindow({
     height: 700,
-    width: 950
+    width: 950,
+    //TODO is there another way to get filesystem images displaying?
+    webPreferences: { webSecurity: false }
   })
 
   mainWindow.loadURL(config.url)

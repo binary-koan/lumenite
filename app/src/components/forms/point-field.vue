@@ -14,7 +14,6 @@
         <label>Y</label>
         <input type="text" :id="yId" v-model="yCoord" />
       </div>
-      <span v-if="unit">{{ unit }}</span>
       <button @click="showMenu"><span class="icon icon-more"></span></button>
     </div>
   </div>
@@ -30,7 +29,7 @@
 
   export default {
     name: 'point-field',
-    props: ['label', 'unit', 'valuePath', 'changedMutator'],
+    props: ['label', 'unit', 'valuePath', 'changedMutator', 'defaultX', 'defaultY'],
     computed: {
       xId() {
         return uniqueId(kebabCase(this.label))
@@ -39,11 +38,11 @@
         return uniqueId(kebabCase(this.label))
       },
       xCoord: {
-        get() { return get(get(this.$store.state, this.valuePath), [0]) },
+        get() { return get(get(this.$store.state, this.valuePath), [0]) || this.defaultX },
         set(value) { this.$store.commit(this.changedMutator, [value, this.yCoord]) }
       },
       yCoord: {
-        get() { return get(get(this.$store.state, this.valuePath), [1]) },
+        get() { return get(get(this.$store.state, this.valuePath), [1]) || this.defaultY },
         set(value) { this.$store.commit(this.changedMutator, [this.xCoord, value]) }
       }
     },

@@ -17,13 +17,13 @@
 
   export default {
     name: 'number-field',
-    props: ['label', 'valuePath', 'changedMutator', 'min', 'max', 'step'],
+    props: ['label', 'valuePath', 'changedMutator', 'min', 'max', 'step', 'default'],
     computed: {
       inputId() {
         return uniqueId(kebabCase(this.label))
       },
       value: {
-        get() { return get(this.$store.state, this.valuePath) },
+        get() { return get(this.$store.state, this.valuePath) || this.default },
         set(value) { this.$store.commit(this.changedMutator, value) }
       }
     }

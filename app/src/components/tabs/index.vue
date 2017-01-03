@@ -13,7 +13,7 @@
 
   .tab-pane {
     flex: 1
-    padding: $gap-sm $gap-md
+    padding: $gap-sm
     background: $background-default
     overflow: auto
   }
@@ -24,7 +24,9 @@
     <div class="tab-bar">
       <tab v-for="(tab, index) in tabs" :is-active="isActive(index)" :tab="tab" :index="index"></tab>
     </div>
-    <tab-pane v-for="(tab, index) in tabs" class="tab-pane" v-show="isActive(index)" :tab="tab"></tab-pane>
+    <div v-for="(tab, index) in tabs" class="tab-pane" v-show="isActive(index)">
+      <tab-pane :tab="tab"></tab-pane>
+    </div>
   </div>
 </template>
 

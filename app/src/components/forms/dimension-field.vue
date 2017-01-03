@@ -14,7 +14,6 @@
         <label>Height</label>
         <input type="text" :id="heightId" v-model="height" />
       </div>
-      <span v-if="unit">{{ unit }}</span>
       <button @click="showMenu"><span class="icon icon-more"></span></button>
     </div>
   </div>
@@ -30,7 +29,7 @@
 
   export default {
     name: 'dimension-field',
-    props: ['label', 'unit', 'valuePath', 'changedMutator'],
+    props: ['label', 'unit', 'valuePath', 'changedMutator', 'defaultWidth', 'defaultHeight'],
     computed: {
       widthId() {
         return uniqueId(kebabCase(this.label))
@@ -39,12 +38,22 @@
         return uniqueId(kebabCase(this.label))
       },
       width: {
-        get() { return get(get(this.$store.state, this.valuePath), [0]) },
-        set(value) { this.$store.commit(this.changedMutator, [value, this.height]) }
+        get() {
+          return get(get(this.$store.state, this.valuePath), [0]) || this.defaultWidth
+        },
+        set(value) {
+          const actualValue = value.replace(this.unit, '')
+          this.$store.commit(this.changedMutator, [parseFloat(actualValue), this.height])
+        }
       },
       height: {
-        get() { return get(get(this.$store.state, this.valuePath), [1]) },
-        set(value) { this.$store.commit(this.changedMutator, [this.width, value]) }
+        get() {
+          return get(get(this.$store.state, this.valuePath), [1]) || this.defaultHeight
+        },
+        set(value) {
+          const actualValue = value.replace(this.unit, '')
+          this.$store.commit(this.changedMutator, [this.width, parseFloat(actualValue)])
+        }
       }
     },
     methods: {

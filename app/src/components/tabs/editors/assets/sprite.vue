@@ -1,34 +1,62 @@
 <style lang="stylus" scoped>
   @import '~src/styles/definitions'
 
+  .image-editor {
+    flex-layout: row
+    height: 100%
+  }
+
+  .image {
+    flex: 1
+    background: $background-darken
+    background-origin: content-box
+    background-size: contain
+    background-repeat: no-repeat
+    background-position: center
+    padding: 5%
+  }
+
   .settings {
-    padding: $gap-md
+    padding-left: $gap-lg
+    padding-right: $gap-sm
+    max-width: 25rem
   }
 
   h2 {
-    font-size: $font-size-md
+    margin: $gap-xl 0 $gap-lg 0
+    font-size: $font-size-lg
     font-weight: $font-weight-medium
-    margin: $gap-md 0
+
+    &:first-child {
+      margin-top: $gap-sm
+    }
+  }
+
+  hr {
+    border: none
+    border-bottom: $input-border
+    margin: $gap-sm 0 $gap-lg 0
   }
 </style>
 
 <template>
   <div class="image-editor">
-    <div class="image">
+    <div class="image" :style="{ backgroundImage: 'url(' + imageUrl + ')' }">
       <div class="anchor-point-display"></div>
     </div>
     <div class="settings">
-      <h2>Source</h2>
-      <file-field label="Image file"></file-field>
-      <dimension-field unit="px"></dimension-field>
-      <point-field label="Anchor point" unit="px"></point-field>
+      <h2>{{ sprite.source }}</h2>
 
-      <h2>Display</h2>
-      <number-field label="Opacity" min="0" max="1" step="0.01"></number-field>
+      <hr />
+      <dimension-field label="Scaled size" unit="px" :defaultWidth="100" :defaultHeight="50"></dimension-field>
+      <point-field label="Anchor point" unit="%" :defaultX="0.5" :defaultY="0.5"></point-field>
+
+      <hr />
+      <number-field label="Opacity" min="0" max="1" step="0.01" :default="100"></number-field>
       <select-field label="Blend mode" :options="blendModes"></select-field>
       <color-field label="Tint"></color-field>
-      <span class="TODO placeholder">Filters</span>
-      <span class="TODO placeholder">Mask</span>
+      <span class="TODO filters"></span>
+      <span class="TODO mask"></span>
       <rect-field label="Crop"></rect-field>
       <checkbox-field label="Smoothed"></checkbox-field>
     </div>
@@ -36,7 +64,8 @@
 </template>
 
 <script>
-  import FileField from 'src/components/forms/file-field'
+  import pathUtils from 'path'
+
   import DimensionField from 'src/components/forms/dimension-field'
   import PointField from 'src/components/forms/point-field'
   import NumberField from 'src/components/forms/number-field'
@@ -47,7 +76,16 @@
 
   export default {
     name: 'sprite-asset-editor',
+    props: ['tab'],
     computed: {
+      sprite() {
+        return this.tab.content
+      },
+
+      imageUrl() {
+        return pathUtils.resolve(pathUtils.dirname(this.tab.location), this.sprite.source).replace(/\\/g, '/')
+      },
+
       blendModes() {
         return [
           'NORMAL', 'ADD', 'MULTIPLY', 'SCREEN', 'OVERLAY', 'DARKEN', 'LIGHTEN',
@@ -57,7 +95,6 @@
       }
     },
     components: {
-      FileField,
       DimensionField,
       PointField,
       NumberField,
