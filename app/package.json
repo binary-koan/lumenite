@@ -4,6 +4,7 @@
   "description": "An electron-vue project",
   "main": "electron.js",
   "dependencies": {
+    "babylonjs": "^2.5.0",
     "fs-extra": "^1.0.0",
     "lodash": "^4.17.2",
     "minimatch": "^3.0.3",
