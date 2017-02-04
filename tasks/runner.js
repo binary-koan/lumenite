@@ -33,12 +33,12 @@ function run (command, color, name) {
     console.log(format(name, data, color))
 
     /**
-     * Start electron after VALID build
+     * Start electron after successful build
      * (prevents electron from opening a blank window that requires refreshing)
      *
      * NOTE: needs more testing for stability
      */
-    if (/VALID/g.test(data.toString().trim().replace(/\n/g, '\n' + repeat(' ', command.length + 2))) && !isElectronOpen) {
+    if (/Compiled successfully./g.test(data.toString().trim().replace(/\n/g, '\n' + repeat(' ', command.length + 2))) && !isElectronOpen) {
       console.log(`${BLUE}Starting electron...\n${END}`)
       run('cross-env NODE_ENV=development electron app/electron.js', BLUE, 'electron')
       isElectronOpen = true

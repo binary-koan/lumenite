@@ -18,7 +18,7 @@ config.plugins = config.plugins.concat([
     template: `${__dirname}/app/index.ejs`,
     title: settings.name
   }),
-  new webpack.NoErrorsPlugin()
+  new webpack.NoEmitOnErrorsPlugin()
 ])
 
 config.output = {
