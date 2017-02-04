@@ -8,11 +8,11 @@ require("./tasks/packager")({
   license: "MIT",
 
   scripts: {
-    postinstall: "node tasks/element-theme-to-stylus.js && cd app && npm install",
+    postinstall: "node tasks/element-theme-to-stylus.js",
     setup: "node tasks/dependencies/setup.js",
 
     dev: "node tasks/runner.js",
-    
+
     test: {
       default: ["unit", "e2e"],
       unit: "webpack --config test/boilerplate/unit/webpack.config.js && electron test/boilerplate/unit/runner.js | faucet",

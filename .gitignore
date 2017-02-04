@@ -4,6 +4,7 @@
 /app/dist
 /app/src/styles/element-theme-default
 /test/boilerplate/unit/dist
+package.json
 
 # Logs
 logs
