@@ -5,6 +5,7 @@
   "main": "electron.js",
   "dependencies": {
     "babylonjs": "^2.5.0",
+    "element-ui": "^1.1.6",
     "fs-extra": "^1.0.0",
     "lodash": "^4.17.2",
     "minimatch": "^3.0.3",
@@ -13,6 +14,5 @@
     "vue-electron": "^1.0.0",
     "vuex": "^2.0.0"
   },
-  "devDependencies": {},
   "author": "Jono Mingard <reason.koan@gmail.com>"
 }

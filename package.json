@@ -15,7 +15,7 @@
     "test": "npm run test:unit && npm run test:e2e",
     "test:e2e": "npm run pack && node test/e2e",
     "test:unit": "webpack --config test/boilerplate/unit/webpack.config.js && electron test/boilerplate/unit/runner.js | faucet",
-    "postinstall": "cd app && npm install",
+    "postinstall": "node tasks/element-theme-to-stylus.js && cd app && npm install",
     "setup": "node tasks/dependencies/setup.js"
   },
   "author": "Greg Holguin <simulatedgreg@gmail.com>",
@@ -29,6 +29,7 @@
     "electron-devtools-installer": "^2.0.1",
     "electron-packager": "^8.4.0",
     "electron-rebuild": "^1.4.0",
+    "element-theme-default": "^1.1.6",
     "eslint": "^3.12.0",
     "eslint-config-standard": "^6.2.1",
     "eslint-friendly-formatter": "^2.0.6",
