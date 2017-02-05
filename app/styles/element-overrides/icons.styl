@@ -1,16 +1,12 @@
-i[class*="el-icon"] {
-  @extend .icon
+el-icon-wrapper($name, $icon-name = $name) {
+  .el-icon-{$name} {
+    @extend .icon
+
+    &:before {
+      @extend .icon-{$icon-name}:before
+    }
+  }
 }
 
-.el-icon-opened-folder:before {
-  @extend .icon-opened-folder:before
-}
-
-.el-icon-circle-cross:before {
-  @extend .icon-cancel-2:before
-}
-
-.el-icon-close:before {
-  content: "×"
-  font-size: 16px
-}
+el-icon-wrapper(opened-folder)
+el-icon-wrapper(circle-cross, cancel-2)

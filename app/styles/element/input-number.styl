@@ -1,27 +1,15 @@
-
-
 .el- {
   &input-number {
-    display: inline-block
+    flex-layout: row
     overflow: hidden
-    width: 180px
-    position: relative
 
-    & .el-input__inner {
-      appearance: none
-      padding-right: ($input-height * 2 + 10)
-    }
     &__increase, &__decrease {
       height: auto
-      border-left: $border-base
-      width: $input-height
-      line-height: ($input-height - 2)
-      top: 1px
+      border-left: $input-border
+      padding: $input-padding
       text-align: center
       color: $color-light-silver
       cursor: pointer
-      position: absolute
-      z-index: 1
 
       &:hover {
         color: $color-primary
@@ -56,8 +44,6 @@
       }
     }
     &--large {
-      width: 200px
-
       & .el-input-number__increase, .el-input-number__decrease {
         line-height: $input-large-height
         width: $input-large-height
@@ -71,8 +57,6 @@
       }
     }
     &--small {
-      width: 130px
-
       & .el-input-number__increase, .el-input-number__decrease {
         line-height: $input-small-height
         width: $input-small-height

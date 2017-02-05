@@ -83,10 +83,11 @@ $box-shadow-dark = 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .12)
 // Transitions
 $all-transition = all .3s cubic-bezier(.645,.045,.355,1)
 $fade-transition = opacity 300ms cubic-bezier(0.23, 1, 0.32, 1)
+$fade-fast-transition = opacity 200ms cubic-bezier(0.23, 1, 0.32, 1)
 $fade-linear-transition = opacity 200ms linear
 $md-fade-transition = transform 300ms cubic-bezier(0.23, 1, 0.32, 1) 100ms, opacity 300ms cubic-bezier(0.23, 1, 0.32, 1) 100ms
-$border-transition-base = border-color .2s cubic-bezier(.645,.045,.355,1)
-$color-transition-base = color .2s cubic-bezier(.645,.045,.355,1)
+$border-transition = border-color .2s cubic-bezier(.645,.045,.355,1)
+$color-transition = color .2s cubic-bezier(.645,.045,.355,1)
 
 // z-index
 $index-normal = 1
@@ -202,17 +203,16 @@ $select-dropdown-empty-padding = 10px 0
 $select-dropdown-border = solid 1px $disabled-border-base
 
 // Alert
-$alert-padding = 8px 16px
+$alert-padding = $gap-medium
 $alert-border-radius = $border-radius-base
-$alert-title-font-size = 13px
-$alert-description-font-size = 12px
-$alert-close-font-size = 12px
-$alert-close-customed-font-size = 13px
+$alert-title-font-size = $font-size-medium
+$alert-description-font-size = $font-size-base
+$alert-title-description-spacing = $gap-xsmall
+$alert-content-padding = 0 $gap-small
+$alert-close-font-size = $font-size-base
+$alert-close-customed-font-size = $font-size-base
 
-$alert-success-color = $color-success
-$alert-info-color = $color-info
-$alert-warning-color = $color-warning
-$alert-danger-color = $color-danger
+$alert-variants = { success: $color-success, info: $color-info, warning: $color-warning, error: $color-danger }
 
 $alert-icon-size = 16px
 $alert-icon-large-size = 28px
@@ -262,10 +262,10 @@ $notification-warning-color = $color-warning
 $notification-danger-color = $color-danger
 
 // Input
+$input-padding = $gap-small
 $input-font-size = $font-size-base
-$input-color = $font-color-base
-$input-width = 40px
-$input-height = 36px
+$input-color = lighten($font-color-base, 15%)
+$input-min-width = 40px
 $input-border-color = $border-color-base
 $input-border-color-hover = $border-color-hover
 $input-border = $border-width-base $border-style-base $input-border-color
@@ -273,14 +273,12 @@ $input-border-radius = $border-radius-base
 $input-fill = $fill-darken
 $input-fill-disabled = $disabled-fill-base
 $input-color-disabled = $font-color-disabled-base
-$input-icon-color = $color-extra-light-silver
+$input-icon-width = 2rem
+$input-icon-color = $input-border-color
 $input-placeholder-color = $color-muted
-$input-max-width = 314px
 
-$input-hover-border = $border-color-hover
-
-$input-focus-border = $color-primary
-$input-focus-fill = $color-white
+$input-hover-border-color = $border-color-hover
+$input-focus-border-color = $color-primary
 
 $input-disabled-fill = $disabled-fill-base
 $input-disabled-border = $disabled-border-base
@@ -338,23 +336,13 @@ $tab-vertical-header-count-fill = $color-secondary
 
 // Button
 $button-font-size = 14px
+$button-border = none
 $button-border-radius = $border-radius-base
-$button-paddding = 5px 20px
 $button-padding-vertical = 10px
 $button-padding-horizontal = 15px
+$button-spacing = $gap-small
 
-$button-large-font-size = 16px
-$button-large-padding-vertical = 11px
-$button-large-padding-horizontal = 19px
-
-$button-small-font-size = 12px
-$button-small-padding-vertical = 7px
-$button-small-padding-horizontal = 9px
-
-$button-mini-font-size = 12px
-$button-mini-padding-vertical = 4px
-$button-mini-padding-horizontal = 4px
-
+$button-default-border-color = transparent
 $button-default-color = $font-color-base
 $button-default-fill = $fill-lighten
 
@@ -366,29 +354,22 @@ $button-disabled-color = $color-extra-light-silver
 $button-disabled-fill = $color-extra-light-gray
 $button-disabled-border = $disabled-border-base
 
-$button-primary-border = $color-primary
-$button-primary-color = $color-white
-$button-primary-fill = $color-primary
+$button-sizes = {
+  large: { font-size: 16px, padding-vertical: 11px, padding-horizontal: 19px },
+  small: { font-size: 12px, padding-vertical: 7px, padding-horizontal: 9px },
+  mini: { font-size: 12px, padding-vertical: 4px, padding-horizontal: 4px }
+}
 
-$button-success-border = $color-success
-$button-success-color = $color-white
-$button-success-fill = $color-success
+$button-variants = {
+  primary: { color: $color-white, fill: $color-primary, border-color: $color-primary },
+  success: { color: $color-white, fill: $color-success, border-color: $color-success },
+  warning: { color: $color-white, fill: $color-warning, border-color: $color-warning },
+  danger: { color: $color-white, fill: $color-danger, border-color: $color-danger },
+  info: { color: $color-white, fill: $color-info, border-color: $color-info }
+}
 
-$button-warning-border = $color-warning
-$button-warning-color = $color-white
-$button-warning-fill = $color-warning
-
-$button-danger-border = $color-danger
-$button-danger-color = $color-white
-$button-danger-fill = $color-danger
-
-$button-info-border = $color-info
-$button-info-color = $color-white
-$button-info-fill = $color-info
-
-$button-hover-tint-percent = 15%
+$button-hover-tint-percent = 10%
 $button-active-shade-percent = 10%
-
 
 // cascader
 $cascader-height = 200px

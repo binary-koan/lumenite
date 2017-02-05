@@ -1,73 +1,63 @@
-
 .el- {
-
   &alert {
-    width: 100%
+    flex-layout: row
+    align-items: flex-end
     padding: $alert-padding
-    margin: 0
-    box-sizing: border-box
     border-radius: $alert-border-radius
-    position: relative
-    background-color: $color-white
-    overflow: hidden
     color: $color-white
     opacity: 1
-    display: table
-    transition: opacity .2s
+    transition: $fade-fast-transition
 
-    &--success {
-      background-color: $alert-success-fill
-    }
-
-    &--info {
-      background-color: $alert-info-fill
-    }
-
-    &--warning {
-      background-color: $alert-warning-fill
-    }
-
-    &--error {
-      background-color: $alert-danger-fill
+    for $variant, $color in $alert-variants {
+      &--{$variant} {
+        background-color: $color
+      }
     }
 
     &__content {
-      display: table-cell
-      padding: 0 8px
+      flex: 1
+      position: relative
+      padding: $alert-content-padding
     }
 
     &__icon {
       font-size: $alert-icon-size
-      width: $alert-icon-size
-      display: table-cell
       color: $color-white
-      vertical-align: middle
+
       &.is-big {
         font-size: $alert-icon-large-size
-        width: $alert-icon-large-size
       }
     }
 
     &__title {
       font-size: $alert-title-font-size
-      line-height: 18px
+
       &.is-bold {
-        font-weight: bold
+        font-weight: $font-weight-strong
       }
     }
 
     & .el-alert__description {
       color: $color-white
       font-size: $alert-description-font-size
-      margin: 5px 0 0 0
+      margin-top: $alert-title-description-spacing
     }
 
     &__closebtn {
+      absolute: top right
       font-size: $alert-close-font-size
       color: $color-white
-      opacity: 1
-      absolute: top 12px right 15px
+      opacity: 0.7
       cursor: pointer
+      transition: $fade-fast-transition
+
+      &:hover {
+        opacity: 1
+      }
+
+      &:after {
+        content: "×"
+      }
 
       &.is-customed {
         font-style: normal
