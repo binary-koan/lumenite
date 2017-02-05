@@ -1,22 +1,21 @@
 .el- {
   &input-number {
-    flex-layout: row
+    position: relative
     overflow: hidden
 
     &__increase, &__decrease {
+      absolute: top $border-width-base
+      display: inline-block
+      width: $input-icon-width
       height: auto
-      border-left: $input-border
       padding: $input-padding
       text-align: center
       color: $color-light-silver
       cursor: pointer
+      z-index: 1
 
       &:hover {
-        color: $color-primary
-
-        &:not(.is-disabled) ~ .el-input .el-input__inner:not(.is-disabled) {
-          border-color: $input-focus-border
-        }
+        color: $input-hover-border-color
       }
 
       &.is-disabled {
@@ -26,10 +25,11 @@
     }
 
     &__increase {
-      right: 0
+      right: ($input-padding / 2)
     }
+
     &__decrease {
-      right: ($input-height + 1px)
+      right: $input-icon-width + ($input-padding / 2)
     }
 
     &.is-disabled {

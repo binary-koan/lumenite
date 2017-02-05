@@ -14,7 +14,8 @@
       background-color: $input-fill
       background-image: none
       font: inherit
-      line-height: 1
+      font-weight: $font-weight-medium
+      line-height: normal
       color: $input-color
       transition: $border-transition
       outline: none
@@ -114,12 +115,11 @@
 
     &__append, &__prepend {
       padding: $input-padding
-      padding-left: 0
-      padding-right: 0
       border: $input-border
       border-radius: $input-border-radius
       background-color: $input-fill
-      color: $input-color
+      line-height: normal
+      color: $input-border-color
       white-space: nowrap
 
       & .el-select,
@@ -146,6 +146,10 @@
       border-right: 0
       border-top-right-radius: 0
       border-bottom-right-radius: 0
+
+      + .el-input__inner {
+        border-left: none
+      }
     }
     &__append {
       border-left: 0
