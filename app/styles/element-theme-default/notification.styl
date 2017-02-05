@@ -1,0 +1,81 @@
+
+.el- {
+
+  &notification {
+    width: $notification-width
+    padding: $notification-padding
+    box-sizing: border-box
+    border-radius: $border-radius-small
+    position: fixed
+    right: 16px
+    background-color: $color-white
+    box-shadow: $notification-shadow
+    transition: opacity 0.3s, transform .3s, right .3s, top 0.4s
+    overflow: hidden
+
+    &__group {
+      margin-left: 0
+      &.is-with-icon {
+        margin-left: 55px
+      }
+    }
+
+    &__title {
+      font-weight: normal
+      font-size: $notification-title-font-size
+      color: $notification-title-color
+    }
+
+    &__content {
+      font-size: $notification-font-size
+      line-height: 21px
+      margin: 10px 0 0 0
+      color: $notification-color
+      text-align: justify
+    }
+
+    &__icon {
+      size: $notification-icon-size
+      font-size: $notification-icon-size
+      float: left
+      position: relative
+      top: 3px
+    }
+
+    &__closeBtn {
+      absolute: top 20px left 20px
+      cursor: pointer
+      color: $notification-close-color
+      font-size: $notification-font-size
+
+      &:hover {
+        color: $notification-close-hover-color
+      }
+    }
+
+    & .el-icon-circle-check {
+      color: $notification-success-color
+    }
+
+    & .el-icon-circle-cross {
+      color: $notification-danger-color
+    }
+
+    & .el-icon-information {
+      color: $notification-info-color
+    }
+
+    & .el-icon-warning {
+      color: $notification-warning-color
+    }
+  }
+
+  .el-notification-fade-enter {
+    transform: translateX(100%)
+    right: 0
+  }
+
+  .el-notification-fade-leave-active {
+    opacity: 0
+  }
+}

@@ -1,0 +1,142 @@
+@import "./input-number"
+@import "./tooltip"
+
+.el- {
+  &slider {
+    clearfix()
+    &__runway {
+      width: 100%
+      height: $slider-height
+      margin: $slider-margin
+      background-color: $slider-runway-background-color
+      border-radius: $slider-border-radius
+      position: relative
+      cursor: pointer
+      vertical-align: middle
+
+      &.show-input {
+        margin-right: 160px
+        width: auto
+      }
+
+      &.disabled {
+        cursor: default
+
+        .el-slider__bar, .el-slider__button {
+          background-color: $slider-disable-color
+        }
+
+        .el-slider__button-wrapper {
+          &:hover,
+          &.hover {
+            cursor: not-allowed
+          }
+
+          &.dragging {
+            cursor: not-allowed
+          }
+        }
+
+        .el-slider__button {
+          &:hover,
+          &.hover,
+          &.dragging {
+            transform: scale(1)
+          }
+
+          &:hover,
+          &.hover {
+            cursor: not-allowed
+          }
+
+          &.dragging {
+            cursor: not-allowed
+          }
+        }
+      }
+    }
+
+    &__input {
+      float: right
+      margin-top: 3px
+    }
+
+    &__bar {
+      height: $slider-height
+      background-color: $slider-main-background-color
+      border-top-left-radius: $slider-border-radius
+      border-bottom-left-radius: $slider-border-radius
+      position: absolute
+    }
+
+    &__button-wrapper {
+      size: $slider-button-wrapper-size
+      position: absolute
+      z-index: 1001
+      top: $slider-button-wrapper-offset
+      transform: translateX(-50%)
+      background-color: transparent
+      text-align: center
+      user-select: none
+
+      .el-tooltip {
+        line-height: 1
+        height: 100%
+        display: block
+      }
+
+      .el-tooltip::after {
+        content: ''
+        width: 0
+        height: 100%
+        display: inline-block
+        vertical-align: middle
+      }
+
+      .el-tooltip__rel {
+        vertical-align: middle
+      }
+
+      &:hover,
+      &.hover {
+        cursor: grab
+      }
+
+      &.dragging {
+        cursor: grabbing
+      }
+    }
+
+    &__button {
+      size: $slider-button-size
+      background-color: $slider-main-background-color
+      border-radius: 50%
+      transition: .2s
+      user-select: none
+
+      &:hover,
+      &.hover,
+      &.dragging {
+        transform: scale(1.5)
+        background-color: $slider-button-hover-color
+      }
+
+      &:hover,
+      &.hover {
+        cursor: grab
+      }
+
+      &.dragging {
+        cursor: grabbing
+      }
+    }
+
+    &__stop {
+      position: absolute
+      size: $slider-height
+      border-radius: $border-radius-circle
+      background-color: $slider-stop-background-color
+      transform: translateX(-50%)
+    }
+  }
+}

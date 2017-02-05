@@ -1,0 +1,69 @@
+@import "./button"
+
+.el- {
+  &dropdown {
+    display: inline-block
+    position: relative
+    color: $color-extra-light-black
+    font-size: $font-size-base
+
+    .el-button-group {
+      display: block
+    }
+
+    & .el-dropdown__caret-button {
+      padding-left: 5px; padding-right: 5px
+
+      & .el-dropdown__icon {
+        padding-left: 0
+      }
+    }
+    &__icon {
+      font-size: 12px
+      margin: 0 3px
+    }
+  }
+  &dropdown-menu {
+    margin: 5px 0
+    background-color: $color-white
+    border: 1px solid $color-base-gray
+    box-shadow: $dropdown-menu-box-shadow
+    padding: 6px 0
+    z-index: 10
+    position: absolute
+    top: 0
+    left: 0
+    min-width: 100px
+
+    &__item {
+      list-style: none
+      line-height: 36px
+      padding: 0 10px
+      margin: 0
+      cursor: pointer
+
+      &:not(.is-disabled):hover {
+        background-color: $dropdown-menuItem-hover-fill
+        color: $dropdown-menuItem-hover-color
+      }
+      &--divided {
+        position: relative
+        margin-top: 6px
+        border-top: 1px solid $color-base-gray
+
+        &:before {
+          content: ''
+          height: 6px
+          display: block
+          margin: 0 -10px
+          background-color: $color-white
+        }
+      }
+      &.is-disabled {
+        cursor: default
+        color: $color-extra-light-silver
+        pointer-events: none
+      }
+    }
+  }
+}

@@ -1,0 +1,43 @@
+
+.el- {
+
+  &breadcrumb {
+    font-size:13px
+    line-height: 1
+    clearfix()
+
+    &__separator {
+      margin: 0 8px
+      color: $color-extra-light-silver
+    }
+    &__item {
+      float: left
+
+      &__inner {
+        &, & a {
+          transition: color .15s linear
+          color:$color-extra-light-black
+
+          &:hover {
+            color: $color-primary
+            cursor: pointer
+          }
+        }
+      }
+
+      &:last-child {
+        .el-breadcrumb__item__inner,
+        .el-breadcrumb__item__inner a {
+          &, &:hover {
+            color: $color-light-silver
+            cursor: text
+          }
+        }
+
+        .el-breadcrumb__separator {
+          display: none
+        }
+      }
+    }
+  }
+}

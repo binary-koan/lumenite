@@ -1,0 +1,203 @@
+
+.el- {
+  &step {
+    position: relative
+    vertical-align: top
+
+    &.is-horizontal {
+      display: inline-block
+    }
+
+    &.is-vertical {
+      & .el-step__head,
+      & .el-step__main {
+        display: inline-block
+      }
+
+      & .el-step__main {
+        padding-left: 10px
+      }
+    }
+
+    &__line {
+      display: inline-block
+      position: absolute
+      border-color: inherit
+      background-color: $color-extra-light-silver
+
+      &.is-icon {
+        &.is-horizontal {
+          right: 4px
+        }
+      }
+
+      &.is-horizontal {
+        top: 15px
+        height: 2px
+        left: 32px
+        right: 0
+      }
+
+      &.is-vertical {
+        width: 2px
+        box-sizing: border-box
+        top: 32px
+        bottom: 0
+        left: 15px
+      }
+    }
+
+    &__line-inner {
+      display: block
+      border-width: 1px
+      border-style: solid
+      border-color: inherit
+      transition: all 150ms
+      width: 0
+      height: 0
+    }
+
+    &__icon {
+      display: block
+      line-height: 28px
+
+      > * {
+        line-height: inherit
+        vertical-align: middle
+      }
+    }
+
+    &__head {
+      circle: 28px transparent
+      text-align: center
+      line-height: 28px
+      font-size: 28px
+      vertical-align: top
+      transition: all 150ms
+
+      &.is-text {
+        font-size: 14px
+        border-width: 2px
+        border-style: solid
+
+        &.is-process {
+          color: $color-white
+          background-color: $color-extra-light-silver
+          border-color: $color-extra-light-silver
+        }
+
+        &.is-wait {
+          color: $color-extra-light-silver
+          background-color: $color-white
+          border-color: $color-extra-light-silver
+        }
+
+        &.is-success {
+          color: $color-white
+          background-color: $color-success
+          border-color: $color-success
+        }
+
+        &.is-error {
+          color: $color-white
+          background-color: $color-danger
+          border-color: $color-danger
+        }
+
+        &.is-finish {
+          color: $color-white
+          background-color: $color-primary
+          border-color: $color-primary
+        }
+      }
+
+      &.is-process {
+        color: $color-extra-light-silver
+        border-color: $color-extra-light-silver
+      }
+
+      &.is-wait {
+        color: $color-extra-light-silver
+        border-color: $color-extra-light-silver
+      }
+
+      &.is-success {
+        color: $color-success
+        border-color: $color-success
+      }
+
+      &.is-error {
+        color: $color-danger
+        border-color: $color-danger
+      }
+
+      &.is-finish {
+        color: $color-primary
+        border-color: $color-primary
+      }
+    }
+
+    &__main {
+      white-space: normal
+      padding-right: 10px
+      text-align: left
+    }
+
+    &__title {
+      font-size: 14px
+      line-height: 32px
+      display: inline-block
+
+      &.is-process {
+        font-weight: 700
+        color: $color-extra-light-black
+      }
+
+      &.is-wait {
+        font-weight: normal
+        color: $color-light-silver
+      }
+
+      &.is-success {
+        font-weight: 700
+        color: $color-success
+      }
+
+      &.is-error {
+        font-weight: 700
+        color: $color-danger
+      }
+
+      &.is-finish {
+        font-weight: 700
+        color: $color-primary
+      }
+    }
+
+    &__description {
+      font-size: 12px
+      font-weight: normal
+      line-height: 14px
+
+      &.is-process {
+        color: $color-base-silver
+      }
+
+      &.is-wait {
+        color: $color-extra-light-silver
+      }
+
+      &.is-success {
+        color: $color-success
+      }
+
+      &.is-error {
+        color: $color-danger
+      }
+
+      &.is-finish {
+        color: $color-primary
+      }
+    }
+  }
+}

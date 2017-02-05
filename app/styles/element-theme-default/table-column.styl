@@ -1,0 +1,90 @@
+@import "./checkbox"
+@import "./tag"
+
+.el- {
+  &table-column {
+    &--selection .cell {
+      padding-left: 14px
+      padding-right: 14px
+    }
+  }
+
+  &table-filter {
+    border: solid 1px $color-base-gray
+    border-radius: 2px
+    background-color: $color-white
+    box-shadow: $dropdown-menu-box-shadow
+    box-sizing: border-box
+    margin: 2px 0
+
+    /** used for dropdown mode */
+    &__list {
+      padding: 5px 0
+      margin: 0
+      list-style: none
+      min-width: 100px
+    }
+
+    &__list-item {
+      line-height: 36px
+      padding: 0 10px
+      cursor: pointer
+      font-size: $font-size-base
+
+      &:hover {
+        background-color: $dropdown-menuItem-hover-fill
+        color: $dropdown-menuItem-hover-color
+      }
+
+      &.is-active {
+        background-color: $color-primary
+        color: $color-white
+      }
+    }
+
+    &__content {
+      min-width: 100px
+    }
+
+    &__bottom {
+      border-top: 1px solid $color-base-gray
+      padding: 8px
+
+      button {
+        background: transparent
+        border: none
+        color: $color-base-silver
+        cursor: pointer
+        font-size: $font-size-base
+        padding: 0 3px
+
+        &:hover {
+          color: $color-primary
+        }
+
+        &:focus {
+          outline: none
+        }
+
+        &.is-disabled {
+          color: $color-extra-light-silver
+          cursor: not-allowed
+        }
+      }
+    }
+
+    &__checkbox-group {
+      padding: 10px
+
+      .el-checkbox {
+        display: block
+        margin-bottom: 8px
+        margin-left: 5px
+      }
+
+      .el-checkbox:last-child {
+        margin-bottom: 0
+      }
+    }
+  }
+}

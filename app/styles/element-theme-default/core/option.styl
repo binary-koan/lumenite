@@ -1,0 +1,70 @@
+
+.element- {
+
+  &option {
+    box-sizing: border-box
+    color: $dropdown-color
+    cursor: pointer
+    display: block
+    font-size: $dropdown-font-size
+    padding: 9px
+
+    &__remark {
+      color: $dropdown-option-pinyin-color
+      float: right
+    }
+
+    &--arrow {
+
+      &:not(.is-last)::after {
+        border-left: 1px solid $dropdown-border-color
+        border-top: 1px solid $dropdown-border-color
+        content: " "
+        height: 4px
+        margin-top: 6px
+        position: absolute
+        right: 12px
+        transform: rotate(135deg)
+        width: 4px
+      }
+    }
+
+    &.is-disabled {
+      background-color: transparent
+      color: $dropdown-option-color-disabled
+      cursor: not-allowed
+    }
+
+    &:hover,
+    &.is-hover {
+      background-color: $dropdown-option-fill-hover
+      color: $dropdown-option-color-hover
+    }
+
+    &.is-selected {
+      background-color: $dropdown-option-fill-active
+      color: $dropdown-option-color-active
+    }
+  }
+
+  &optiongroup {
+    list-style: none
+    padding-left: 0
+
+    & .element-option {
+      padding-left: 21px
+    }
+
+    &__title {
+      box-sizing: border-box
+      color: $dropdown-group-color
+      display: inline-block
+      font-size: $dropdown-font-size
+      padding: 8px
+
+      &:hover {
+        background-color: inherit
+      }
+    }
+  }
+}

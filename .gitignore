@@ -2,7 +2,6 @@
 /dependencies
 /builds
 /dist
-/app/styles/element-theme-default
 /test/boilerplate/unit/dist
 package.json
 
