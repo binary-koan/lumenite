@@ -91,7 +91,7 @@ function fixDependencies(config, key) {
 
   Object.keys(dependencies).forEach(name => {
     if (oldDependencies[name] !== dependencies[name]) {
-      const path = [key, ...dependencyPath(config[key], name)]
+      const path = [key].concat(dependencyPath(config[key], name) || [])
 
       toUpdate.push({
         name,

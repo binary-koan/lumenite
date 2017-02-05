@@ -95,7 +95,7 @@ function convertFile(filename) {
 console.log("--- Converting Element default theme from PostCSS to Stylus ---")
 
 const sourceDir = path.resolve(__dirname, "../node_modules/element-theme-default/src")
-const targetDir = path.resolve(__dirname, "../app/src/styles/element-theme-default")
+const targetDir = path.resolve(__dirname, "../app/styles/element-theme-default")
 
 glob.sync(`${sourceDir}/**/*.css`).forEach(filename => {
   if (filename.endsWith("/var.css") || filename.endsWith("/icon.css")) {

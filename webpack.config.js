@@ -3,13 +3,14 @@
 const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 const SymlinkPlugin = require('./tasks/webpack/symlink-plugin')
 
 const settings = require('./config.js')
 const config = require('./webpack.config.base')
 
 config.entry = {
-  build: path.join(__dirname, 'app/src/boot.js')
+  build: path.join(__dirname, 'app/client.js')
 }
 
 config.plugins = config.plugins.concat([
@@ -18,12 +19,15 @@ config.plugins = config.plugins.concat([
     template: `${__dirname}/app/index.ejs`,
     title: settings.name
   }),
+  new CopyWebpackPlugin([
+    { from: 'app/electron.js', to: 'electron.js' }
+  ]),
   new webpack.NoEmitOnErrorsPlugin()
 ])
 
 config.output = {
   filename: '[name].js',
-  path: path.join(__dirname, 'app/dist')
+  path: path.join(__dirname, 'dist')
 }
 
 if (process.env.NODE_ENV !== 'production') {

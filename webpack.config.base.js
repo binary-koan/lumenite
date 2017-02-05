@@ -61,8 +61,7 @@ module.exports = {
   ],
   resolve: {
     modules: [
-      path.join(__dirname, 'app'),
-      path.join(__dirname, 'app', 'node_modules'),
+      __dirname,
       'node_modules'
     ],
     extensions: ['.js', '.vue', '.json', '.styl', '.css'],

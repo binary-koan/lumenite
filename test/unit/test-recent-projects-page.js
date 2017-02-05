@@ -1,6 +1,6 @@
 import test from 'tape-catch'
 import Vue from 'vue'
-import RecentProjectsPage from 'src/components/landing-pages/recent-projects-page'
+import RecentProjectsPage from 'app/components/landing-pages/recent-projects-page'
 
 export default function(test) {
   test('RecentProjectsPage', test => {

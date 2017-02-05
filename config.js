@@ -19,9 +19,9 @@ let config = {
   building: {
     arch: 'x64',
     asar: true,
-    dir: path.join(__dirname, 'app'),
-    icon: path.join(__dirname, 'app/icons/icon'),
-    ignore: /\b(node_modules|src|index\.ejs|icons)\b/,
+    dir: __dirname,
+    icon: path.join(__dirname, 'icons/icon'),
+    ignore: /\b(node_modules|app|icons|builds)\b/,
     out: path.join(__dirname, 'builds'),
     overwrite: true,
     platform: process.env.PLATFORM_TARGET || 'all'
