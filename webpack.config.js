@@ -7,7 +7,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const SymlinkPlugin = require('./tasks/webpack/symlink-plugin')
 
 const settings = require('./config.js')
-const config = require('./webpack.config.base')
+const config = settings.webpack
 
 config.entry = {
   build: path.join(__dirname, 'app/client.js')

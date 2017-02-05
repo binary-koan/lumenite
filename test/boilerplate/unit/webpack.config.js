@@ -3,7 +3,7 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
-const config = require('../../../webpack.config.base')
+const config = require('../../../config').webpack
 
 config.devtool = '#inline-source-map'
 
