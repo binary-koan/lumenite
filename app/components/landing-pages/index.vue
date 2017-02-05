@@ -34,10 +34,7 @@
 <template>
   <div class="landing-pages">
     <div class="page">
-      <div class="error" v-show="errorMessage">
-        <span class="icon icon-cancel-2"></span>
-        <span>{{ errorMessage }}</span>
-      </div>
+      <el-alert type="error" show-icon :title="errorMessage || ''" v-show="errorMessage"></el-alert>
 
       <div :class="{ hidden: recentPageHidden }">
         <recent-projects-page></recent-projects-page>

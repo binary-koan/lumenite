@@ -5,27 +5,10 @@
     spacing-vertical: $gap-large
   }
 
-  .template-label {
-    color: $color-muted
-  }
-
-  .templates {
-    padding: $gap-small
-    border-radius: $border-radius-base
-    background-color: $fill-darken
-  }
-
   .template {
     flex-layout: row
     align-items: center
-    padding: $gap-small
     spacing-horizontal: $gap-small
-    border-radius: $border-radius-base
-    color: $font-color-base
-
-    input:checked + & {
-      background: $fill-lighten
-    }
 
     .image {
       padding: $gap-small
@@ -50,52 +33,41 @@
 
   .actions {
     text-align: right
-    spacing-horizontal: $gap-small
-
-    .submit {
-      stateful-background: $color-primary
-    }
   }
 </style>
 
 <template>
   <div class="container">
-    <text-field
-      label="Name"
-      valuePath="landingPages.newProject.name"
-      :changedMutator="types.SET_NEW_PROJECT_NAME"></text-field>
+    <div>
+      <elx-label>Name</elx-label>
+      <el-input :value="newProjectName.get()" @change="newProjectName.set"></el-input>
+    </div>
 
-    <file-field
-      label="Location"
-      valuePath="landingPages.newProject.path"
-      :changedMutator="types.SET_NEW_PROJECT_PATH"
-      :pickedAction="types.PICK_NEW_PROJECT_LOCATION"
-      :properties="['openDirectory', 'createDirectory']"
-      ></file-field>
+    <div>
+      <elx-label>Location</elx-label>
+      <el-input
+        :value="newProjectPath.get()" @change="newProjectPath.set"
+        icon="opened-folder" :on-icon-click="pickNewProjectPath"></el-input>
+    </div>
 
-    <div class="input-group">
-      <h2 class="template-label">Template</h2>
-      <div class="templates">
-        <ul>
-          <li v-for="t in templates">
-            <input
-              :id="t.id + 'Template'" :value="t.id"
-              type="radio" name="template" class="hidden" v-model="template" />
-            <label :for="t.id + 'Template'" :class="{ active: template === t.id }" class="template">
-              <div class="image"><span class="icon icon-circle"></span></div>
-              <div class="description">
-                <h3 class="name">{{ t.name }}</h3>
-                <p class="info">{{ t.description }}</p>
-              </div>
-            </label>
-          </li>
-        </ul>
-      </div>
+    <div>
+      <elx-label>Template</elx-label>
+      <elx-list-box>
+        <elx-list-box-item v-for="t in templates" :selected="template.get() === t.id" @click="template.set(t.id)">
+          <div class="template">
+            <div class="image"><span class="icon icon-circle"></span></div>
+            <div class="description">
+              <h3 class="name">{{ t.name }}</h3>
+              <p class="info">{{ t.description }}</p>
+            </div>
+          </div>
+        </elx-list-box-item>
+      </elx-list-box>
     </div>
 
     <div class="actions">
-      <button @click="cancel">Cancel</button>
-      <button @click="create" class="submit">Create</button>
+      <el-button @click="cancel">Cancel</el-button>
+      <el-button type="primary" @click="create">Create</el-button>
     </div>
   </div>
 </template>
@@ -107,7 +79,7 @@
   import TextField from 'app/components/forms/text-field'
   import FileField from 'app/components/forms/file-field'
 
-  import { modelFromStore } from 'app/helpers/vuex-helpers'
+  import { modelFromStore, modelFromStore2 } from 'app/helpers/vuex-helpers'
   import { pages } from 'app/store/landing-pages'
   import types from 'app/store/landing-pages/types'
 
@@ -120,9 +92,25 @@
       types() {
         return types
       },
-      template: modelFromStore('landingPages.newProject.template', types.SET_NEW_PROJECT_TEMPLATE),
+      newProjectName() {
+        return modelFromStore2('landingPages.newProject.name', types.SET_NEW_PROJECT_NAME, this.$store)
+      },
+      newProjectPath() {
+        return modelFromStore2('landingPages.newProject.path', types.SET_NEW_PROJECT_PATH, this.$store)
+      },
+      template() {
+        return modelFromStore2('landingPages.newProject.template', types.SET_NEW_PROJECT_TEMPLATE, this.$store)
+      },
     },
     methods: {
+      pickNewProjectPath() {
+        const files = dialog.showOpenDialog({ defaultPath: this.newProjectPath.get(), properties: ['openDirectory', 'createDirectory'] })
+
+        if (!files || !files.length) return
+
+        this.newProjectPath.set(files[0])
+      },
+
       create() {
         this.$store.dispatch(types.CREATE_PROJECT)
       },

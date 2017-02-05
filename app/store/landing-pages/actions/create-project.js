@@ -63,6 +63,11 @@ async function createOnDisk(details) {
 }
 
 export default async function createProject({ state, commit }) {
+  if (!state.newProject.name) {
+    setError("Your project needs a name!", commit)
+    return
+  }
+
   try {
     await createOnDisk(state.newProject)
 

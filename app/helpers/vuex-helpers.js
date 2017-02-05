@@ -6,3 +6,10 @@ export function modelFromStore(pathInState, updateMutatorType) {
     set(value) { this.$store.commit(updateMutatorType, value) }
   }
 }
+
+export function modelFromStore2(pathInState, updateMutatorType, store) {
+  return {
+    get() { return get(store.state, pathInState) },
+    set(value) { store.commit(updateMutatorType, value) }
+  }
+}

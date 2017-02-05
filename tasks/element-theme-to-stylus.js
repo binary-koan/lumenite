@@ -41,7 +41,7 @@ function bemRule(atRules, cssBuilder) {
 
 const lineConverter = flow(
   // Hacky specific workarounds
-  line => line.replace("position: absolute 0 calc(var(--badge-size) / 2 + 1) * *", "absolute: top 0 left ($badge-size / 2 + 1)"),
+  line => line.replace("position: absolute 0 calc(var(--badge-size) / 2 + 1) * *", "absolute: top 0 right ($badge-size / 2 + 1)"),
 
   // Imports
   line => line.replace(/(@import.+)\.css(.+)/, "$1$2"),
@@ -78,8 +78,8 @@ const lineConverter = flow(
   line => line.replace(/@utils-vertical-center/, "vertical-center()"),
   line => line.replace(/@utils-clearfix/, "clearfix()"),
   // postcss-short
-  line => line.replace(/position: (absolute|relative|fixed) (\S+) (\S+) (\S+) (\S+)/, (_, type, top, left, bottom, right) =>
-    `${type}: ${shorthandPosition({ top, left, bottom, right })}`
+  line => line.replace(/position: (absolute|relative|fixed) (\S+) (\S+) (\S+) (\S+)/, (_, type, top, right, bottom, left) =>
+    `${type}: ${shorthandPosition({ top, right, bottom, left })}`
   ),
   line => line.replace(/(padding|margin): \* (.+)/, "$1-left: $2; $1-right: $2"),
 

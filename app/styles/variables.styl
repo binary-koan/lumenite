@@ -19,7 +19,7 @@ $color-black = #000
 
 $color-base-black = #2f343f
 
-$color-extra-light-silver = #a9caf1
+$color-extra-light-silver = saturation(#a9caf1, 25%)
 $color-light-silver = darken($color-extra-light-silver, 6%)
 $color-base-silver = darken($color-extra-light-silver, 12%)
 
@@ -69,7 +69,7 @@ $link-hover-color = lighten($color-primary, 10%)
 // Border
 $border-width-base = 1px
 $border-style-base = solid
-$border-color-base = $color-extra-light-silver
+$border-color-base = darken($color-base-silver, 10%)
 $border-color-hover = $color-base-silver
 $border-base = none
 $border-radius-base = 0.2rem
@@ -266,15 +266,15 @@ $input-font-size = $font-size-base
 $input-color = $font-color-base
 $input-width = 140px
 $input-height = 36px
-$input-border = $border-base
 $input-border-color = $border-color-base
-$input-border-radius = $border-radius-base
 $input-border-color-hover = $border-color-hover
-$input-fill = $color-white
+$input-border = $border-width-base $border-style-base $input-border-color
+$input-border-radius = $border-radius-base
+$input-fill = $fill-darken
 $input-fill-disabled = $disabled-fill-base
 $input-color-disabled = $font-color-disabled-base
 $input-icon-color = $color-extra-light-silver
-$input-placeholder-color = $color-light-silver
+$input-placeholder-color = $color-muted
 $input-max-width = 314px
 
 $input-hover-border = $border-color-hover
@@ -588,3 +588,6 @@ $list-box-border-radius = $border-radius-base
 $list-box-item-color = $button-default-color
 $list-box-item-padding = $gap-small
 $list-box-item-border-radius = $border-radius-base
+
+// Label
+$label-bottom-margin = $gap-small

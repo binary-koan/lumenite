@@ -11,6 +11,10 @@
       transition: $all-transition
       stateful-color: $list-box-item-color
       stateful-background: $list-box-fill
+
+      &.is-selected {
+        background: lighten($list-box-fill, 15%)
+      }
     }
   }
 }
