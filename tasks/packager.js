@@ -1,11 +1,23 @@
 const fs = require("fs")
 const minimist = require("minimist")
+const difference = require("lodash/difference")
 const isObject = require("lodash/isObject")
+const keys = require("lodash/keys")
 const map = require("lodash/map")
 const mapKeys = require("lodash/mapKeys")
 const omit = require("lodash/omit")
-const escapeRegExp = require("lodash/escapeRegExp")
-const execSync = require("child_process").execSync
+
+function injectPackageScripts(scripts) {
+  keys(scripts).forEach(script => {
+    scripts[script] = `node package.js && ${scripts[script]}`
+  })
+
+  for (script of ["postinstall", "postuninstall", "postupdate"]) {
+    scripts[script] = scripts[script] || "node package.js"
+  }
+
+  return scripts
+}
 
 function mergeScripts(scripts) {
   const scriptGroups = map(scripts, (value, name) => {
@@ -29,115 +41,66 @@ function mergeDependencies(dependencies) {
 
 function generatePackageJson(config) {
   const contents = Object.assign(omit(config, "scripts", "dependencies", "devDependencies"), {
-    scripts: mergeScripts(config.scripts),
+    scripts: injectPackageScripts(mergeScripts(config.scripts)),
     dependencies: mergeDependencies(config.dependencies),
     devDependencies: mergeDependencies(config.devDependencies)
   })
 
   fs.writeFileSync("package.json", JSON.stringify(contents, null, 2))
-  console.log("Generated package.json")
+  console.log("Synced package.json with package.js.")
 }
 
-function dependencyPath(dependencies, name) {
-  if (dependencies[name]) {
-    return []
-  } else if (isObject(dependencies)) {
-    for (let key of Object.keys(dependencies)) {
-      const path = dependencyPath(dependencies[key], name)
-
-      if (path) return [key].concat(path)
-    }
-  }
+function formatDependencies(toFormat, all) {
+  return keys(all)
+    .filter(key => toFormat.includes(key))
+    .map(key => `"${key}": "${all[key]}"`)
 }
 
-function replaceDependency(lines, { name, path, oldVersion, newVersion }) {
-  let replaced = false
-  let lastWhitespace = ""
+function formatChangedDependencies(toFormat, previous, current) {
+  return keys(previous)
+    .filter(key => toFormat.includes(key))
+    .map(key => `"${key}": "${current[key]}" (was "${previous[key]}")`)
+}
 
-  const regexFor = fragment => new RegExp(`^(${lastWhitespace}\\s+)['"]?${escapeRegExp(fragment)}['"]?\\s*:`)
-
-  const regex = new RegExp(`\s+`)
-  const result = lines.map(line => {
-    if (path.length === 0 && regexFor(name).test(line) && line.includes(oldVersion)) {
-      replaced = true
-
-      return line.replace(oldVersion, newVersion)
-    } else {
-      const match = regexFor(path[0]).exec(line)
-
-      if (match) {
-        path.shift()
-        lastWhitespace = match[1]
-      }
-    }
-
-    return line
-  })
-
-  if (replaced) {
-    console.log(`Updated "${name}": "${oldVersion}" => "${newVersion}"`)
-  } else {
-    console.warn(`Dependency not autosaved. Please add "${name}": "${newVersion}" by hand.`)
+function checkDependencies(config, key) {
+  if (!fs.existsSync("package.json")) {
+    return true
   }
 
-  return result
-}
+  const packageJson = JSON.parse(fs.readFileSync("package.json"))
 
-function fixDependencies(config, key) {
-  const dependencies = JSON.parse(fs.readFileSync("package.json"))[key]
-  const oldDependencies = mergeDependencies(config[key])
+  const npmDependencies = packageJson[key]
+  const savedDependencies = mergeDependencies(config[key])
 
-  const toUpdate = []
+  let messages = []
 
-  Object.keys(dependencies).forEach(name => {
-    if (oldDependencies[name] !== dependencies[name]) {
-      const path = [key].concat(dependencyPath(config[key], name) || [])
+  const added = difference(keys(npmDependencies), keys(savedDependencies))
+  if (added.length) {
+    messages = [...messages, "", "Added:", ...formatDependencies(added, npmDependencies)]
+  }
 
-      toUpdate.push({
-        name,
-        path,
-        oldVersion: oldDependencies[name],
-        newVersion: dependencies[name]
-      })
-    }
-  })
+  const removed = difference(keys(savedDependencies), keys(npmDependencies))
+  if (removed.length) {
+    messages = [...messages, "", "Removed:", ...formatDependencies(removed, savedDependencies)]
+  }
 
-  const lines = fs.readFileSync(process.argv[1], "utf-8").split("\n")
-  const updated = toUpdate.reduce(replaceDependency, lines).join("\n")
+  const changed = keys(savedDependencies).filter(name => npmDependencies[name] && savedDependencies[name] !== npmDependencies[name])
+  if (changed.length) {
+    messages = [...messages, "", "Changed:", ...formatChangedDependencies(changed, savedDependencies, npmDependencies)]
+  }
 
-  fs.writeFileSync(process.argv[1], updated)
-}
+  if (messages.length) {
+    console.log("Your package.js does not match your package.json")
+    messages.forEach(message => console.log(message))
+    console.log("\nPlease update your package.js to reflect these changes.")
+    console.log("Your package.json was not changed.")
+  }
 
-function runNpm(args) {
-  const argList = []
-
-  const formatArg = name => name.length === 1 ? `-${name}` : `--${name}`
-  const formatValue = value => /\s/.test(value) ? `"${value.replace(/"/g, '\\"')}"` : value
-
-  Object.keys(omit(args, "_")).forEach(name => {
-    if (args[name] === true) {
-      argList.push(formatArg(name))
-    } else {
-      argList.push(formatArg(name) + " " + formatValue(args[name]))
-    }
-  })
-
-  const command = "npm " + (args._[0] || "") + " " + argList.concat(args._.slice(1)).join(" ")
-
-  console.log(command)
-  execSync(command)
+  return !messages.length
 }
 
 module.exports = function packager(config) {
-  generatePackageJson(config)
-
-  const args = minimist(process.argv.slice(2))
-
-  if (args.save || args["save-dev"]) {
-    runNpm(args)
-    fixDependencies(config, "dependencies")
-    fixDependencies(config, "devDependencies")
-  } else {
-    runNpm(args)
+  if (checkDependencies(config, "dependencies") && checkDependencies(config, "devDependencies")) {
+    generatePackageJson(config)
   }
 }
