@@ -4,17 +4,20 @@ import Vue from 'vue'
 import Electron from 'vue-electron'
 import ElementUI from 'element-ui'
 
-import setupCustomDirectives from './helpers/directives'
+import ElementExtras from './components/element-extras'
+import CustomDirectives from './helpers/directives'
 import unsetAnnoyingGlobals from './helpers/unset-annoying-globals'
+
+import Main from './components/main'
 
 Vue.use(Electron)
 Vue.use(ElementUI)
+Vue.use(ElementExtras)
+Vue.use(CustomDirectives)
+
 Vue.config.debug = true
 
-setupCustomDirectives(Vue)
 unsetAnnoyingGlobals()
-
-import Main from './components/main'
 
 /* eslint-disable no-new */
 new Vue(Main).$mount('#main')

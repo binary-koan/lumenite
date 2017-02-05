@@ -21,6 +21,12 @@
       transition: all $transition-default
       stateful-background: $background-darken
     }
+  }
+
+  .recent-project {
+    flex-layout: row
+    align-items: center
+    spacing-horizontal: $gap-sm
 
     .project-icon {
       padding: $gap-sm
@@ -28,15 +34,15 @@
       border-radius: $radius-sm
       background-color: $background-primary
     }
-  }
 
-  .recent-list .title {
-    margin-bottom: $gap-xs
-    font-size: $font-size-md
-  }
+    .title {
+      margin-bottom: $gap-xs
+      font-size: $font-size-md
+    }
 
-  .recent-list .info {
-    color: $color-muted
+    .info {
+      color: $color-muted
+    }
   }
 
   .actions {
@@ -50,17 +56,17 @@
 
 <template>
   <div class="container">
-    <ul class="recent-list">
-      <li>
-        <a href="#">
+    <elx-list-box>
+      <elx-list-box-item>
+        <div class="recent-project">
           <div class="project-icon"><span class="icon icon-folder"></span></div>
           <div class="description">
             <h3 class="title">Pacman</h3>
             <p class="info">~/Projects/Pacman</p>
           </div>
-        </a>
-      </li>
-    </ul>
+        </div>
+      </elx-list-box-item>
+    </elx-list-box>
 
     <div class="actions">
       <el-button @click="createProject" size="large">
