@@ -7,27 +7,27 @@
     align-items: center
     justify-content: center
 
-    background-color: $background-default
+    background-color: $fill-base
   }
 
   .page {
-    width-upto: $width-sm
-    padding: $gap-lg
-    spacing-vertical: $gap-lg
+    width-upto: $landing-page-width
+    padding: $gap-large
+    spacing-vertical: $gap-large
   }
 
   .error {
     flex-layout: row
-    padding: $gap-sm
-    spacing-horizontal: $gap-xs
-    background: $background-primary
-    border-radius: $radius-sm
+    padding: $gap-small
+    spacing-horizontal: $gap-xsmall
+    background: $color-primary
+    border-radius: $border-radius-base
   }
 
   .title {
-    font-size: $font-size-lg
+    font-size: $font-size-large
     font-weight: $font-weight-strong
-    margin-bottom: $gap-lg
+    margin-bottom: $gap-large
   }
 </style>
 

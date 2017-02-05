@@ -4,12 +4,14 @@ body {
 }
 
 html {
-  font: $font-default
+  font-family: $font-family-base
+  font-weight: $font-weight-base
+  font-size: $font-size-base
 }
 
 body {
-  background-color: $background-default
-  color: $color-default
+  background-color: $fill-base
+  color: $font-color-base
 }
 
 a {
@@ -18,14 +20,14 @@ a {
 }
 
 label {
-  color: $label-color
+  color: lighten($font-color-base, 10%)
 }
 
 button {
-  padding: $gap-sm $gap-lg
-  border-radius: $radius-sm
-  stateful-background: $background-lighten
-  color: $color-default
+  padding: $gap-small $gap-large
+  border-radius: $border-radius-base
+  stateful-background: $fill-lighten
+  color: $font-color-base
   cursor: pointer
 }
 
@@ -35,11 +37,11 @@ input[type="password"],
 input[type="number"],
 input[type="url"],
 input[type="tel"] {
-  padding: $gap-sm
-  border-radius: $radius-sm
+  padding: $gap-small
+  border-radius: $border-radius-base
   font-weight: $font-weight-medium
-  background: $background-darken
-  color: $color-default
+  background: $fill-darken
+  color: $font-color-base
 }
 
 .hidden {

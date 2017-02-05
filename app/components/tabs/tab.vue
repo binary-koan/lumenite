@@ -5,19 +5,19 @@
     flex-layout: row
     align-items: center
     width: $tab-width
-    padding: $gap-sm $gap-sm $gap-sm $gap-lg
+    padding: $gap-small $gap-small $gap-small $gap-large
     border-radius: 0
-    stateful-background: $background-darken
+    stateful-background: $fill-darken
     text-align: left
     cursor: default
   }
 
   .tab.active {
-    background: $background-default
+    background: $fill-base
   }
 
   .tab-icon {
-    margin-right: $gap-sm
+    margin-right: $gap-small
   }
 
   .title {
@@ -29,14 +29,14 @@
   }
 
   .close {
-    padding: $gap-sm
+    padding: $gap-small
     background: transparent
     stateful-color: $color-muted
   }
 
   .close .icon:before {
     content: '×'
-    font-size: $font-size-lg
+    font-size: $font-size-large
   }
 </style>
 

@@ -3,26 +3,26 @@
 
   .top-level-item {
     flex-layout: row
-    margin: $gap-md
-    background: $background-default
-    border-radius: $radius-sm
-    child-radius-horizontal: $radius-sm
+    margin: $gap-medium
+    background: $fill-base
+    border-radius: $border-radius-base
+    child-radius-horizontal: $border-radius-base
   }
 
   .top-level-item.expanded {
-    margin-bottom: $gap-xs
+    margin-bottom: $gap-xsmall
     font-weight: $font-weight-medium
   }
 
   .top-level-item > button {
-    padding: $gap-sm
-    stateful-background: $background-default
-    color: $color-default
+    padding: $gap-small
+    stateful-background: $fill-base
+    color: $font-color-base
   }
 
   .top-level-item > .title {
     flex: 1
-    padding: $gap-sm
+    padding: $gap-small
     text-align: left
   }
 
@@ -39,7 +39,7 @@
   }
 
   .top-level-item + .folder-contents {
-    padding-right: $gap-md
+    padding-right: $gap-medium
   }
 </style>
 

@@ -6,6 +6,14 @@ const escapeRegExp = require("lodash/escapeRegExp")
 
 const SKIP = Symbol("skip")
 
+// We use custom versions of these
+const ignoreIfIncludes = ["/var.css", "/reset.css", "/icon.css"]
+
+// Some variables are just ... unnecessary
+const variableReplacements = {
+  "color-extra-light-black": "fill-lighten"
+}
+
 function shorthandPosition(values) {
   return Object.keys(values).map(key =>
     values[key] === "*" ? "" : `${key} ${values[key]}`
@@ -73,11 +81,21 @@ const lineConverter = flow(
   line => line.replace(/position: (absolute|relative|fixed) (\S+) (\S+) (\S+) (\S+)/, (_, type, top, left, bottom, right) =>
     `${type}: ${shorthandPosition({ top, left, bottom, right })}`
   ),
-  line => line.replace(/(padding|margin): \* (.+)/, "$1-left: $2; $1-right: $2")
+  line => line.replace(/(padding|margin): \* (.+)/, "$1-left: $2; $1-right: $2"),
+
+  ...Object.keys(variableReplacements).map(original =>
+    line => line.replace(new RegExp("\\$" + original), "$$" + variableReplacements[original])
+  )
 )
 
+function ignoreLine(line) {
+  return /^@charset/.test(line) ||
+    /^@import/.test(line) && ignoreIfIncludes.filter(i => line.includes(i)).length ||
+    /filter: alpha\(opacity=/.test(line)
+}
+
 function convertLine(line) {
-  if (/^@charset|@import.+(var\.css|icon\.css)/.test(line) || /filter: alpha\(opacity=/.test(line)) {
+  if (ignoreLine(line)) {
     return SKIP
   } else {
     return lineConverter(line)
@@ -98,8 +116,7 @@ const sourceDir = path.resolve(__dirname, "../node_modules/element-theme-default
 const targetDir = path.resolve(__dirname, "../app/styles/element-theme-default")
 
 glob.sync(`${sourceDir}/**/*.css`).forEach(filename => {
-  if (filename.endsWith("/var.css") || filename.endsWith("/icon.css")) {
-    // We use custom variables and icons
+  if (ignoreIfIncludes.filter(i => filename.includes(i)).length) {
     return
   }
 

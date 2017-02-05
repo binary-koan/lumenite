@@ -2,42 +2,42 @@
   @import '~app/styles/definitions'
 
   .container {
-    spacing-vertical: $gap-md
+    spacing-vertical: $gap-medium
   }
 
   .recent-list {
-    padding: $gap-sm
-    border-radius: $radius-sm
-    background-color: $background-darken
-    spacing-vertical: $gap-lg
+    padding: $gap-small
+    border-radius: $border-radius-base
+    background-color: $fill-darken
+    spacing-vertical: $gap-large
 
     a {
       flex-layout: row
       align-items: center
-      padding: $gap-sm
-      spacing-horizontal: $gap-sm
-      border-radius: $radius-sm
-      color: $color-default
-      transition: all $transition-default
-      stateful-background: $background-darken
+      padding: $gap-small
+      spacing-horizontal: $gap-small
+      border-radius: $border-radius-base
+      color: $font-color-base
+      transition: $all-transition
+      stateful-background: $fill-darken
     }
   }
 
   .recent-project {
     flex-layout: row
     align-items: center
-    spacing-horizontal: $gap-sm
+    spacing-horizontal: $gap-small
 
     .project-icon {
-      padding: $gap-sm
-      font-size: $font-size-lg
-      border-radius: $radius-sm
-      background-color: $background-primary
+      padding: $gap-small
+      font-size: $font-size-large
+      border-radius: $border-radius-base
+      background-color: $color-primary
     }
 
     .title {
-      margin-bottom: $gap-xs
-      font-size: $font-size-md
+      margin-bottom: $gap-xsmall
+      font-size: $font-size-medium
     }
 
     .info {

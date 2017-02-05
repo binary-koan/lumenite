@@ -1,92 +1,70 @@
-$blue = #2196F3
-$yellow = #FFCA28
-$red = #F44336
-$orange = #FF7043
-$green = #43A047
-$purple = #5C6BC0
-$teal = #26C6DA
+$input-border = 1px solid #666 //TODO remove when all inputs are replaced with Element ones
 
-$brand-primary = $orange
+/**
+ * Base
+ */
 
-$background-default = #333
-$background-inverse = #eee
-$background-primary = $brand-primary
-$background-darken = #222
-$background-lighten = #444
+// Colors
+$color-blue = #2196F3
+$color-yellow = #FFCA28
+$color-red = #F44336
+$color-orange = #FF7043
+$color-green = #43A047
+$color-purple = #5C6BC0
+$color-teal = #26C6DA
 
-$color-default = #eee
-$color-muted = #aaa
-$color-inverse = #222
-$color-primary = $brand-primary
+$color-white = #fff
+$color-dark-white = #D3DAE3
+$color-black = #000
 
-$font-default = 300 14px "Helvetica Neue", "Segoe UI", Helvetica, sans-serif
+$color-base-black = #2f343f
+
+$color-extra-light-silver = #a9caf1
+$color-light-silver = darken($color-extra-light-silver, 6%)
+$color-base-silver = darken($color-extra-light-silver, 12%)
+
+$color-base-gray = #5d626e
+$color-light-gray = lighten(#5d626e, 10%)
+$color-extra-light-gray = lighten(#5d626e, 20%)
+
+$color-primary = $color-orange
+$color-secondary = darken($color-primary, 10%)
+$color-success = $color-green
+$color-warning = $color-yellow
+$color-danger = $color-red
+$color-info = $color-blue
+$color-muted = $color-base-gray
+$color-inverse = $color-base-black
+
+$fill-base = $color-base-black
+$fill-inverse = $color-dark-white
+$fill-darken = darken($color-base-black, 10%)
+$fill-lighten = lighten($color-base-black, 10%)
+
+// Font
+$font-family-base = "Helvetica Neue", "Segoe UI", Helvetica, sans-serif
+$font-weight-base = 300
 $font-weight-medium = 500
 $font-weight-strong = 700
 
-$width-sm = 30rem
+$font-size-base = 14px
+$font-size-medium = 1.1rem
+$font-size-large = 1.5rem
+$font-size-xlarge = 2rem
 
-$gap-xs = 0.25rem
-$gap-sm = 0.5rem
-$gap-md = 0.75rem
-$gap-lg = 1rem
-$gap-xl = 1.5rem
+$font-color-base = $color-dark-white
+$font-color-disabled-base = #bbb
 
-$radius-sm = 0.2rem
-
-$font-size-md = 1.1rem
-$font-size-lg = 1.5rem
-$font-size-xl = 2rem
-
-$transition-default = 0.2s ease-in-out
-
-$sidebar-width = 4rem
-
-$bench-width-default = 20rem
-$folder-contents-gap = 1.25rem
-
-$tab-width = 10rem
-
-$label-color = #ccc
-$input-border = 1px solid #666
-
-// Element UI
-
-// Transition
-$all-transition = all .3s cubic-bezier(.645,.045,.355,1)
-$fade-transition = opacity 300ms cubic-bezier(0.23, 1, 0.32, 1)
-$fade-linear-transition = opacity 200ms linear
-$md-fade-transition = transform 300ms cubic-bezier(0.23, 1, 0.32, 1) 100ms, opacity 300ms cubic-bezier(0.23, 1, 0.32, 1) 100ms
-$border-transition-base = border-color .2s cubic-bezier(.645,.045,.355,1)
-$color-transition-base = color .2s cubic-bezier(.645,.045,.355,1)
-
-// Colors
-$color-primary = #20a0ff
-
-$color-success = #13ce66
-$color-warning = #f7ba2a
-$color-danger = #ff4949
-$color-info = #50bfff
-
-$color-secondary = darken($color-primary, 10%)
-$color-white = #fff
-$color-dark-white = blend($color-white, $color-primary, 2%)
-$color-black = #000
-
-$color-base-black = #222
-$color-light-black = #333
-$color-extra-light-black = #444
-
-$color-base-silver = #ddd
-$color-light-silver = #eee
-$color-extra-light-silver = #f7f7f7
-
-$color-base-gray = #777
-$color-light-gray = #888
-$color-extra-light-gray = #999
+// Sizes
+$gap-xsmall = 0.25rem
+$gap-small = 0.5rem
+$gap-medium = 0.75rem
+$gap-large = 1rem
+$gap-xlarge = 1.5rem
 
 // Link
-$link-color = $color-extra-light-black
-$link-hover-color = $color-primary
+$link-color = $color-primary
+$link-hover-color = lighten($color-primary, 10%)
 
 // Border
 $border-width-base = 1px
@@ -94,24 +72,21 @@ $border-style-base = solid
 $border-color-base = $color-extra-light-silver
 $border-color-hover = $color-base-silver
 $border-base = $border-width-base $border-style-base $border-color-base
-$border-radius-base = 4px
-$border-radius-small = 2px
+$border-radius-base = 0.2rem
+$border-radius-small = 0.1rem
 $border-radius-circle = 100%
 
 // Box-shadow
 $box-shadow-base = 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04)
 $box-shadow-dark = 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .12)
 
-// Fill
-$fill-base = $color-white
-
-// Font
-$font-size-base = 14px
-$font-color-base = $color-base-black
-$font-color-disabled-base = #bbb
-
-// Size
-$size-base = 14px
+// Transitions
+$all-transition = all .3s cubic-bezier(.645,.045,.355,1)
+$fade-transition = opacity 300ms cubic-bezier(0.23, 1, 0.32, 1)
+$fade-linear-transition = opacity 200ms linear
+$md-fade-transition = transform 300ms cubic-bezier(0.23, 1, 0.32, 1) 100ms, opacity 300ms cubic-bezier(0.23, 1, 0.32, 1) 100ms
+$border-transition-base = border-color .2s cubic-bezier(.645,.045,.355,1)
+$color-transition-base = color .2s cubic-bezier(.645,.045,.355,1)
 
 // z-index
 $index-normal = 1
@@ -123,8 +98,19 @@ $disabled-fill-base = $color-extra-light-gray
 $disabled-color-base = #bbb
 $disabled-border-base = $color-base-gray
 
-// Icon
-$icon-color = #666
+/**
+ * Scaffolding
+ */
+
+$landing-page-width = 30rem
+$sidebar-width = 4rem
+$bench-width-default = 20rem
+$folder-contents-gap = 1.25rem
+$tab-width = 10rem
+
+/**
+ * Element UI
+ */
 
 // Checkbox
 $checkbox-font-size = 14px
@@ -537,7 +523,7 @@ $menu-item-hover-fill = $disabled-border-base
 $submenu-item-fill = $color-light-gray
 
 $dark-menu-item-color = $link-color
-$dark-menu-item-fill = $color-light-black
+$dark-menu-item-fill = $fill-lighten
 $dark-menu-item-hover-fill = $link-color
 $dark-submenu-item-fill = $color-base-black
 
@@ -586,18 +572,20 @@ $collapse-header-height = 43px
 $collapse-border-radius = 0
 $collapse-header-padding = 20px
 $collapse-header-fill = $color-white
-$collapse-header-color = $color-extra-light-black
+$collapse-header-color = $fill-lighten
 $collapse-header-size = 13px
 $collapse-content-fill = $color-dark-white
 $collapse-content-size = 13px
 $collapse-content-color = $color-base-black
 
-// Element Extras
+/**
+ * Element Extras
+ */
 
 // ListBox
 $list-box-fill = $button-default-fill
-$list-box-padding = $gap-sm
-$list-box-border-radius = $radius-sm
+$list-box-padding = $gap-small
+$list-box-border-radius = $border-radius-base
 $list-box-item-color = $button-default-color
-$list-box-item-padding = $gap-sm
-$list-box-item-border-radius = $radius-sm
+$list-box-item-padding = $gap-small
+$list-box-item-border-radius = $border-radius-base

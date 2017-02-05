@@ -8,7 +8,7 @@
 
   .image {
     flex: 1
-    background: $background-darken
+    background: $fill-darken
     background-origin: content-box
     background-size: contain
     background-repeat: no-repeat
@@ -17,25 +17,25 @@
   }
 
   .settings {
-    padding-left: $gap-lg
-    padding-right: $gap-sm
+    padding-left: $gap-large
+    padding-right: $gap-small
     max-width: 25rem
   }
 
   h2 {
-    margin: $gap-xl 0 $gap-lg 0
-    font-size: $font-size-lg
+    margin: $gap-xlarge 0 $gap-large 0
+    font-size: $font-size-large
     font-weight: $font-weight-medium
 
     &:first-child {
-      margin-top: $gap-sm
+      margin-top: $gap-small
     }
   }
 
   hr {
     border: none
     border-bottom: $input-border
-    margin: $gap-sm 0 $gap-lg 0
+    margin: $gap-small 0 $gap-large 0
   }
 </style>
 

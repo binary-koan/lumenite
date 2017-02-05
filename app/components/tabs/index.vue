@@ -4,7 +4,7 @@
   .tabs {
     flex: 1
     flex-layout: column
-    background: $background-darken
+    background: $fill-darken
   }
 
   .tab-bar {
@@ -13,8 +13,8 @@
 
   .tab-pane {
     flex: 1
-    padding: $gap-sm
-    background: $background-default
+    padding: $gap-small
+    background: $fill-base
     overflow: auto
   }
 </style>

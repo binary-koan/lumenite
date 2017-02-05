@@ -3,8 +3,8 @@
 
   .bench-build {
     width: $bench-width-default
-    padding-top: $gap-xs
-    background: $background-darken
+    padding-top: $gap-xsmall
+    background: $fill-darken
   }
 </style>
 

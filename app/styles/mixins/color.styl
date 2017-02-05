@@ -1,6 +1,6 @@
 stateful-color(color) {
   color: color
-  transition: all $transition-default
+  transition: $all-transition
 
   &:hover {
     color: lighten(color, 35%)
@@ -13,7 +13,7 @@ stateful-color(color) {
 
 stateful-background(color) {
   background-color: color
-  transition: all $transition-default
+  transition: $all-transition
 
   &:hover {
     background-color: lighten(color, 15%)

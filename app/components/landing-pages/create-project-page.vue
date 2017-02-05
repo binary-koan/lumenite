@@ -2,7 +2,7 @@
   @import '~app/components/forms/common'
 
   .container {
-    spacing-vertical: $gap-lg
+    spacing-vertical: $gap-large
   }
 
   .template-label {
@@ -10,37 +10,37 @@
   }
 
   .templates {
-    padding: $gap-sm
-    border-radius: $radius-sm
-    background-color: $background-darken
+    padding: $gap-small
+    border-radius: $border-radius-base
+    background-color: $fill-darken
   }
 
   .template {
     flex-layout: row
     align-items: center
-    padding: $gap-sm
-    spacing-horizontal: $gap-sm
-    border-radius: $radius-sm
-    color: $color-default
+    padding: $gap-small
+    spacing-horizontal: $gap-small
+    border-radius: $border-radius-base
+    color: $font-color-base
 
     input:checked + & {
-      background: $background-lighten
+      background: $fill-lighten
     }
 
     .image {
-      padding: $gap-sm
-      font-size: $font-size-lg
-      border-radius: $radius-sm
-      background-color: $background-inverse
+      padding: $gap-small
+      font-size: $font-size-large
+      border-radius: $border-radius-base
+      background-color: $fill-inverse
       color: $color-inverse
     }
 
     .description {
-      spacing-vertical: $gap-xs
+      spacing-vertical: $gap-xsmall
     }
 
     .name {
-      font-size: $font-size-md
+      font-size: $font-size-medium
     }
 
     .info {
@@ -50,10 +50,10 @@
 
   .actions {
     text-align: right
-    spacing-horizontal: $gap-sm
+    spacing-horizontal: $gap-small
 
     .submit {
-      stateful-background: $background-primary
+      stateful-background: $color-primary
     }
   }
 </style>

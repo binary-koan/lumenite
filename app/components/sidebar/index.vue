@@ -52,11 +52,11 @@
     padding: ($sidebar-width / 8)
     line-height: ($sidebar-width / 4)
 
-    border-radius: $radius-sm
-    background: $background-default
-    color: $color-default
+    border-radius: $border-radius-base
+    background: $fill-base
+    color: $font-color-base
     opacity: 0
-    transition: opacity $transition-default
+    transition: $fade-transition
   }
 
   .link:hover > .tooltip {

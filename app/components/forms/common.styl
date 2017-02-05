@@ -2,8 +2,8 @@
 
 .input-group {
   flex-layout: column
-  spacing-vertical: $gap-sm
-  margin-bottom: $gap-lg
+  spacing-vertical: $gap-small
+  margin-bottom: $gap-large
 }
 
 .input-group label:empty {
@@ -12,13 +12,13 @@
 
 .input-group .input {
   border: $input-border
-  border-radius: $radius-sm
-  background: $background-darken
-  child-radius-horizontal: $radius-sm
+  border-radius: $border-radius-base
+  background: $fill-darken
+  child-radius-horizontal: $border-radius-base
   spacing-horizontal: 0
 
   button {
-    stateful-background: $background-darken
+    stateful-background: $fill-darken
     stateful-color: $color-muted
   }
 
@@ -37,7 +37,7 @@
 .input-row {
   flex-layout: row
   align-items: center
-  spacing-horizontal: $gap-sm
+  spacing-horizontal: $gap-small
 }
 
 .input-row input,

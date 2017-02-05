@@ -7,7 +7,7 @@
   }
 
   .title {
-    padding: $gap-sm $gap-xs
+    padding: $gap-small $gap-xsmall
     background: transparent
     stateful-color: $color-muted
     text-align: left
@@ -19,8 +19,8 @@
   }
 
   .empty {
-    padding-top: $gap-sm
-    padding-bottom: $gap-sm
+    padding-top: $gap-small
+    padding-bottom: $gap-small
     padding-left: $folder-contents-gap
     font-style: italic
     color: $color-muted
@@ -31,8 +31,8 @@
   .editor {
     display: flex
     border: 1px solid $color-muted
-    border-radius: $radius-sm
-    margin: $gap-sm 0
+    border-radius: $border-radius-base
+    margin: $gap-small 0
 
     > input {
       flex: 1
@@ -40,8 +40,8 @@
     }
 
     > button {
-      padding-left: $gap-sm
-      padding-right: $gap-sm
+      padding-left: $gap-small
+      padding-right: $gap-small
       background: transparent
       opacity: 0.5
 
