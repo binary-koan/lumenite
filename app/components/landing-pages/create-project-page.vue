@@ -1,5 +1,5 @@
 <style lang="stylus" scoped>
-  @import '~app/components/forms/common'
+  @import '~app/styles/definitions'
 
   .container {
     spacing-vertical: $gap-large
@@ -76,9 +76,6 @@
   import { remote } from 'electron'
   const dialog = remote.dialog
 
-  import TextField from 'app/components/forms/text-field'
-  import FileField from 'app/components/forms/file-field'
-
   import { modelFromStore, modelFromStore2 } from 'app/helpers/vuex-helpers'
   import { pages } from 'app/store/landing-pages'
   import types from 'app/store/landing-pages/types'
@@ -118,10 +115,6 @@
       cancel() {
         this.$store.commit(types.SWITCH_PAGE, pages.RECENT_PROJECTS)
       }
-    },
-    components: {
-      TextField,
-      FileField
     },
     created() {
       this.$store.dispatch(types.FIND_TEMPLATES)

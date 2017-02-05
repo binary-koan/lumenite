@@ -7,3 +7,13 @@
   width: 35px !important
   height: 100% !important
 }
+
+.el-input-group__prepend {
+  background: $input-fill
+  border: $input-border
+  border-right: none
+
+  + .el-input__inner:not(:focus) {
+    border-left-color: transparent
+  }
+}

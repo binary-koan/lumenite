@@ -48,31 +48,41 @@
       <h2>{{ sprite.source }}</h2>
 
       <hr />
-      <dimension-field label="Scaled size" unit="px" :defaultWidth="100" :defaultHeight="50"></dimension-field>
-      <point-field label="Anchor point" unit="%" :defaultX="0.5" :defaultY="0.5"></point-field>
 
-      <hr />
-      <number-field label="Opacity" min="0" max="1" step="0.01" :default="100"></number-field>
-      <select-field label="Blend mode" :options="blendModes"></select-field>
-      <color-field label="Tint"></color-field>
-      <span class="TODO filters"></span>
-      <span class="TODO mask"></span>
-      <rect-field label="Crop"></rect-field>
-      <checkbox-field label="Smoothed"></checkbox-field>
+      <div>
+        <elx-label>Scaled size</elx-label>
+        <elx-multi-input :parts="['x', 'y']"></elx-multi-input>
+      </div>
+
+      <div>
+        <elx-label>Anchor point</elx-label>
+        <elx-multi-input :parts="['width', 'height']"></elx-multi-input>
+      </div>
+
+      <div>
+        <elx-label>Opacity</elx-label>
+        <el-input-number :min="0" :max="100"></el-input-number>
+      </div>
+
+      <div>
+        <elx-label>Blend mode</elx-label>
+        <el-select>
+          <el-option v-for="mode in blendModes" :label="mode" :value="mode"></el-option>
+        </el-select>
+      </div>
+
+      <div>
+        <elx-label>Tint</elx-label>
+        <el-input></el-input>
+      </div>
+
+      <span class="TODO filters, mask, crop"></span>
     </div>
   </div>
 </template>
 
 <script>
   import pathUtils from 'path'
-
-  import DimensionField from 'app/components/forms/dimension-field'
-  import PointField from 'app/components/forms/point-field'
-  import NumberField from 'app/components/forms/number-field'
-  import SelectField from 'app/components/forms/select-field'
-  import ColorField from 'app/components/forms/color-field'
-  import CheckboxField from 'app/components/forms/checkbox-field'
-  import RectField from 'app/components/forms/rect-field'
 
   export default {
     name: 'sprite-asset-editor',
@@ -83,7 +93,7 @@
       },
 
       imageUrl() {
-        return pathUtils.resolve(pathUtils.dirname(this.tab.location), this.sprite.source).replace(/\\/g, '/')
+        return 'file://' + pathUtils.resolve(pathUtils.dirname(this.tab.location), this.sprite.source).replace(/\\/g, '/')
       },
 
       blendModes() {
@@ -93,15 +103,6 @@
           'DIFFERENCE', 'EXCLUSION', 'HUE', 'SATURATION', 'COLOR', 'LUMINOSITY'
         ]
       }
-    },
-    components: {
-      DimensionField,
-      PointField,
-      NumberField,
-      SelectField,
-      ColorField,
-      CheckboxField,
-      RectField
     }
   }
 </script>
