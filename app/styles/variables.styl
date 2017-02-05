@@ -24,8 +24,8 @@ $color-light-silver = darken($color-extra-light-silver, 6%)
 $color-base-silver = darken($color-extra-light-silver, 12%)
 
 $color-base-gray = #5d626e
-$color-light-gray = lighten(#5d626e, 10%)
-$color-extra-light-gray = lighten(#5d626e, 20%)
+$color-light-gray = lighten(#5d626e, 15%)
+$color-extra-light-gray = lighten(#5d626e, 25%)
 
 $color-primary = $color-orange
 $color-secondary = darken($color-primary, 10%)
@@ -33,12 +33,12 @@ $color-success = $color-green
 $color-warning = $color-yellow
 $color-danger = $color-red
 $color-info = $color-blue
-$color-muted = $color-base-gray
+$color-muted = $color-extra-light-gray
 $color-inverse = $color-base-black
 
 $fill-base = $color-base-black
 $fill-inverse = $color-dark-white
-$fill-darken = darken($color-base-black, 10%)
+$fill-darken = darken($color-base-black, 15%)
 $fill-lighten = lighten($color-base-black, 10%)
 
 // Font
@@ -71,7 +71,7 @@ $border-width-base = 1px
 $border-style-base = solid
 $border-color-base = $color-extra-light-silver
 $border-color-hover = $color-base-silver
-$border-base = $border-width-base $border-style-base $border-color-base
+$border-base = none
 $border-radius-base = 0.2rem
 $border-radius-small = 0.1rem
 $border-radius-circle = 100%
@@ -355,9 +355,8 @@ $button-mini-font-size = 12px
 $button-mini-padding-vertical = 4px
 $button-mini-padding-horizontal = 4px
 
-$button-default-color = $color-base-black
-$button-default-fill = $color-white
-$button-default-border = #c4c4c4
+$button-default-color = $font-color-base
+$button-default-fill = $fill-lighten
 
 $button-ghost-color = #666
 $button-ghost-fill = transparent
@@ -387,7 +386,7 @@ $button-info-border = $color-info
 $button-info-color = $color-white
 $button-info-fill = $color-info
 
-$button-hover-tint-percent = 20%
+$button-hover-tint-percent = 15%
 $button-active-shade-percent = 10%
 
 
@@ -583,7 +582,7 @@ $collapse-content-color = $color-base-black
  */
 
 // ListBox
-$list-box-fill = $button-default-fill
+$list-box-fill = $fill-darken
 $list-box-padding = $gap-small
 $list-box-border-radius = $border-radius-base
 $list-box-item-color = $button-default-color
