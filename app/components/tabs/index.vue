@@ -4,17 +4,20 @@
   .tabs {
     flex: 1
     flex-layout: column
-    background: $fill-darken
   }
 
   .tab-bar {
     flex-layout: row
+    margin-top: $gap-xsmall
+    margin-left: $gap-xsmall
   }
 
   .tab-pane {
     flex: 1
+    margin: $gap-xsmall
+    margin-top: 0
     padding: $gap-small
-    background: $fill-base
+    background: $fill-darken
     overflow: auto
   }
 </style>

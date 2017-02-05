@@ -13,7 +13,9 @@
   }
 
   .tab.active {
-    background: $fill-base
+    background: $fill-darken
+    border-top-left-radius: $border-radius-base
+    border-top-right-radius: $border-radius-base
   }
 
   .tab-icon {
