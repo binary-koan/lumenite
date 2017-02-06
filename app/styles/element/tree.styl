@@ -55,9 +55,7 @@
       color: $color-light-silver
     }
 
-    & > .el-tree-node__children {
-      overflow: hidden
-      background-color: transparent
+    &:not(.is-leaf) > .el-tree-node__children {
       margin-bottom: $gap-xsmall
     }
 

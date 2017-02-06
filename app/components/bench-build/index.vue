@@ -25,7 +25,7 @@
       :data="treeData"
       :props="{ label: 'displayName', children: 'children' }"
       :render-content="renderNode"
-      @node-click="expandFolder"></el-tree>
+      @node-click="handleNodeClick"></el-tree>
   </div>
 </template>
 
@@ -34,6 +34,8 @@
   import constant from 'lodash/constant'
 
   import types from 'app/store/file-tree/types'
+  import tabTypes from 'app/store/tabs/types'
+
   import TreeNode from './tree-node'
   import { settingsActions, assetsActions, behavioursActions, scenesActions } from './actions'
 
@@ -55,14 +57,27 @@
         })
       },
 
-      expandFolder(data, node) {
+      handleNodeClick(data, node) {
         let path = [node.data.name]
         while (node.parent) {
           node = node.parent
-          path.unshift(node.data.name)
+          if (node.data.name) path.unshift(node.data.name)
         }
 
-        this.$store.dispatch(types.TOGGLE_FOLDER, { path: path.filter(Boolean) })
+        if (Array.isArray(data.children)) {
+          this.expandFolder(path)
+        } else {
+          this.openFile(data, path)
+        }
+      },
+
+      expandFolder(path) {
+        this.$store.dispatch(types.TOGGLE_FOLDER, { path })
+      },
+
+      openFile(data, path) {
+        console.log(data, path)
+        this.$store.dispatch(tabTypes.OPEN_FILE, { path, file: data })
       }
     }
   }
