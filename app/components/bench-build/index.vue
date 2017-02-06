@@ -4,6 +4,7 @@
   .bench-build {
     width: $bench-width-default
     margin: $gap-xsmall
+    margin-left: 0
     padding-top: $gap-xsmall
     border-radius: $border-radius-base
     background: $fill-darken

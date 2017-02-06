@@ -2,46 +2,42 @@
   @import '~app/styles/definitions'
 
   .tabs {
-    flex: 1
-    flex-layout: column
-  }
-
-  .tab-bar {
-    flex-layout: row
-    margin-top: $gap-xsmall
-    margin-left: $gap-xsmall
+    margin: $gap-xsmall
+    margin-left: 0
   }
 
   .tab-pane {
-    flex: 1
-    margin: $gap-xsmall
-    margin-top: 0
-    padding: $gap-small
-    background: $fill-darken
-    overflow: auto
+    width: 100%
+    height: 100%
   }
 </style>
 
 <template>
-  <div class="tabs">
-    <div class="tab-bar">
-      <tab v-for="(tab, index) in tabs" :is-active="isActive(index)" :tab="tab" :index="index"></tab>
-    </div>
-    <div v-for="(tab, index) in tabs" class="tab-pane" v-show="isActive(index)">
-      <tab-pane :tab="tab"></tab-pane>
-    </div>
-  </div>
+  <el-tabs class="tabs" type="card" :closable="true" :value="selectedIndex.get().toString()" @change="selectedIndex.set">
+    <el-tab-pane v-for="(tab, index) in tabs" :name="index.toString()" class="tab-pane">
+      <span slot="label">
+        <span class="icon tab-icon color-icon" style="background-color: #ff0"></span>
+        <span class="title">{{ tab.title }}</span>
+      </span>
+      <tab-content :tab="tab"></tab-content>
+    </el-tab-pane>
+  </el-tabs>
 </template>
 
 <script>
-  import Tab from './tab'
-  import TabPane from './tab-pane'
+  import types from 'app/store/tabs/types'
+  import { modelFromStore2 } from 'app/helpers/vuex-helpers'
+
+  import TabContent from './tab-content'
 
   export default {
     name: 'tabs',
     computed: {
       tabs() {
         return this.$store.state.tabs.tabs
+      },
+      selectedIndex() {
+        return modelFromStore2('tabs.selectedIndex', types.SELECT_TAB, this.$store)
       }
     },
     methods: {
@@ -50,8 +46,7 @@
       }
     },
     components: {
-      Tab,
-      TabPane
+      TabContent
     }
   }
 </script>

@@ -24,7 +24,7 @@
   }
 
   export default {
-    name: 'tab-pane',
+    name: 'tab-content',
     props: ['tab'],
 
     render(createElement) {

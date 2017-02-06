@@ -1,9 +1,13 @@
-<style lang="stylus">
+<style lang="stylus" scoped>
   @import '~app/styles/definitions'
 
   main {
     height: 100%
     flex-layout: row
+  }
+
+  .tabs {
+    flex: 1
   }
 </style>
 
@@ -11,7 +15,7 @@
   <main>
     <sidebar></sidebar>
     <bench-build></bench-build>
-    <tabs></tabs>
+    <tabs class="tabs"></tabs>
     <landing-pages :class="{ hidden: landingPagesHidden }"></landing-pages>
   </main>
 </template>

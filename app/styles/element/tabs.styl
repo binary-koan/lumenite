@@ -1,0 +1,226 @@
+.el- {
+  &tabs {
+    flex-layout: column
+
+    &__header {
+      flex-layout: row
+      border-bottom: $tab-border-line
+      padding: 0
+      position: relative
+    }
+    &__active-bar {
+      position: absolute
+      bottom: 0
+      left: 0
+      height: 3px
+      background-color: $tab-header-color-active
+      z-index: 1
+      transition: transform .3s cubic-bezier(.645,.045,.355,1)
+    }
+    &__item {
+      padding: $tab-padding
+      height: $tab-height
+      line-height: $tab-height
+      font-size: $tab-font-size
+      color: $tab-header-color
+      position: relative
+      transition: $color-transition
+
+      & .el-icon-close {
+        border-radius: 50%
+        text-align: center
+        transition: all .3s cubic-bezier(.645,.045,.355,1)
+        margin-left: 5px
+        &:before {
+          transform: scale(.7, .7)
+          display: inline-block
+        }
+
+        &:hover {
+          background-color: $fill-lighten
+          color: $font-color-base
+        }
+      }
+
+      &.is-active {
+        color: $tab-header-color-active
+      }
+
+      &:hover {
+        color: $tab-header-color-hover
+        cursor: pointer
+      }
+
+      &.is-disabled {
+        color: $disabled-color-base
+        cursor: default
+      }
+    }
+    &__content {
+      flex: 1
+      position: relative
+      padding-top: $tab-margin-bottom
+    }
+    &--card {
+      &>.el-tabs__header>.el-tabs__active-bar {
+        display: none
+      }
+      &>.el-tabs__header>.el-tabs__item .el-icon-close {
+        position: relative
+        font-size: 12px
+        width: 0
+        height: 14px
+        vertical-align: middle
+        line-height: 15px
+        overflow: hidden
+        top: -1px
+        right: -2px
+        transform-origin: 100% 50%
+      }
+      &>.el-tabs__header>.el-tabs__item {
+        transition: all .3s cubic-bezier(.645,.045,.355,1)
+
+        &.is-closable {
+          padding-left: 16px; padding-right: 16px
+
+          .el-icon-close {
+            width: 14px
+          }
+        }
+
+        &.is-active {
+          background-color: $tab-card-fill
+          border-radius: $border-radius-base $border-radius-base 0 0
+        }
+      }
+      &>.el-tabs__content:not(:empty) {
+        background-color: $tab-card-fill
+        border-radius: 0 0 $border-radius-base $border-radius-base
+      }
+    }
+    &--border-card {
+      background: $color-white
+      border: 1px solid $color-base-gray
+      box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.12), 0px 0px 6px 0px rgba(0,0,0,0.04)
+
+      &>.el-tabs__content {
+        padding: 15px
+      }
+      &>.el-tabs__header {
+        background-color: $color-extra-light-gray
+        margin: 0
+      }
+      &>.el-tabs__header>.el-tabs__item {
+        transition: all .3s cubic-bezier(.645,.045,.355,1)
+        border: 1px solid transparent
+        border-top: 0
+        margin-left: -1px; margin-right: -1px
+
+        &.is-active {
+          background-color: $color-white
+          border-right-color: $color-base-gray
+          border-left-color: $color-base-gray
+
+          &:first-child {
+            border-left-color: $color-base-gray
+          }
+          &:last-child {
+            border-right-color: $color-base-gray
+          }
+        }
+      }
+    }
+  }
+}
+
+.slideInRight-transition,
+.slideInLeft-transition {
+  display: inline-block
+}
+.slideInRight-enter {
+  animation: slideInRight-enter .3s
+}
+.slideInRight-leave {
+  position: absolute
+  left: 0
+  right: 0
+  animation: slideInRight-leave .3s
+}
+.slideInLeft-enter {
+  animation: slideInLeft-enter .3s
+}
+.slideInLeft-leave {
+  position: absolute
+  left: 0
+  right: 0
+  animation: slideInLeft-leave .3s
+}
+
+@keyframes slideInRight-enter {
+  0% {
+    opacity: 0
+    -webkit-transform-origin: 0 0
+    transform-origin: 0 0
+    -webkit-transform: translateX(100%)
+    transform: translateX(100%)
+  }
+
+  to {
+    opacity: 1
+    -webkit-transform-origin: 0 0
+    transform-origin: 0 0
+    -webkit-transform: translateX(0)
+    transform: translateX(0)
+  }
+}
+@keyframes slideInRight-leave {
+  0% {
+    -webkit-transform-origin: 0 0
+    transform-origin: 0 0
+    -webkit-transform: translateX(0)
+    transform: translateX(0)
+    opacity: 1
+  }
+
+  100% {
+    -webkit-transform-origin: 0 0
+    transform-origin: 0 0
+    -webkit-transform: translateX(100%)
+    transform: translateX(100%)
+    opacity: 0
+  }
+}
+@keyframes slideInLeft-enter {
+  0% {
+    opacity: 0
+    -webkit-transform-origin: 0 0
+    transform-origin: 0 0
+    -webkit-transform: translateX(-100%)
+    transform: translateX(-100%)
+  }
+
+  to {
+    opacity: 1
+    -webkit-transform-origin: 0 0
+    transform-origin: 0 0
+    -webkit-transform: translateX(0)
+    transform: translateX(0)
+  }
+}
+@keyframes slideInLeft-leave {
+  0% {
+    -webkit-transform-origin: 0 0
+    transform-origin: 0 0
+    -webkit-transform: translateX(0)
+    transform: translateX(0)
+    opacity: 1
+  }
+
+  100% {
+    -webkit-transform-origin: 0 0
+    transform-origin: 0 0
+    -webkit-transform: translateX(-100%)
+    transform: translateX(-100%)
+    opacity: 0
+  }
+}
