@@ -1,9 +1,12 @@
+import pathUtils from 'path'
+
 import types from './types'
 
 // State
 
 const state = {
-  path: null
+  path: null,
+  name: null
 }
 
 // Mutations
@@ -11,6 +14,7 @@ const state = {
 const mutations = {
   [types.LOAD](state, path) {
     state.path = path
+    state.name = pathUtils.basename(path)
   }
 }
 

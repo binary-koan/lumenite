@@ -9,10 +9,18 @@
     border-radius: $border-radius-base
     background: $fill-darken
   }
+
+  .title {
+    padding: $gap-large $gap-small $gap-medium $gap-small
+    text-transform: uppercase
+    color: $color-muted
+  }
 </style>
 
 <template>
   <div class="bench-build">
+    <h2 class="title">{{ projectName }}</h2>
+
     <el-tree
       :data="treeData"
       :props="{ label: 'displayName', children: 'children' }"
@@ -32,6 +40,10 @@
   export default {
     name: 'bench-build',
     computed: {
+      projectName() {
+        return this.$store.state.activeProject.name
+      },
+
       treeData() {
         return this.$store.state.fileTree.baseFolders
       }
