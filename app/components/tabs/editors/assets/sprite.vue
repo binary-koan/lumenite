@@ -17,25 +17,7 @@
   }
 
   .settings {
-    padding-left: $gap-large
-    padding-right: $gap-small
     max-width: 25rem
-  }
-
-  h2 {
-    margin: $gap-xlarge 0 $gap-large 0
-    font-size: $font-size-large
-    font-weight: $font-weight-medium
-
-    &:first-child {
-      margin-top: $gap-small
-    }
-  }
-
-  hr {
-    border: none
-    border-bottom: $input-border
-    margin: $gap-small 0 $gap-large 0
   }
 </style>
 
@@ -44,11 +26,7 @@
     <div class="image" :style="{ backgroundImage: 'url(' + imageUrl + ')' }">
       <div class="anchor-point-display"></div>
     </div>
-    <div class="settings">
-      <h2>{{ sprite.source }}</h2>
-
-      <hr />
-
+    <elx-settings-form class="settings" :title="sprite.source">
       <div>
         <elx-label>Scaled size</elx-label>
         <elx-multi-input :parts="['x', 'y']"></elx-multi-input>
