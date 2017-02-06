@@ -23,10 +23,7 @@ const mutations = {
     const index = findIndex(state.tabs, tab => tab.id === state.selected)
 
     state.tabs.splice(index + 1, 0, tab)
-
-    if (!state.selected) {
-      state.selected = tab.id
-    }
+    state.selected = tab.id
   },
 
   [types.SELECT_TAB](state, id) {
