@@ -48,19 +48,19 @@ const state = {
   baseFolders: [
     {
       name: 'Settings', icon: 'settings', displayName: 'Settings',
-      properties: SETTINGS_FOLDER_PROPERTIES, expanded: false, children: []
+      properties: SETTINGS_FOLDER_PROPERTIES, children: []
     },
     {
       name: 'Assets', icon: 'assets', displayName: 'Assets',
-      properties: ASSET_FOLDER_PROPERTIES, expanded: false, children: []
+      properties: ASSET_FOLDER_PROPERTIES, children: []
     },
     {
       name: 'Behaviours', icon: 'behaviours', displayName: 'Behaviours',
-      properties: BEHAVIOURS_FOLDER_PROPERTIES, expanded: false, children: []
+      properties: BEHAVIOURS_FOLDER_PROPERTIES, children: []
     },
     {
       name: 'Scenes', icon: 'scenes', displayName: 'Scenes',
-      properties: SCENES_FOLDER_PROPERTIES, expanded: false, children: []
+      properties: SCENES_FOLDER_PROPERTIES, children: []
     }
   ],
   rename: {
@@ -83,14 +83,11 @@ const mutations = {
       child.properties = folder.properties
       folder.children.push(child)
     })
-
-    folder.expanded = true
   },
 
   [types.COLLAPSE_FOLDER](state, path) {
     const folder = findFolder(state, path)
     folder.children = []
-    folder.expanded = false
   },
 
   [types.START_RENAME](state, path) {

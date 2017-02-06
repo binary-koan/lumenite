@@ -6,7 +6,7 @@ export default async function refreshFolder({ state, dispatch, commit }, path) {
     const folder = findFolder(state, path)
 
     folder.children.forEach(child => {
-      if (child.expanded) {
+      if (child.children.length) {
         dispatch(types.REFRESH_FOLDER, path.concat([child.name]))
       }
     })

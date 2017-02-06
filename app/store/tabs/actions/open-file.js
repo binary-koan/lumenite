@@ -20,6 +20,7 @@ export default async function openFile({ state, rootState, commit }, { path, fil
 
   commit(types.ADD_TAB, {
     location,
+    id: 'file://' + location,
     title: file.displayName,
     tabType: 'file',
     fileType: file.type,

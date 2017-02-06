@@ -26,7 +26,7 @@ async function buildEntry(basePath, location) {
   const stats = await fs.statAsync(location)
 
   if (stats.isDirectory()) {
-    return { name, displayName, expanded: false, children: [] }
+    return { name, displayName, children: [] }
   } else if (type && name.endsWith('.json')) {
     return { name, displayName, type }
   }
@@ -36,7 +36,7 @@ export default async function toggleFolder({ state, rootState, commit }, { path,
   const folder = findFolder(state, path)
 
   if (expand === undefined) {
-    expand = !folder.expanded
+    expand = !folder.children.length
   }
 
   if (expand) {

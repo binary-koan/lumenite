@@ -76,7 +76,6 @@
       },
 
       openFile(data, path) {
-        console.log(data, path)
         this.$store.dispatch(tabTypes.OPEN_FILE, { path, file: data })
       }
     }
