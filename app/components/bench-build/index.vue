@@ -5,7 +5,7 @@
     width: $bench-width-default
     margin: $gap-xsmall
     margin-left: 0
-    padding-top: $gap-xsmall
+    padding: $gap-xsmall $gap-small
     border-radius: $border-radius-base
     background: $fill-darken
   }
@@ -13,10 +13,11 @@
 
 <template>
   <div class="bench-build">
-    <top-level-item :base-folder="settingsFolder"></top-level-item>
-    <top-level-item :base-folder="assetsFolder"></top-level-item>
-    <top-level-item :base-folder="behavioursFolder"></top-level-item>
-    <top-level-item :base-folder="scenesFolder"></top-level-item>
+    <el-tree
+      :data="treeData"
+      :props="{ label: 'displayName', children: 'children' }"
+      :render-content="renderNode"
+      @node-click="expandFolder"></el-tree>
   </div>
 </template>
 
@@ -24,30 +25,33 @@
   import find from 'lodash/find'
   import constant from 'lodash/constant'
 
-  import TopLevelItem from './top-level-item'
+  import types from 'app/store/file-tree/types'
+  import TreeNode from './tree-node'
   import { settingsActions, assetsActions, behavioursActions, scenesActions } from './actions'
 
   export default {
     name: 'bench-build',
     computed: {
-      settingsFolder() {
-        return find(this.$store.state.fileTree.baseFolders, folder => folder.name === 'Settings')
-      },
-
-      assetsFolder() {
-        return find(this.$store.state.fileTree.baseFolders, folder => folder.name === 'Assets')
-      },
-
-      behavioursFolder() {
-        return find(this.$store.state.fileTree.baseFolders, folder => folder.name === 'Behaviours')
-      },
-
-      scenesFolder() {
-        return find(this.$store.state.fileTree.baseFolders, folder => folder.name === 'Scenes')
+      treeData() {
+        return this.$store.state.fileTree.baseFolders
       }
     },
-    components: {
-      TopLevelItem
+    methods: {
+      renderNode(h, { node }) {
+        return h(TreeNode, {
+          props: { data: node.data, isTopLevel: !node.parent.parent, expanded: node.expanded }
+        })
+      },
+
+      expandFolder(data, node) {
+        let path = [node.data.name]
+        while (node.parent) {
+          node = node.parent
+          path.unshift(node.data.name)
+        }
+
+        this.$store.dispatch(types.TOGGLE_FOLDER, { path: path.filter(Boolean) })
+      }
     }
   }
 </script>
