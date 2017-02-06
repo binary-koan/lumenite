@@ -31,7 +31,7 @@ config.output = {
 }
 
 if (process.env.NODE_ENV !== 'production') {
-  config.devtool = '#eval-source-map'
+  config.devtool = '#inline-source-map'
 
   /**
    * Apply ESLint
