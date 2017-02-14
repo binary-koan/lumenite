@@ -1,16 +1,63 @@
 <style lang="stylus" scoped>
   @import '~app/styles/definitions'
 
-  canvas {
-    width: 400px;
-    height: 300px;
+  .mesh-editor {
+    flex-layout: row
+    height: 100%
+  }
+
+  .canvas-wrapper {
+    flex: 1
+    min-width: 20rem
+    margin-right: $gap-medium
+
+    canvas {
+      width: 100%
+      height: 100%
+    }
+  }
+
+  .checkbox {
+    margin-left: $gap-small
   }
 </style>
 
 <template>
   <div class="mesh-editor">
-    MESH
-    <canvas></canvas>
+    <div class="canvas-wrapper">
+      <canvas></canvas>
+    </div>
+    <elx-settings-form :title="mesh.source">
+      <div>
+        <elx-label>Initial rotation</elx-label>
+        <elx-multi-input :parts="['x', 'y', 'z']"></elx-multi-input>
+      </div>
+
+      <div>
+        <elx-label>Initial scale</elx-label>
+        <elx-multi-input :parts="['x', 'y', 'z']"></elx-multi-input>
+      </div>
+
+      <elx-label>Collision</elx-label>
+
+      <div class="checkbox">
+        <el-checkbox>Check collisions</el-checkbox>
+      </div>
+
+      <div class="checkbox">
+        <el-checkbox>Is blocker</el-checkbox>
+      </div>
+
+      <elx-label>Shadows</elx-label>
+
+      <div class="checkbox">
+        <el-checkbox>Cast shadows</el-checkbox>
+      </div>
+
+      <div class="checkbox">
+        <el-checkbox>Receive shadows</el-checkbox>
+      </div>
+    </elx-settings-form>
   </div>
 </template>
 
@@ -19,6 +66,13 @@
 
   export default {
     name: 'mesh-asset-editor',
+    props: ['tab'],
+
+    computed: {
+      mesh() {
+        return this.tab.content
+      },
+    },
 
     mounted() {
       const canvas = this.$el.querySelector("canvas")
