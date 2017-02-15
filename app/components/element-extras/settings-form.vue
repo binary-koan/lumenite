@@ -2,6 +2,9 @@
   @import '~app/styles/definitions'
 
   .elx-settings-form {
+    padding: $gap-medium
+    border-radius: $border-radius-base
+    background-color: $fill-base
     spacing-vertical: $gap-large
   }
 

@@ -1,6 +1,6 @@
 <template>
   <ul class="elx-list-box">
-    <slot>Nothing to show.</slot>
+    <slot><div class="elx-list-box__empty">Nothing to show.</div></slot>
   </ul>
 </template>
 

@@ -20,6 +20,18 @@
   .checkbox {
     margin-left: $gap-small
   }
+
+  .materials-list {
+    border-bottom-left-radius: 0
+    border-bottom-right-radius: 0
+  }
+
+  .add-material {
+    display: block
+    width: 100%
+    border-top-left-radius: 0
+    border-top-right-radius: 0
+  }
 </style>
 
 <template>
@@ -56,6 +68,12 @@
 
       <div class="checkbox">
         <el-checkbox>Receive shadows</el-checkbox>
+      </div>
+
+      <div>
+        <elx-label>Materials</elx-label>
+        <elx-list-box class="materials-list"></elx-list-box>
+        <el-button class="add-material"><span class="icon icon-plus"></span> Add</el-button>
       </div>
     </elx-settings-form>
   </div>
