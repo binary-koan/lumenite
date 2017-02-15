@@ -3,7 +3,6 @@
 /builds
 /dist
 /test/boilerplate/unit/dist
-package.json
 
 # Logs
 logs
