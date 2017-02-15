@@ -1,14 +1,14 @@
 <script>
-  import GeneralSettingsEditor from './editors/settings/general'
-  import MaterialAssetEditor from './editors/assets/material'
-  import MeshAssetEditor from './editors/assets/mesh'
-  import ShaderAssetEditor from './editors/assets/shader'
-  import SpriteAssetEditor from './editors/assets/sprite'
-  import FontAssetEditor from './editors/assets/font'
-  import TilesetAssetEditor from './editors/assets/tileset'
-  import VideoAssetEditor from './editors/assets/video'
-  import ScriptEditor from './editors/behaviours/script'
-  import SceneEditor from './editors/scenes/scene'
+  import GeneralSettingsEditor from './files/general'
+  import MaterialAssetEditor from './files/material'
+  import MeshAssetEditor from './files/mesh'
+  import ShaderAssetEditor from './files/shader'
+  import SpriteAssetEditor from './files/sprite'
+  import FontAssetEditor from './files/font'
+  import TilesetAssetEditor from './files/tileset'
+  import VideoAssetEditor from './files/video'
+  import ScriptEditor from './files/script'
+  import SceneEditor from './files/scene'
 
   const FILE_EDITORS = {
     'general-settings': GeneralSettingsEditor,
