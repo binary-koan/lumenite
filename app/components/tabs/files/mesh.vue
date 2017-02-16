@@ -9,7 +9,7 @@
   .canvas-wrapper {
     flex: 1
     min-width: 20rem
-    margin-right: $gap-medium
+    margin-right: $gap-small
 
     canvas {
       width: 100%

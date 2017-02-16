@@ -2,8 +2,7 @@
   @import '~app/styles/definitions'
 
   .tabs {
-    margin: $gap-xsmall
-    margin-left: 0
+    margin-top: $gap-xsmall
   }
 
   .tab-pane {
