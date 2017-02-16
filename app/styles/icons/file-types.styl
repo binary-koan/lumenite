@@ -1,24 +1,53 @@
 .file-icon-general-settings:before {
   @extend .icon-settings:before
-  color: $teal
+  color: $color-teal
 }
 
 .file-icon-sprite:before {
   @extend .icon-picture:before
-  color: $color-primary
+  color: $color-purple
+}
+
+.file-icon-mesh {
+  transform: rotate(45deg)
+}
+
+.file-icon-mesh:before {
+  @extend .icon-grid-2:before
+  color: $color-red
+}
+
+.file-icon-material:before {
+  @extend .icon-last-quarter:before
+  color: $color-red
+}
+
+.file-icon-shader:before {
+  @extend .icon-code-file:before
+  color: $color-red
 }
 
 .file-icon-font:before {
   @extend .icon-generic-text:before
-  color: $color-primary
+  color: $color-purple
 }
 
 .file-icon-tileset:before {
   @extend .icon-insert-table:before
-  color: $color-primary
+  color: $color-purple
 }
 
 .file-icon-video:before {
   @extend .icon-video-call:before
-  color: $color-primary
+  color: $color-green
+}
+
+.file-icon-script:before {
+  @extend .icon-fantasy:before
+  color: $color-blue
+}
+
+.file-icon-scene:before {
+  @extend .icon-film:before
+  color: $color-yellow
 }
